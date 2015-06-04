@@ -21,7 +21,11 @@
     "org.apache.cordova.file-transfer",
     "cordova-plugin-media",
     "cordova-plugin-file",
-    "cordova-plugin-media-capture"
+    "cordova-plugin-media-capture",
+    {
+      "locator": "https://github.com/phonegap-build/PushPlugin.git",
+      "id": "com.phonegap.plugins.PushPlugin"
+    }
   ],
   "cordovaPlatforms": [
     "android",

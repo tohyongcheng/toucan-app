@@ -1,50 +1,100 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-  // Form data for the login modal
-  $scope.loginData = {};
+.controller('LoginCtrl', function($scope, $auth, $state, $rootScope) {
+  $scope.loginForm = {};
 
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
+  $scope.login = function() {
+    $auth.submitLogin($scope.loginForm)
+      .then(function(resp) { 
+        console.log(resp);
+        $scope.loginForm = {};
+        $state.go('app.home');
+      })
+      .catch(function(resp) { 
+        console.log(resp);
+      });
+  };
+})
+
+.controller('RegistrationCtrl', function($scope, $auth, $state, $rootScope) {
+  $scope.registrationForm = {};
+
+  $scope.register = function() {
+    $auth.submitRegistration($scope.registrationForm)
+    .then(function(resp) { 
+      console.log(resp);
+      $scope.registrationForm = {};
+      // handle success response
+    })
+    .catch(function(resp) { 
+      console.log(resp);
+      // handle error response
+    });
+  };
+})
+
+.controller('CreateParentCtrl', function($scope, $auth, $state, $rootScope) {
+  $scope.parentForm = {};
+  $scope.$on('$ionicView.beforeEnter', function() {
+    
+  });
+})
+
+.controller('CreateChildCtrl', function($scope, $auth, $state, $rootScope, $cordovaDatePicker, $ionicPlatform) {
+  $scope.childForm = {};
+  var options = {
+    date: new Date(),
+    mode: 'date', // or 'time'
+    minDate: new Date() - 10000,
+    allowOldDates: true,
+    allowFutureDates: false,
+    doneButtonLabel: 'DONE',
+    doneButtonColor: '#F2F3F4',
+    cancelButtonLabel: 'CANCEL',
+    cancelButtonColor: '#000000'
+  };
+  
+  $scope.show_datepicker = function() {
+    $cordovaDatePicker.show(options).then(function(date){
+        alert(date);
+    });
+  }
+
+  $ionicPlatform.ready(function() {
+    
   });
 
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
+  $scope.$on('$ionicView.beforeEnter', function() {
+    console.log("trying beforeEnter");
+  });
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.controller('CreateParentCtrl', function($scope, $auth, $state, $rootScope) {
+  $scope.$on('$ionicView.beforeEnter', function() {
+    
+  });
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('HomeCtrl', function($scope, $http, $auth) {
+  $scope.$on('$ionicView.beforeEnter', function() {
+    
+  });
+
+  
+})
+
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $rootScope, $cordovaPush, $auth, $state) {
+  // Create the login modal that we will use later
+  $scope.logout = function() {
+    $auth.signOut()
+    .then(function(resp) { 
+      console.log("successfully logged out", resp);
+      $state.go('login');
+    })
+    .catch(function(resp) { 
+      console.log("error in logging out", resp);// handle error response
+    });
+  }
 })
 
 .controller('MapCtrl', function($scope, uiGmapGoogleMapApi, $http) {
@@ -74,7 +124,26 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, $log ) {
+.controller('PingCtrl', function($scope, $http) {
+  $scope.$on('$ionicView.beforeEnter', function() {
+    
+  });
+
+  $scope.ping =function() {
+    data = {
+      ping_message : { user_id: 1, color: 0 },
+      machine_uuid: 1234567890
+    };
+
+    $http.post("http://localhost:3000/mobile_api/ping_messages", data).then(function(success) {
+      console.log(success);
+    }, function(error){
+      console.log(error);
+    })
+  }
+})
+
+.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout ) {
 
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.audio_file = null;
@@ -147,7 +216,7 @@ angular.module('starter.controllers', [])
     console.log("uploading");
     var options = {chunkedMode: false, fileKey: "file", fileName: "recording.m4a", mimeType: "audio/m4a", httpMethod: "POST"};
     options.params = { machine_uuid: 1234567890 }
-    var server = encodeURI("http://localhost:3000/mobile_api/audio_messages");
+    var server = encodeURI("http://toucan-api.herokuapp.com/mobile_api/audio_messages");
     var filePath = $scope.audio_file_entry.nativeURL;
     console.log('filePath', filePath);
 

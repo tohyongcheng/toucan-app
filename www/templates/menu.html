@@ -1,5 +1,5 @@
 <ion-side-menus enable-menu-with-back-views="false">
-  <ion-side-menu-content>
+  <ion-side-menu-content drag-content="allowSideMenu">
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button>
       </ion-nav-back-button>
@@ -18,11 +18,26 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
+        <ion-item menu-close href="#/app/home">
+          Home
+        </ion-item>
         <ion-item menu-close href="#/app/record">
           Record
         </ion-item>
         <ion-item menu-close href="#/app/map">
           Map
+        </ion-item>
+        <ion-item menu-close href="#/app/ping">
+          Ping
+        </ion-item>
+        <ion-item menu-close href="#/app/create_child">
+          Create a Child
+        </ion-item>
+        <ion-item menu-close href="#/app/create_parent">
+          Create a Parent
+        </ion-item>
+        <ion-item menu-close ng-click="logout()">
+          Logout
         </ion-item>
       </ion-list>
     </ion-content>

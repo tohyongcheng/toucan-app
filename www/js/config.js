@@ -1,46 +1,45 @@
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
   $stateProvider
-
+  .state('login', {
+    url: '/login',
+    templateUrl: "templates/login.html",
+    controller: "LoginCtrl"
+  })
   .state('app', {
     url: "/app",
     abstract: true,
     templateUrl: "templates/menu.html",
-    controller: 'AppCtrl'
-  })
-
-  .state('app.search', {
-    url: "/search",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/search.html"
+    controller: 'AppCtrl',
+    resolve: {
+      auth: function($auth) {
+        return $auth.validateUser();
       }
     }
   })
-
-  .state('app.browse', {
-    url: "/browse",
+  .state('app.createChild', {
+    url: "/create_child",
     views: {
       'menuContent': {
-        templateUrl: "templates/browse.html"
+        templateUrl: "templates/create_child.html",
+        controller: 'CreateChildCtrl'
       }
     }
   })
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
-
-  .state('app.single', {
-    url: "/playlists/:playlistId",
+  .state('app.createParent', {
+    url: "/create_parent",
     views: {
       'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
+        templateUrl: "templates/create_parent.html",
+        controller: 'CreateParentCtrl'
+      }
+    }
+  })
+  .state('app.home', {
+    url: "/home",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/home.html",
+        controller: 'HomeCtrl'
       }
     }
   })
@@ -61,7 +60,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
         controller: 'MapCtrl'
       }
     }
+  })
+  .state('app.ping', {
+    url: "/ping",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ping.html",
+        controller: 'PingCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/login');
+
+
+  $authProvider.configure({
+      apiUrl: 'http://localhost:3000',
+      storage: 'localStorage'
+  });
 });

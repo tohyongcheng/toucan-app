@@ -1,0 +1,22 @@
+<ion-view view-title="Add a Child">
+  <ion-content>
+    <h1>Add A Child</h1>
+    <form ng-submit="nextStep()">
+      <!-- Image -->
+
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Name</span>
+          <input type="email" ng-model="childForm.email">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Birthday</span>
+          <input type="text" ng-model="childForm.birthday" ng-focus="show_datepicker()">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Proceed</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
