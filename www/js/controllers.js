@@ -40,6 +40,20 @@ angular.module('starter.controllers', [])
   });
 })
 
+.controller('SettingsCtrl', function($scope, $auth, $state, $rootScope) {
+  $scope.settings = {};
+  $scope.$on('$ionicView.beforeEnter', function() {
+    
+  });
+})
+
+.controller('UpdatePasswordCtrl', function($scope, $auth, $state, $rootScope) {
+  $scope.passwordForm = {};
+  $scope.$on('$ionicView.beforeEnter', function() {
+    
+  });
+})
+
 .controller('CreateChildCtrl', function($scope, $auth, $state, $rootScope, $cordovaDatePicker, $ionicPlatform) {
   $scope.childForm = {};
   var options = {
@@ -97,14 +111,13 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('MapCtrl', function($scope, uiGmapGoogleMapApi, $http) {
-  uiGmapGoogleMapApi.then(function(maps) {
-    console.log("uiGmapGoogleMapApi loaded");
-  });
+.controller('MapCtrl', function($scope, uiGmapGoogleMapApi, $http, LoadingService) {
+  LoadingService.showLoading();
   $scope.locations = [];
 
   $http.get("http://toucan-api.herokuapp.com/device_api/v1/gps_messages/1234567890").
     success(function(data){
+      LoadingService.hideLoading();
       $scope.locations = data;
       $scope.map = { center: { latitude: $scope.locations[data.length-1].lat, longitude: $scope.locations[data.length-1].lng }, zoom: 13 };
       $scope.marker = {
@@ -116,9 +129,6 @@ angular.module('starter.controllers', [])
         options: { draggable: false },
         events: {}
       };
-      console.log($scope.marker);
-      $scope.$apply();
-      console.log($scope.locations);
     }).error(function(data) {
       console.log("Error: ", data);
     });
