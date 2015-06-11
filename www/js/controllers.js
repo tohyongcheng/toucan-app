@@ -105,7 +105,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('SetupAccountCtrl', function($scope, $auth, $state, $rootScope, $cordovaCamera) {
+.controller('SetupAccountCtrl', function($scope, $auth, $state, $rootScope, $cordovaCamera, $ionicPlatform) {
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.parentForm = {};
     
@@ -124,29 +124,26 @@ angular.module('starter.controllers', [])
       saveToPhotoAlbum: false
     };
 
-    $scope.takephoto = function(){
+    $scope.takephoto = function() {
       $cordovaCamera.getPicture(options).then(function(imageData) {
-      var image = document.getElementById('myImage');
-      image.src = "data:image/jpeg;base64," + imageData;
-    }, function(err) {
+        var image = document.getElementById('myImage');
+        image.src = "data:image/jpeg;base64," + imageData;
+      }, function(err) {
       alert("error");
       // error
-    });
+      });
+    }
+  });
 
-    };
-
-  }
 
   $scope.createparent = function(){
     $auth.updateAccount($scope.parentForm)
       .then(function(resp){
         $state.go("app.createChild");
-    })
+      })
     .catch(function(resp){
       console.log(resp);
     })
-    
-
   }
 })
 
