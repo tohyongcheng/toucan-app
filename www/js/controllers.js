@@ -16,6 +16,17 @@ angular.module('starter.controllers', [])
   };
 })
 
+.controller('LandingCtrl', function($scope, $auth, $state, $rootScope){
+  $scope.login = function(){
+    $state.go('login');
+  }
+
+  $scope.register = function(){
+    $state.go('registration')
+  }
+
+})
+
 .controller('RegistrationCtrl', function($scope, $auth, $state, $rootScope) {
   $scope.registrationForm = {};
 
@@ -24,21 +35,17 @@ angular.module('starter.controllers', [])
     .then(function(resp) { 
       console.log(resp);
       $scope.registrationForm = {};
+      $state.go('app.createParent');
       // handle success response
+      // how to send new response to server 
     })
     .catch(function(resp) { 
-      console.log(resp);
+      alert("Error:", resp);
       // handle error response
     });
   };
 })
 
-.controller('CreateParentCtrl', function($scope, $auth, $state, $rootScope) {
-  $scope.parentForm = {};
-  $scope.$on('$ionicView.beforeEnter', function() {
-    
-  });
-})
 
 .controller('SettingsCtrl', function($scope, $auth, $state, $rootScope) {
   $scope.settings = {};
@@ -81,12 +88,40 @@ angular.module('starter.controllers', [])
   $scope.$on('$ionicView.beforeEnter', function() {
     console.log("trying beforeEnter");
   });
+
+  $scope.createchild = function(){
+    $auth.updateAccount($scope.childForm).then(function(resp){
+      console.log = (resp);
+      $scope.childForm = {};
+      $state.go('app.home');
+    })
+
+    .catch(function(resp) { 
+      console.log(resp);
+      // handle error response
+    });
+  };  
+
+
 })
 
-.controller('CreateParentCtrl', function($scope, $auth, $state, $rootScope) {
+.controller('SetupAccountCtrl', function($scope, $auth, $state, $rootScope) {
   $scope.$on('$ionicView.beforeEnter', function() {
+    $scope.parentForm = {};
     
-  });
+  }); 
+
+  $scope.createparent = function(){
+    $auth.updateAccount($scope.parentForm)
+      .then(function(resp){
+        $state.go("app.createChild");
+    })
+    .catch(function(resp){
+      console.log(resp);
+    })
+    
+
+  }
 })
 
 .controller('HomeCtrl', function($scope, $http, $auth) {
@@ -151,6 +186,25 @@ angular.module('starter.controllers', [])
       console.log(error);
     })
   }
+})
+
+.controller('ScanDeviceCtrl', function($scope,$auth,$cordovaBarcodeScanner, $ionicPlatform){
+  $scope.$on('$ionicView.beforeEnter', function(){
+
+
+
+  });
+
+  $ionicPlatform.ready(function() {
+    $scope.scan = function() {
+      $cordovaBarcodeScanner.scan().then(function(barcodeData){
+        alert(barcodeData);
+        $scope.qrstring = barcodeData;
+      },function(error){
+
+      });
+    }
+  });
 })
 
 .controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout ) {

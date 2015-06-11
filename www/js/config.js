@@ -1,5 +1,15 @@
 app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
   $stateProvider
+  .state('landing', {
+    url:'/landing',
+    templateUrl:"templates/landing.html",
+    controller:"LandingCtrl"
+  })
+  .state('registration', {
+    url:'/registration',
+    templateUrl:"templates/sign_up.html",
+    controller:"RegistrationCtrl"
+  })
   .state('login', {
     url: '/login',
     templateUrl: "templates/login.html",
@@ -25,12 +35,12 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       }
     }
   })
-  .state('app.createParent', {
-    url: "/create_parent",
+  .state('app.setupaccount', {
+    url: "/setupaccount",
     views: {
       'menuContent': {
-        templateUrl: "templates/create_parent.html",
-        controller: 'CreateParentCtrl'
+        templateUrl: "templates/setupaccount.html",
+        controller: 'SetupAccountCtrl'
       }
     }
   })
@@ -78,9 +88,18 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
         controller: 'SettingsCtrl'
       }
     }
+  })
+  .state('app.scandevice', {
+    url:"/scandevice",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/scandevice.html",
+        controller:'ScanDeviceCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/landing');
 
 
   $authProvider.configure({
