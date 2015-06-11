@@ -29,7 +29,8 @@
     {
       "locator": "https://github.com/wildabeast/BarcodeScanner.git",
       "id": "com.phonegap.plugins.barcodescanner"
-    }
+    },
+    "cordova-plugin-camera"
   ],
   "cordovaPlatforms": [
     "android",
