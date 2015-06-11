@@ -1,0 +1,45 @@
+<ion-view view-title="Settings">
+  <ion-content>
+    <ion-list>
+      <div class="item item-divider">
+        General Settings
+      </div>
+      <label class="item item-input item-select">
+        <span class="input-label">Update Frequency of Toucan</span>
+        <select ng-model="settings.update_frequency">
+          <option>5 min</option>
+          <option>10 min</option>
+          <option>15 min</option>
+          <option>20 min</option>
+          <option>30 min</option>
+        </select>
+      </label>
+      <label class="item item-input item-select">
+        <span class="input-label">Update me when Toucan battery reaches </span>
+        <select ng-model="settings.battery">
+          <option>5%</option>
+          <option>10%</option>
+          <option>15%</option>
+          <option>20%</option>
+        </select>
+      </label>
+      <div class="item item-divider">
+        Device Information
+      </div>
+      <label class="item item-input">
+        <span class="input-label">Device Serial No. </span>
+        1234567890
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Device Data Usage: </span>
+        10.0MB
+      </label>
+      <div class="item item-divider">
+        App Settings
+      </div>
+      <ion-item menu-close href="#">
+        Update Password
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
