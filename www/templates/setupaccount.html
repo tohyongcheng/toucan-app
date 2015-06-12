@@ -3,11 +3,11 @@
     <h1>Identify yourself!</h1>
     <form ng-submit="nextStep()">
       <!-- Image -->
-
       <div class="list">
+        <img src="" id="myImage"></img>
         <label class="item">
-      <button class="button button-block button-positive" ng-click='takephoto()'>Take photo</button>
-    </label>
+          <button class="button button-block button-positive" ng-click='takephoto()'>Take photo</button>
+        </label>
         <label class="item item-input">
           <span class="input-label">Name</span>
           <input type="text" ng-model="parentForm.name">
