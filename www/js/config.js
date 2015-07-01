@@ -20,11 +20,11 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
     abstract: true,
     templateUrl: "templates/menu.html",
     controller: 'AppCtrl',
-    // resolve: {
-    //   auth: function($auth) {
-    //     return $auth.validateUser();
-    //   }
-    // }
+    resolve: {
+      auth: function($auth) {
+        return $auth.validateUser();
+      }
+    }
   })
   .state('app.createChild', {
     url: "/create_child",
