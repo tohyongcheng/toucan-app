@@ -202,7 +202,7 @@ angular.module('starter.controllers', [])
       machine_uuid: 1234567890
     };
 
-    $http.post("http://localhost:3000/mobile_api/ping_messages", data).then(function(success) {
+    $http.post("http://toucan-api.herokuapp.com/mobile_api/ping_messages", data).then(function(success) {
       console.log(success);
     }, function(error){
       console.log(error);
@@ -229,23 +229,50 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout ) {
+.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http) {
 
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.audio_file = null;
     $scope.audio_file_entry = null;
+    $scope.audio_recordings = [];
+    $scope.currently_playing = null;
     console.log($cordovaMedia);
     console.log($cordovaCapture);
     console.log($cordovaFile);
     console.log($cordovaFileTransfer);
     console.log("READY");
+
+    LoadingService.showLoading();
+    $http.get("http://toucan-api.herokuapp.com/mobile_api/audio_messages/?machine_uuid=1234567890").
+    success(function(data){
+      LoadingService.hideLoading();
+      $scope.audio_recordings = data;
+      $scope.audio_recordings.reverse();
+    }).error(function(data) {
+      console.log("Error: ", data);
+    });
   });
+
+  $scope.play_recording = function(recording) {
+    console.log(recording);
+    if ($scope.currently_playing != null) {
+      $scope.currently_playing.stop();
+      $scope.currently_playing.release();  
+    }
+    src = recording.audio_message_url;
+    $scope.currently_playing = new Media(src,
+    function(success) {
+      console.log('success', success); 
+      $scope.currently_playing.play();
+    },
+    function(err) {
+        console.log("recordAudio():Audio Error: "+ err.code);
+    });
+  }
 
   $scope.start_record = function() {
     // $scope.audio_file.startRecord();
     if (ionic.Platform.isIOS()) {
-
-      
       src = "documents://myrecording.m4a";
       $scope.audio_file = new Media(src,
       function(success) {

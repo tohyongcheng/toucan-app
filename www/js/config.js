@@ -99,11 +99,11 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/ping');
+  $urlRouterProvider.otherwise('/landing');
 
 
   $authProvider.configure({
-      apiUrl: 'http://localhost:3000',
+      apiUrl: 'http://toucan-api.herokuapp.com',
       storage: 'localStorage'
   });
 });

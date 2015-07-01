@@ -4,9 +4,11 @@
     <button ng-click="stop_record()" class="button">Stop Record</button>
     <button ng-click="play()" class="button">Play</button>
     <button ng-click="stop()" class="button">Stop</button>
-    <button ng-click="release()" class="button">Release</button>
-    <button ng-click="upload_record()" class="button">Upload Record</button>
-    <button ng-click="captureAudio()" class="button">Capture Audio</button>
-    
+    <ion-list>
+    <a class="item item-icon" ng-repeat="audio_recording in audio_recordings" ng-click="play_recording(audio_recording)">
+      <i class="icon ion-chatbubble-working"></i>
+      {{audio_recording.created_at}}
+    </a>
+  </ion-list>
   </ion-content>
 </ion-view>
