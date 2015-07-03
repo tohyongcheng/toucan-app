@@ -1,4 +1,54 @@
 /* Empty. Add your own CSS if you like */
 
+h1 {
+	margin: auto;
+    text-align: center;
+    color: purple;
+}
 
-#home {}
+
+
+h1#title{
+	color: white;
+	margin-top: 30px;
+}
+
+
+h5#tagline{
+	font-size: small;
+	color: white;
+}
+
+.item{
+	margin: auto;
+	background-color: transparent;
+	color:black;
+	border-color: #FFF;
+}
+
+.pane {
+	background-color: #B9DCD7;
+}
+
+.logo {
+	max-width: 200px;
+}
+
+#home-tab{
+	color:#A2D5D4;
+}
+
+.nav-bar-block .bar{
+
+	background-color:#A2D5D4;
+}
+/*
+.nav-bar-block .bar .title{
+	color:white;
+}*/
+
+
+
+
+
+
