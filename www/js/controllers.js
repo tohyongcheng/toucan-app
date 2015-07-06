@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function($scope, $auth, $state, $rootScope) {
+.controller('LoginCtrl', function($scope, $auth, $state, $rootScope, $localStorage) {
   $scope.loginForm = {};
 
   $scope.login = function() {
@@ -8,6 +8,8 @@ angular.module('starter.controllers', [])
       .then(function(resp) { 
         console.log(resp);
         $scope.loginForm = {};
+        $localStorage.user_id = resp.id;
+        $localStorage.email = resp.email;
         $state.go('app.home');
       })
       .catch(function(resp) { 
@@ -22,12 +24,12 @@ angular.module('starter.controllers', [])
   }
 
   $scope.register = function(){
-    $state.go('registration')
+    $state.go('registration');
   }
 
 })
 
-.controller('RegistrationCtrl', function($scope, $auth, $state, $rootScope) {
+.controller('RegistrationCtrl', function($scope, $auth, $state, $rootScope, $localStorage) {
   $scope.registrationForm = {};
 
   $scope.register = function() {
@@ -35,7 +37,9 @@ angular.module('starter.controllers', [])
     .then(function(resp) { 
       console.log(resp);
       $scope.registrationForm = {};
-      $state.go('app.createParent');
+      $localStorage.user_id = resp.id;
+      $localStorage.email = resp.email;
+      $state.go('app.setupAccount');
       // handle success response
       // how to send new response to server 
     })
@@ -61,7 +65,15 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('CreateChildCtrl', function($scope, $auth, $state, $rootScope, $cordovaDatePicker, $ionicPlatform) {
+.controller('CreateChildCtrl', function($scope, $auth, $state, $rootScope, $cordovaDatePicker, $ionicPlatform, $http) {
+  $ionicPlatform.ready(function() {
+    
+  });
+
+  $scope.$on('$ionicView.beforeEnter', function() {
+    console.log("trying beforeEnter");
+  });
+
   $scope.childForm = {};
   var options = {
     date: new Date(),
@@ -81,31 +93,18 @@ angular.module('starter.controllers', [])
     });
   }
 
-  $ionicPlatform.ready(function() {
-    
-  });
-
-  $scope.$on('$ionicView.beforeEnter', function() {
-    console.log("trying beforeEnter");
-  });
-
-  $scope.createchild = function(){
-    $auth.updateAccount($scope.childForm).then(function(resp){
-      console.log = (resp);
-      $scope.childForm = {};
-      $state.go('app.home');
-    })
-
-    .catch(function(resp) { 
-      console.log(resp);
-      // handle error response
+  $scope.create_child = function(){
+    $http.post("http://localhost:3000/mobile_api/children", $scope.childForm).success(function(data,status,headers,config){
+      console.log(data);
+    }).error(function(data,status,headers,config) {
+      console.log(data);
     });
   };  
 
 
 })
 
-.controller('SetupAccountCtrl', function($scope, $auth, $state, $rootScope, $cordovaCamera, $ionicPlatform) {
+.controller('SetupMyCtrl', function($scope, $auth, $state, $rootScope, $cordovaCamera, $ionicPlatform) {
   var options = {
     quality: 50,
     destinationType: Camera.DestinationType.DATA_URL,
@@ -146,9 +145,62 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('HomeCtrl', function($scope, $http, $auth) {
+.controller('HomeCtrl', function($scope, $http, $auth, $localStorage, $ionicSlideBoxDelegate) {
   $scope.$on('$ionicView.beforeEnter', function() {
-    
+    // Get Children
+    $http.get("http://localhost:3000/mobile_api/users/"+$localStorage.user_id).
+    success(function(data) {
+      $scope.children = data.children;
+      console.log("get user data", data);
+      $ionicSlideBoxDelegate.update();
+    }).
+    error(function(data) {
+
+    });
+
+    // Get Notifications
+    $http.get("http://localhost:3000/mobile_api/user_notifications/").
+    success(function(data) {
+      $scope.notifications = data;
+      console.log("get user notifications", data);
+    }).
+    error(function(data) {
+
+    });
+  }); 
+
+  
+})
+
+.controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage) {
+  $scope.$on('$ionicView.beforeEnter', function() {
+    var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: false,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 100,
+      targetHeight: 100,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false
+    };
+
+    $scope.$on('$ionicView.beforeEnter', function() {
+      $scope.parentForm = {};
+    }); 
+
+    $ionicPlatform.ready(function() {
+      $scope.takephoto = function() {
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+          var image = document.getElementById('myImage');
+          image.src = "data:image/jpeg;base64," + imageData;
+        }, function(err) {
+        alert("error");
+        // error
+        });
+      }
+    });
   });
 
   
@@ -172,20 +224,34 @@ angular.module('starter.controllers', [])
   LoadingService.showLoading();
   $scope.locations = [];
 
-  $http.get("http://toucan-api.herokuapp.com/device_api/v1/gps_messages/1234567890").
+  $http.get("http://localhost:3000/mobile_api/gps_messages/1?machine_uuid=1234567890").
     success(function(data){
       LoadingService.hideLoading();
       $scope.locations = data;
-      $scope.map = { center: { latitude: $scope.locations[data.length-1].lat, longitude: $scope.locations[data.length-1].lng }, zoom: 13 };
-      $scope.marker = {
-        id: 0,
-        coords: {
-          latitude: $scope.locations[data.length-1].lat,
-          longitude: $scope.locations[data.length-1].lng
-        },
-        options: { draggable: false },
-        events: {}
-      };
+      if ($scope.locations.length > 0) {
+        $scope.map = { center: { latitude: $scope.locations[data.length-1].lat, longitude: $scope.locations[data.length-1].lng }, zoom: 13 };
+        $scope.marker = {
+          id: 0,
+          coords: {
+            latitude: $scope.locations[data.length-1].lat,
+            longitude: $scope.locations[data.length-1].lng
+          },
+          options: { draggable: false },
+          events: {}
+        };  
+      } else {
+        $scope.map = { center: { latitude: 1.3000, longitude: 103.8 }, zoom: 11 };
+        $scope.marker = {
+          id: 0,
+          coords: {
+            latitude: 1.3000,
+            longitude: 103.8
+          },
+          options: { draggable: false },
+          events: {}
+        };  
+      }
+      
     }).error(function(data) {
       console.log("Error: ", data);
     });
@@ -202,7 +268,7 @@ angular.module('starter.controllers', [])
       machine_uuid: 1234567890
     };
 
-    $http.post("http://toucan-api.herokuapp.com/mobile_api/ping_messages", data).then(function(success) {
+    $http.post("http://localhost:3000/mobile_api/ping_messages", data).then(function(success) {
       console.log(success);
     }, function(error){
       console.log(error);
@@ -212,8 +278,6 @@ angular.module('starter.controllers', [])
 
 .controller('ScanDeviceCtrl', function($scope,$auth,$cordovaBarcodeScanner, $ionicPlatform){
   $scope.$on('$ionicView.beforeEnter', function(){
-
-
 
   });
 
@@ -243,7 +307,7 @@ angular.module('starter.controllers', [])
     console.log("READY");
 
     LoadingService.showLoading();
-    $http.get("http://toucan-api.herokuapp.com/mobile_api/audio_messages/?machine_uuid=1234567890").
+    $http.get("http://localhost:3000/mobile_api/audio_messages/?machine_uuid=1234567890").
     success(function(data){
       LoadingService.hideLoading();
       $scope.audio_recordings = data;
@@ -258,16 +322,18 @@ angular.module('starter.controllers', [])
     if ($scope.currently_playing != null) {
       $scope.currently_playing.stop();
       $scope.currently_playing.release();  
+      $scope.currently_playing = null;
     }
     src = recording.audio_message_url;
+    console.log("src", src);
     $scope.currently_playing = new Media(src,
     function(success) {
       console.log('success', success); 
-      $scope.currently_playing.play();
     },
     function(err) {
         console.log("recordAudio():Audio Error: "+ err.code);
     });
+    $scope.currently_playing.play();
   }
 
   $scope.start_record = function() {
@@ -329,7 +395,7 @@ angular.module('starter.controllers', [])
     console.log("uploading");
     var options = {chunkedMode: false, fileKey: "file", fileName: "recording.m4a", mimeType: "audio/m4a", httpMethod: "POST"};
     options.params = { machine_uuid: 1234567890 }
-    var server = encodeURI("http://toucan-api.herokuapp.com/mobile_api/audio_messages");
+    var server = encodeURI("http://localhost:3000/mobile_api/audio_messages");
     var filePath = $scope.audio_file_entry.nativeURL;
     console.log('filePath', filePath);
 

@@ -35,12 +35,21 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       }
     }
   })
-  .state('app.setupaccount', {
+  .state('app.setupAccount', {
     url: "/setupaccount",
     views: {
       'menuContent': {
         templateUrl: "templates/setupaccount.html",
         controller: 'SetupAccountCtrl'
+      }
+    }
+  })
+  .state('app.createFamilyMember', {
+    url: "/create_family_member",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/create_family_member.html",
+        controller: 'CreateFamilyMemberCtrl'
       }
     }
   })
@@ -89,7 +98,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       }
     }
   })
-  .state('app.scandevice', {
+  .state('app.scanDevice', {
     url:"/scandevice",
     views: {
       'menuContent': {
@@ -103,7 +112,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
 
 
   $authProvider.configure({
-      apiUrl: 'http://toucan-api.herokuapp.com',
+      apiUrl: 'http://localhost:3000',
       storage: 'localStorage'
   });
 });
