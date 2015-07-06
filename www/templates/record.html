@@ -1,14 +1,38 @@
 <ion-view view-title="Record Media">
   <ion-content>
-    <button ng-click="start_record()" class="button">Start Record</button>
-    <button ng-click="stop_record()" class="button">Stop Record</button>
+
+    <div class="controller_area">
+      <div class="startstoprecord" ng-click="start_record()">
+        START/STOP RECORD
+      </div>
+      <div class="bottombuttons">
+        <div class="previousbutton" ng-click="stop_record()">
+          prev
+        </div>
+        <div class="playpausebutton" ng-click="play()">
+          play
+        </div>
+        <div class="nextbutton" ng-click="stop()">
+          next
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- button ng-click="start_record()" class="button" id="startrecord" >
+      Start Record
+    </button> -->
+    <!-- <button ng-click="stop_record()" class="button">Stop Record</button>
     <button ng-click="play()" class="button">Play</button>
     <button ng-click="stop()" class="button">Stop</button>
-    <ion-list>
-    <a class="item item-icon" ng-repeat="audio_recording in audio_recordings" ng-click="play_recording(audio_recording)">
-      <i class="icon ion-chatbubble-working"></i>
-      {{audio_recording.created_at}}
-    </a>
+    <ion-list> -->
+    <div class="audio_area">
+      <a class="item item-icon" ng-repeat="audio_recording in audio_recordings" ng-click="play_recording(audio_recording)">
+        <i class="icon ion-chatbubble-working"></i>
+        {{audio_recording.created_at}}
+      </a>
+    </div>
   </ion-list>
   </ion-content>
 </ion-view>
