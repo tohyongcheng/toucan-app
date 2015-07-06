@@ -27,8 +27,8 @@ h5#tagline{
 	max-width: 200px;
 }
 
-#home-tab{
-	color:#A2D5D4;
+.home_title{
+	color:white;
 }
 
 .nav-bar-block .bar{
@@ -36,12 +36,20 @@ h5#tagline{
 	background-color:#A2D5D4;
 }
 
+/* ######## home.html ######## */
+
+
+
 /* ######## menu.html ######## */
 .menu .bar{
 	background-color: #A2D5D4;
 	padding-bottom: 4em; 
 }
-
+.menu_title{
+	color:white;
+	font-size: 250%;
+	margin:auto;
+}
 
 
 
@@ -59,6 +67,10 @@ h5#tagline{
 
 /* ######## record.html ######## */
 
+.voice_message_title{
+	color:white;
+}
+
 .controller_area{
 	height:25em;
 	display:block;
@@ -75,6 +87,10 @@ h5#tagline{
 	border:1px solid black;
 }
 
+.startstoprecord img{
+	max-width:12em;
+}
+
 .bottombuttons{
 	margin-top:1em;
 	margin-left:auto;
@@ -86,7 +102,6 @@ h5#tagline{
 
 .previousbutton{
 	display:inline-block;
-	border:1px solid black;
 	width:5em;
 	height:5em;
 	float:left;
@@ -97,15 +112,14 @@ h5#tagline{
 	margin:auto;
 	width:5em;
 	height:5em;
-	border:1px solid black;	
 }
+
 
 .nextbutton{
 	display:inline-block;
 	margin:auto;
 	width:5em;
 	height:5em;
-	border:1px solid black;
 	float:right;
 }
 
@@ -114,6 +128,14 @@ h5#tagline{
 	clear:both;
 }
 
+.control-buttons {
+	margin: auto;
+}
+
+.control-buttons img {
+	max-width: 5em;
+	max-height: 5em;
+}
 
 
 
