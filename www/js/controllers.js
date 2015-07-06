@@ -16,6 +16,10 @@ angular.module('starter.controllers', [])
         console.log(resp);
       });
   };
+
+  $scope.closeLogin = function() {
+    $state.go('landing');
+  }
 })
 
 .controller('LandingCtrl', function($scope, $auth, $state, $rootScope){
@@ -39,7 +43,7 @@ angular.module('starter.controllers', [])
       $scope.registrationForm = {};
       $localStorage.user_id = resp.id;
       $localStorage.email = resp.email;
-      $state.go('app.setupAccount');
+      $state.go('setupAccount');
       // handle success response
       // how to send new response to server 
     })
@@ -48,6 +52,10 @@ angular.module('starter.controllers', [])
       // handle error response
     });
   };
+
+  $scope.goBack = function() {
+    $state.go('landing');
+  }
 })
 
 
@@ -65,7 +73,62 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('CreateChildCtrl', function($scope, $auth, $state, $rootScope, $cordovaDatePicker, $ionicPlatform, $http) {
+.controller('CreateChildCtrl', function($scope, $auth, $state, $rootScope, $cordovaDatePicker, $ionicPlatform, $http, $cordovaBarcodeScanner) {
+  $ionicPlatform.ready(function() {
+    $scope.scan = function() {
+      $cordovaBarcodeScanner.scan().then(function(barcodeData){
+        console.log(barcodeData);
+        $scope.childForm.machine_uuid = barcodeData;
+      },function(error){
+
+      });
+    }
+  });
+
+  $scope.$on('$ionicView.beforeEnter', function() {
+    $scope.showChildParticulars = true;
+  });
+
+  $scope.childForm = {};
+  var options = {
+    date: new Date(),
+    mode: 'date', // or 'time'
+    minDate: new Date() - 10000,
+    allowOldDates: true,
+    allowFutureDates: false,
+    doneButtonLabel: 'DONE',
+    doneButtonColor: '#F2F3F4',
+    cancelButtonLabel: 'CANCEL',
+    cancelButtonColor: '#000000'
+  };
+  
+  $scope.show_datepicker = function() {
+    $cordovaDatePicker.show(options).then(function(date){
+        alert(date);
+    });
+  }
+
+  $scope.create_child = function(){
+    $http.post("http://localhost:3000/mobile_api/children", $scope.childForm).success(function(data){
+      $state.go("app.home");
+      console.log(data);
+    }).error(function(data) {
+      console.log(data);
+    });
+  };  
+
+  $scope.nextStep = function() {
+    console.log("next step");
+    $scope.showChildParticulars = false;
+  }
+
+  $scope.goBack = function() {
+    console.log("go back");
+    $scope.showChildParticulars = true;
+  }
+})
+
+.controller('CreateFirstChildCtrl', function($scope, $auth, $state, $rootScope, $cordovaDatePicker, $ionicPlatform, $http) {
   $ionicPlatform.ready(function() {
     
   });
@@ -96,15 +159,14 @@ angular.module('starter.controllers', [])
   $scope.create_child = function(){
     $http.post("http://localhost:3000/mobile_api/children", $scope.childForm).success(function(data,status,headers,config){
       console.log(data);
+      $state.go('app.home');
     }).error(function(data,status,headers,config) {
       console.log(data);
     });
   };  
-
-
 })
 
-.controller('SetupMyCtrl', function($scope, $auth, $state, $rootScope, $cordovaCamera, $ionicPlatform) {
+.controller('SetupMyAccountCtrl', function($scope, $auth, $state, $rootScope, $cordovaCamera, $ionicPlatform) {
   var options = {
     quality: 50,
     destinationType: Camera.DestinationType.DATA_URL,
@@ -116,9 +178,9 @@ angular.module('starter.controllers', [])
     popoverOptions: CameraPopoverOptions,
     saveToPhotoAlbum: false
   };
-
+  $scope.parentForm = {};
   $scope.$on('$ionicView.beforeEnter', function() {
-    $scope.parentForm = {};
+    
   }); 
 
   $ionicPlatform.ready(function() {
@@ -134,10 +196,10 @@ angular.module('starter.controllers', [])
   });
 
 
-  $scope.createparent = function(){
+  $scope.updateParentParticulars = function(){
     $auth.updateAccount($scope.parentForm)
       .then(function(resp){
-        $state.go("app.createChild");
+        $state.go("createFirstChild");
       })
     .catch(function(resp){
       console.log(resp);
@@ -145,7 +207,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('HomeCtrl', function($scope, $http, $auth, $localStorage, $ionicSlideBoxDelegate) {
+.controller('HomeCtrl', function($scope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state) {
   $scope.$on('$ionicView.beforeEnter', function() {
     // Get Children
     $http.get("http://localhost:3000/mobile_api/users/"+$localStorage.user_id).
@@ -153,6 +215,10 @@ angular.module('starter.controllers', [])
       $scope.children = data.children;
       console.log("get user data", data);
       $ionicSlideBoxDelegate.update();
+      if (data.children.length == 0) {
+        console.log("Going to Account Setup");
+        $state.go("app.createChild");
+      }
     }).
     error(function(data) {
 
@@ -174,6 +240,7 @@ angular.module('starter.controllers', [])
 
 .controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage) {
   $scope.$on('$ionicView.beforeEnter', function() {
+    $scope.parentForm = {};
     var options = {
       quality: 50,
       destinationType: Camera.DestinationType.DATA_URL,
@@ -187,7 +254,7 @@ angular.module('starter.controllers', [])
     };
 
     $scope.$on('$ionicView.beforeEnter', function() {
-      $scope.parentForm = {};
+      
     }); 
 
     $ionicPlatform.ready(function() {
@@ -202,6 +269,10 @@ angular.module('starter.controllers', [])
       }
     });
   });
+
+  $scope.createFamilyMember = function() {
+    $scope.parentForm = {};
+  }
 
   
 })
@@ -274,23 +345,6 @@ angular.module('starter.controllers', [])
       console.log(error);
     })
   }
-})
-
-.controller('ScanDeviceCtrl', function($scope,$auth,$cordovaBarcodeScanner, $ionicPlatform){
-  $scope.$on('$ionicView.beforeEnter', function(){
-
-  });
-
-  $ionicPlatform.ready(function() {
-    $scope.scan = function() {
-      $cordovaBarcodeScanner.scan().then(function(barcodeData){
-        alert(barcodeData);
-        $scope.qrstring = barcodeData;
-      },function(error){
-
-      });
-    }
-  });
 })
 
 .controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http) {

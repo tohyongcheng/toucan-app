@@ -1,13 +1,18 @@
-<ion-view view-title="setupaccount">
+<ion-modal-view>
+  <ion-header-bar>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="goBack()">Back</button>
+    </div>
+    <h1 class="title">I am...</h1>
+  </ion-header-bar>
   <ion-content>
-    <h1>Identify yourself!</h1>
-    <form ng-submit="nextStep()">
+    <form ng-submit="updateParentParticulars()">
       <!-- Image -->
-      <div class="list">
-        <img src="" id="myImage"></img>
+      <div class="list">        
         <label class="item">
           <button class="button button-block button-positive" ng-click='takephoto()'>Take photo</button>
         </label>
+        <img src="" id="myImage"></img>
         <label class="item item-input">
           <span class="input-label">Name</span>
           <input type="text" ng-model="parentForm.name">
@@ -23,4 +28,4 @@
       </div>
     </form>
   </ion-content>
-</ion-view>
+<ion-modal-view>

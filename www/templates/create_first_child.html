@@ -1,6 +1,14 @@
-<ion-view view-title="Add a Child">
+<ion-modal-view>
+  <ion-header-bar>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="goBack()">Back</button>
+    </div>
+    <h1 class="title">My Child...</h1>
+  </ion-header-bar>
+
   <ion-content>
-    <div ng-show="showChildParticulars">
+    <h1>Add A Child</h1>
+    <form ng-submit="create_child()">
       <!-- Image -->
       <div class="childlogo">
         <img src="/img/BOY-01.png">
@@ -8,26 +16,22 @@
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Name</span>
-          <input type="text" ng-model="childForm.name">
+          <input type="email" ng-model="childForm.name">
         </label>
         <label class="item item-input">
           <span class="input-label">Birthday</span>
           <input type="text" ng-model="childForm.birthday" ng-focus="show_datepicker()">
         </label>
         <label class="item">
-          <button class="button button-block button-positive" ng-click="nextStep()">Next</button>
+          <button class="button button-block button-positive" type="submit">Create Child</button>
         </label>
       </div>
-    </div>
+    </form>
 
-    <div ng-show="!showChildParticulars">
+    <div ng-show="">
       <label class="item">
         <button class="button button-block button-positive" ng-click='scan()'>Scan</button>
       </label>
-      <label class="item">
-        <button class="button button-block button-assertive" ng-click="goBack()">Back</button>
-      </label>
     </div>
   </ion-content>
-</ion-view>
-
+</ion-modal-view>

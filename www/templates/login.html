@@ -1,31 +1,38 @@
-<ion-content>
-  <div style="margin:auto; text-align: center; margin-top: 50px;">
-    <img class="logo" src="/img/LOGO1-01.png">
+<ion-modal-view>
+  <ion-header-bar>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Back</button>
+    </div>
+    <h1 class="title">Log in</h1>
+    
+  </ion-header-bar>
 
-    <h1 id="title">
-      TOUCAN
-    </h1>
-    <h5 id="tagline">
-      A PEACE OF MIND WITHIN THE FAMILY
-    </h5>
-  </div>
-
-  <div style="margin-left: 2em; margin-right: 2em; margin-top: 5em;">
-    <form ng-submit="login()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Email</span>
-          <input type="text" ng-model="loginForm.email">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginForm.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-      </div>
-    </form>
-  </div>
-
-</ion-content>
+  <ion-content>
+    <div style="margin:auto; text-align: center; margin-top: 50px;">
+      <img class="logo" src="/img/LOGO1-01.png">
+      <h1 id="title">
+        TOUCAN
+      </h1>
+      <h5 id="tagline">
+        A PEACE OF MIND WITHIN THE FAMILY
+      </h5>
+    </div>
+    <div style="margin-left: 2em; margin-right: 2em; margin-top: 5em;">
+      <form ng-submit="login()">
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input type="text" ng-model="loginForm.email">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="loginForm.password">
+          </label>
+          <label class="item">
+            <button class="button button-block button-positive" type="submit">Log in</button>
+          </label>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-modal-view>

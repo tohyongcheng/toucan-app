@@ -15,6 +15,16 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
     templateUrl: "templates/login.html",
     controller: "LoginCtrl"
   })
+  .state('createFirstChild', {
+    url: "/create_first_child",
+    templateUrl: "templates/create_first_child.html",
+    controller: 'CreateChildCtrl'
+  })
+  .state('setupAccount', {
+    url: "/setupaccount",
+    templateUrl: "templates/setupaccount.html",
+    controller: 'SetupMyAccountCtrl'
+  })
   .state('app', {
     url: "/app",
     abstract: true,
@@ -32,15 +42,6 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       'menuContent': {
         templateUrl: "templates/create_child.html",
         controller: 'CreateChildCtrl'
-      }
-    }
-  })
-  .state('app.setupAccount', {
-    url: "/setupaccount",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/setupaccount.html",
-        controller: 'SetupAccountCtrl'
       }
     }
   })
