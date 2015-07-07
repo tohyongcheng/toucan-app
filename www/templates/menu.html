@@ -1,48 +1,61 @@
 <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content drag-content="allowSideMenu">
     <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button>
-      </ion-nav-back-button>
+      
+      <!-- <ion-nav-back-button>
+      </ion-nav-back-button> -->
 
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
       </ion-nav-buttons>
+
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
-      <h1 class="menu_title">PROFILE</h1>
+
+    <ion-header-bar>
+      <p>PROFILE</p>
     </ion-header-bar>
-    <ion-content>
+
+    <ion-content> 
       <ion-list>
-        <ion-item menu-close class="item-icon-left ion-home" href="#/app/home">
-          Home
+        <ion-item menu-close class="item-icon-left" href="#/app/home">
+          <i class="icon ion-home"></i>
+          HOME
         </ion-item>
-        <ion-item menu-close ui-sref="app.record">
-          Record
+        <ion-item menu-close class="item-icon-left" ui-sref="app.record">
+          <i class="icon ion-mic-a"></i>
+          RECORD
         </ion-item>
-        <ion-item menu-close ui-sref="app.map">
-          Map
+        <ion-item menu-close class="item-icon-left" ui-sref="app.map">
+          <i class="icon ion-ios-location-outline"></i>
+          MAP
         </ion-item>
-        <ion-item menu-close ui-sref="app.ping">
-          Ping
+        <ion-item menu-close class="item-icon-left" ui-sref="app.ping">
+          <i class="icon ion-radio-waves"></i>
+          PING
         </ion-item>
-        <ion-item menu-close ui-sref="app.createChild">
-          Create a Child
+        <ion-item menu-close class="item-icon-left" ui-sref="app.createChild">
+          <i class="icon ion-person-add"></i>
+          CREATE A CHILD
         </ion-item>
-        <ion-item menu-close ui-sref="app.createFamilyMember">
-          Create a Parent
+        <ion-item menu-close class="item-icon-left" ui-sref="app.createFamilyMember">
+          <i class="icon ion-person-add"></i>
+          CREATE A PARENT
         </ion-item>
-        <ion-item menu-close ui-sref="app.settings">
-          Settings
+        <ion-item menu-close class="item-icon-left" ui-sref="app.settings">
+          <i class="icon ion-android-settings"></i>
+          SETTINGS
         </ion-item>
-        <ion-item menu-close ng-click="logout()">
-          Logout
+        <ion-item menu-close class="item-icon-left" ng-click="logout()">
+          <i class="icon ion-power"></i>
+          LOGOUT
         </ion-item>
       </ion-list>
     </ion-content>
+
   </ion-side-menu>
 </ion-side-menus>

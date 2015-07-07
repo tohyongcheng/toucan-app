@@ -41,15 +41,42 @@ h5#tagline{
 
 
 /* ######## menu.html ######## */
-.menu .bar{
+
+/*.menu{
+	display: block;
+}*/
+
+.bar-header{
 	background-color: #A2D5D4;
-	padding-bottom: 4em; 
+	border-bottom:1px solid white;
 }
-.menu_title{
-	color:white;
-	font-size: 250%;
+
+.menu-left .bar-header{
+	height:5em;
+}
+
+.menu-left .scroll-content{
+	background-color: #A2D5D4
+}
+
+.bar-header p{
 	margin:auto;
+	font-size: 2em;
+	color:white;
+	font-family: arial;
 }
+
+.item-complex .item-content, .item{
+    background-color: #A2D5D4;
+    border: none;
+    color:white;
+}
+
+.menu-left .list{
+	margin-top: 1.8em;
+}
+
+
 
 
 
