@@ -1,29 +1,33 @@
 <ion-view>
-  <ion-nav-title class="voice_message_title icon-left ion-mic-a" >
+  <ion-nav-title class="header_title icon-left ion-mic-a" >
         VOICE MESSAGE
   </ion-nav-title>
 
   <ion-content>
     <div class="controller_area">
-      <div class="startstoprecord" ng-click="start_record()">
-        <img src="../img/MICROPHONE-01.png"/>
+
+      <div class ="topbuttons">
+        <button class="button startstoprecord" ng-click="start_record()">
+          <img src="../img/MICROPHONE-01.png"/>
+        </button>
       </div>
+
       <div class="bottombuttons">
-        <div class="previousbutton" ng-click="stop_record()">
+        <button class="button previousbutton" ng-click="stop_record()">
           <div class="control-buttons">
             <img src="../img/BACK.png"/>
           </div>
-        </div>
-        <div class="playpausebutton" ng-click="play()">
+        </button>
+        <button class="button playpausebutton" ng-click="play()">
           <div class="control-buttons">
             <img src="../img/PLAY.png"/>
           </div>
-        </div>
-        <div class="nextbutton" ng-click="stop()">
+        </button>
+        <button class="button nextbutton" ng-click="stop()">
           <div class="control-buttons">
             <img src="../img/FORWARD_2.png"/>
           </div>
-        </div>
+        </button>
       </div>
     </div>
     <!-- button ng-click="start_record()" class="button" id="startrecord" >

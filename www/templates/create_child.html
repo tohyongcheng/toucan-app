@@ -1,11 +1,14 @@
-<ion-view view-title="Add a Child">
+<ion-view>
+  <ion-nav-title class="header_title icon-left ion-person-add" >
+    ADD A CHILD
+  </ion-nav-title>
   <ion-content>
     <div ng-show="showChildParticulars">
       <!-- Image -->
       <div class="childlogo">
         <img src="/img/BOY-01.png">
       </div>
-      <div class="list">
+      <div class="inputfield list">
         <label class="item item-input">
           <span class="input-label">Name</span>
           <input type="text" ng-model="childForm.name">

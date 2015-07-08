@@ -1,16 +1,20 @@
 /* Empty. Add your own CSS if you like */
 
-
+/* ######## landing.html ######## */
 h1#title{
 	color: white;
 	margin-top: 30px;
 }
-
-
 h5#tagline{
 	font-size: small;
 	color: white;
 }
+
+.header_title{
+	color:white;
+	font-size: 1.3em;
+}
+
 
 .item{
 	margin: auto;
@@ -27,24 +31,75 @@ h5#tagline{
 	max-width: 200px;
 }
 
-.home_title{
-	color:white;
-}
 
 .nav-bar-block .bar{
 
 	background-color:#A2D5D4;
 }
 
+.login_button{
+	background-color: #B9DCD7;
+	color:white;
+	border: 1px solid white;
+}
+
+.signup_button{
+	background-color: #B9DCD7;
+	color:white;
+	border: 1px solid white;
+}
+
+/* ######## login.html ######## */
+.input-label{
+	background-color: #B9DCD7;
+}
+
+.inputfield{
+	margin-left: 2em; 
+	margin-right: 2em; 
+	margin-top: 5em;
+}
+
+.inputfield .item{
+	background-color: #B9DCD7;
+	border:1px solid white;
+}
+
+.backbutton{
+	color:white;
+}
 /* ######## home.html ######## */
+.home_title{
+	color:white;
+	font-size: 1.3em;
+}
+
+.homeslidebox{
+	height:23em;
+}
+
+
+.boxicon{
+	text-align:center;
+	margin: auto;
+	
+}
+
+.boxicon img{
+	max-width:12em;
+	margin-top:2em;
+	border-radius: 50%;
+	border: 2px solid white;
+}
+
+.add_child_icon{
+	max-width: 12em;
+}
+
 
 
 
 /* ######## menu.html ######## */
-
-/*.menu{
-	display: block;
-}*/
 
 .bar-header{
 	background-color: #A2D5D4;
@@ -92,6 +147,18 @@ h5#tagline{
 	border:3px solid black;
 }
 
+.inputfield{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.inputfield .item{
+	background-color: #B9DCD7;
+	border:1px solid white;
+
+}
+
+
 /* ######## record.html ######## */
 
 .voice_message_title{
@@ -104,38 +171,48 @@ h5#tagline{
 	margin:auto;
 }
 
-.startstoprecord{
+.topbuttons{
 	text-align: center;
+}
+.topbuttons button{
 	margin-top: 2em;
 	margin-left:auto;
 	margin-right:auto;
-	width:18em;
-	height:18em;
-	border:1px solid black;
+	background-color: #B9DCD7;
+	border:none;
 }
 
-.startstoprecord img{
-	max-width:12em;
+.topbuttons button img{
+	max-width:8em;
 }
 
 .bottombuttons{
 	margin-top:1em;
 	margin-left:auto;
 	margin-right:auto;
-	width:18em;
 	text-align: center;
+	width:18em;
 	height:6em;
 }
 
-.previousbutton{
+.bottombuttons button{
 	display:inline-block;
-	width:5em;
-	height:5em;
+	background-color: #B9DCD7;
+	max-width:4em;
+	max-height:4em;
 	float:left;
+	border:2px solid yellow;
+	margin:10px;
 }
 
+.bottombuttons button img{
+	float:left;
+	max-width:4em;
+	max-height:4em;
+}
+
+
 .playpausebutton{
-	display:inline-block;
 	margin:auto;
 	width:5em;
 	height:5em;
@@ -143,7 +220,6 @@ h5#tagline{
 
 
 .nextbutton{
-	display:inline-block;
 	margin:auto;
 	width:5em;
 	height:5em;
@@ -165,17 +241,42 @@ h5#tagline{
 }
 
 
+/* ######## create_family_member.html ######## */
+
+.parent_image{
+	text-align: center;
+	margin-top: 2em;
+}
+
+.parent_image img{
+	max-width: 10em;
+}
+
+.takephoto{
+	text-align: center;
+	background-color: #B9DCD7;
+	margin-left: auto;
+}
+
+.photofield .item button{
+	width:6em;
+	height:6em;
+	border-radius: 50%;
+	margin:auto;
+}
 
 
+.photofield .item button img{
+	max-width:3em;
+	margin-top:1em;
+}
+
+.proceedfield  .item{
+	background-color: #B9DCD7;
+}
 
 
-
-
-
-
-
-
-
+/* ######## map.html ######## */
 
 
 

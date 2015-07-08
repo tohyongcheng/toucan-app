@@ -1,27 +1,43 @@
-<ion-view view-title="Create Family Member">
+<ion-view>
+  <ion-nav-title class="header_title icon-left ion-person-add" >
+    CREATE FAMILY MEMBER
+  </ion-nav-title>
   <ion-content>
     <form ng-submit="nextStep()">
       <!-- Image -->
       <div class="list">
-        <img src="" id="myImage"></img>
-        <label class="item">
-          <button class="button button-block button-positive" ng-click='takephoto()'>Take photo</button>
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Name</span>
-          <input type="text" ng-model="parentForm.name">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Email</span>
-          <input type="email" ng-model="parentForm.email">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Contact No.</span>
-          <input type="tel" ng-model="parentForm.mobile_number">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit" >Proceed</button>
-        </label>
+
+        <div class="parent_image">
+          <img src="../img/MOM-01.png"></img>
+        </div>
+        <div class="photofield">
+          <label class="item takephoto">
+            <button class="button camerabutton button-full button-dark" ng-click='takephoto()'>
+              <img src="../img/CAMERA.png"/>
+            </button>
+          </label>
+        </div>
+
+        <div class="inputfield">
+          <label class="item item-input">
+            <span class="input-label">Name</span>
+            <input type="text" ng-model="parentForm.name">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input type="email" ng-model="parentForm.email">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Contact No.</span>
+            <input type="tel" ng-model="parentForm.mobile_number">
+          </label>
+        </div>
+
+        <div class="proceedfield">
+          <label class="item">
+            <button class="button button-full button-positive" type="submit" >Proceed</button>
+          </label>
+        </div>
         
       </div>
     </form>
