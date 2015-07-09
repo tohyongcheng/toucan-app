@@ -207,35 +207,40 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('HomeCtrl', function($scope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state) {
+.controller('HomeCtrl', function($scope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state, GlobalFactory) {
   $scope.$on('$ionicView.beforeEnter', function() {
     // Get Children
     $http.get("http://localhost:3000/mobile_api/users/"+$localStorage.user_id).
     success(function(data) {
       $scope.children = data.children;
+      GlobalFactory._set_my_children(data.children);
+      console.log($localStorage.children_id);
       console.log("get user data", data);
+
       $ionicSlideBoxDelegate.update();
       if (data.children.length == 0) {
-        console.log("Going to Account Setup");
-        $state.go("app.createChild");
+        alert("Please create a child!");
+        // $state.go("app.createChild");
+      } else {
+        // Get Notifications for each child
+        for (i=0;i<$scope.children.length;i++) {
+          var child = $scope.children[i];
+          $http.get("http://localhost:3000/mobile_api/user_notifications?child_id="+child.id).
+          success(function(data) {
+            child.notifications = data;
+            console.log("get user notifications for child", data);
+            $http.put("http://localhost:3000/mobile_api/user_notifications/update?child_id="+child.id);
+          }).
+          error(function(data) {
+
+          });
+        }  
       }
     }).
     error(function(data) {
-
-    });
-
-    // Get Notifications
-    $http.get("http://localhost:3000/mobile_api/user_notifications/").
-    success(function(data) {
-      $scope.notifications = data;
-      console.log("get user notifications", data);
-    }).
-    error(function(data) {
-
-    });
+      console.log("error", data);
+    });    
   }); 
-
-  
 })
 
 .controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage) {
@@ -283,7 +288,7 @@ angular.module('starter.controllers', [])
     $auth.signOut()
     .then(function(resp) { 
       console.log("successfully logged out", resp);
-      $state.go('login');
+      $state.go('landing');
     })
     .catch(function(resp) { 
       console.log("error in logging out", resp);// handle error response
@@ -291,7 +296,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('MapCtrl', function($scope, uiGmapGoogleMapApi, $http, LoadingService) {
+.controller('MapCtrl', function($scope, uiGmapGoogleMapApi, $http, LoadingService, GlobalFactory) {
   LoadingService.showLoading();
   $scope.locations = [];
 
@@ -328,21 +333,50 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('PingCtrl', function($scope, $http) {
+.controller('PingCtrl', function($scope, $http, $ionicModal, GlobalFactory) {
+  $scope.selected_children = {};
+  $scope.selected_color = 0;
+  $scope.my_children = GlobalFactory._get_my_children();
+
+  $ionicModal.fromTemplateUrl('ping-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+
+
   $scope.$on('$ionicView.beforeEnter', function() {
     
   });
 
-  $scope.ping =function() {
-    data = {
-      ping_message : { user_id: 1, color: 0 },
-      machine_uuid: 1234567890
-    };
+  $scope.toggle_child = function(child) {
+    if ($scope.selected_children[child.id]) {
+      delete $scope.selected_children[child.id];
+    } else {
+      $scope.selected_children[child.id] = child;
+    }
+  }
 
-    $http.post("http://localhost:3000/mobile_api/ping_messages", data).then(function(success) {
-      console.log(success);
-    }, function(error){
-      console.log(error);
+  $scope.ping =function() {
+
+    angular.forEach($scope.selected_children, function(value, key) {
+      var data = {
+        ping_message : { color: $scope.selected_color, child_id: key }
+      };
+
+      $http.post("http://localhost:3000/mobile_api/ping_messages", data).then(function(success) {
+        console.log(success);
+      }, function(error){
+        console.log(error);
+      });
     })
   }
 })
@@ -478,6 +512,46 @@ angular.module('starter.controllers', [])
       // An error occurred. Show a message to the user
     });
   }
+})
+.controller('VoiceLogCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http) {
 
+  $scope.$on('$ionicView.beforeEnter', function() {
+    LoadingService.showLoading();
+    $http.get("http://localhost:3000/mobile_api/audio_messages/?machine_uuid=1234567890").
+    success(function(data){
+      LoadingService.hideLoading();
+      $scope.audio_recordings = data;
+      $scope.audio_recordings.reverse();
+    }).error(function(data) {
+      console.log("Error: ", data);
+    });
+  });
+
+  $scope.play_recording = function(recording) {
+    console.log(recording);
+    if ($scope.currently_playing != null) {
+      $scope.currently_playing.stop();
+      $scope.currently_playing.release();  
+      $scope.currently_playing = null;
+    }
+    src = recording.audio_message_url;
+    console.log("src", src);
+    $scope.currently_playing = new Media(src,
+    function(success) {
+      console.log('success', success); 
+    },
+    function(err) {
+        console.log("recordAudio():Audio Error: "+ err.code);
+    });
+    $scope.currently_playing.play();
+  }
+})
+.controller('ProfileCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http) {
+
+  $scope.$on('$ionicView.beforeEnter', function() {
+    
+  });
+
+  
 });
 

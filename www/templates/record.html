@@ -2,6 +2,11 @@
   <ion-nav-title class="header_title icon-left ion-mic-a" >
         VOICE MESSAGE
   </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <a class="button button-clear" ui-sref="app.voice_log">
+      LOG
+    </a>
+  </ion-nav-buttons>
 
   <ion-content>
     <div class="controller_area">
@@ -30,19 +35,5 @@
         </button>
       </div>
     </div>
-    <!-- button ng-click="start_record()" class="button" id="startrecord" >
-      Start Record
-    </button> -->
-    <!-- <button ng-click="stop_record()" class="button">Stop Record</button>
-    <button ng-click="play()" class="button">Play</button>
-    <button ng-click="stop()" class="button">Stop</button>
-    <ion-list> -->
-    <div class="audio_area">
-      <a class="item item-icon" ng-repeat="audio_recording in audio_recordings" ng-click="play_recording(audio_recording)">
-        <i class="icon ion-chatbubble-working"></i>
-        {{audio_recording.created_at}}
-      </a>
-    </div>
-  </ion-list>
   </ion-content>
 </ion-view>

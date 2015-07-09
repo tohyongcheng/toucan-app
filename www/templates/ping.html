@@ -4,5 +4,18 @@
   	</ion-nav-title>
   	<ion-content>
     	<button ng-click="ping()" class="button">Ping</button>
+      <button ng-click="openModal()" class="button">Open Modal</button>
   	</ion-content>
 </ion-view>
+
+
+<script id="ping-modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">My Modal title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Choose Colour 
+    </ion-content>
+  </ion-modal-view>
+</script>

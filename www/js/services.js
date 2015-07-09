@@ -20,3 +20,4 @@ app.service('LoadingService', function($ionicLoading, $ionicPopup) {
 
   return service;
 });
+

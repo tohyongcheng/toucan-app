@@ -1,0 +1,15 @@
+<ion-view>
+  <ion-nav-title class="voice_message_title icon-left ion-mic-a" >
+    VOICE LOG
+  </ion-nav-title>
+
+  <ion-content>
+    <div class="audio_area">
+      <a class="item item-icon" ng-repeat="audio_recording in audio_recordings" ng-click="play_recording(audio_recording)">
+        <i class="icon ion-chatbubble-working"></i>
+        {{audio_recording.created_at}}
+      </a>
+    </div>
+  </ion-list>
+  </ion-content>
+</ion-view>

@@ -72,6 +72,15 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       }
     }
   })
+  .state('app.voice_log', {
+    url: "/record",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/voice_log.html",
+        controller: 'VoiceLogCtrl'
+      }
+    }
+  })
   .state('app.map', {
     url: "/map",
     views: {
