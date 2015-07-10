@@ -125,6 +125,15 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, $ionicCon
         controller:'ProfileCtrl'
       }
     }
+  })
+  .state('app.family', {
+    url:"/family",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/family.html",
+        controller:'FamilyCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/landing');

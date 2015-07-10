@@ -74,7 +74,7 @@ h5#tagline{
 }
 
 .homeslidebox{
-	height:23em;
+	height:15em;
 }
 
 
@@ -86,9 +86,15 @@ h5#tagline{
 
 .boxicon img{
 	max-width:12em;
+	width: 8em;
+	height: 8em;
 	margin-top:2em;
 	border-radius: 50%;
 	border: 2px solid white;
+}
+
+.boxicon.plus img{
+	padding: 2em;
 }
 
 .add_child_icon{
@@ -187,43 +193,22 @@ h5#tagline{
 }
 
 .bottombuttons{
+	margin: auto;
 	margin-top:1em;
-	margin-left:auto;
-	margin-right:auto;
 	text-align: center;
-	width:18em;
-	height:6em;
 }
 
 .bottombuttons button{
 	display:inline-block;
 	background-color: #B9DCD7;
-	max-width:4em;
-	max-height:4em;
-	float:left;
-	border:2px solid yellow;
-	margin:10px;
+	border:2px solid transparent;
+	text-align: center;
 }
 
 .bottombuttons button img{
-	float:left;
 	max-width:4em;
 	max-height:4em;
-}
-
-
-.playpausebutton{
-	margin:auto;
-	width:5em;
-	height:5em;
-}
-
-
-.nextbutton{
-	margin:auto;
-	width:5em;
-	height:5em;
-	float:right;
+	padding: 1em;
 }
 
 .audio_area{
@@ -309,11 +294,11 @@ h5#tagline{
 	width: 4em;
 	height: 4em;
 	margin: auto;
-	margin-top: 0.5em;
+	margin-top: 1em;
 }
 
 .child-not-selected {
-	border: 5px solid transparent;
+	border: 1px solid #FFF;
 	border-radius:999px;
 }
 
@@ -347,3 +332,25 @@ h5#tagline{
 }
 
 
+/*family.html*/
+
+.horizontal-wide {
+  overflow: scroll;
+  white-space: nowrap;
+}
+
+.inline {
+	display: inline-block;
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.family-children, .family-members {
+	padding-top: 2;
+	height: 30vh;
+	text-align: center;
+}
+
+.word-center {
+	text-align: center
+}

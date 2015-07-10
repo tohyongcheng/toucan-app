@@ -1,0 +1,46 @@
+<ion-view>
+  <ion-nav-title class="header_title icon-left ion-android-home" >
+    MY FAMILY
+  </ion-nav-title>
+  <ion-content>
+    <!-- Image -->
+    <div class="list my-family">        
+
+      <div class="item item-divider word-center">
+        My Children
+      </div>
+      <ion-scroll direction="x" class="horizontal-wide item family-children">
+        <div ng-repeat="child in children" class="inline">
+          <div class="child-image child-not-selected">
+            <img src="../img/BOY-01.png"/>
+          </div>
+          <small>{{child.name}}</small>
+        </div>
+        <div class="inline" ui-sref="app.createChild">
+          <div class="child-image child-not-selected">
+            <img src = "../img/PLUS.png" />
+          </div>
+          <small>Add a child</small>
+        </div>
+      </ion-scroll>
+      <div class="item item-divider word-center">
+        My Family Members
+      </div>
+      <ion-scroll direction="x" class="horizontal-wide item family-members">
+        <div ng-repeat="member in family_members" class="inline">
+          <div class="child-image child-not-selected">
+            <img src="../img/MOM-01.png"/>
+          </div>
+          <small>{{member.name}}</small>
+        </div>
+        <div class="inline" ui-sref="app.createFamilyMember">
+          <div class="child-image child-not-selected">
+            <img src = "../img/PLUS.png" />
+          </div>
+          <small>Add a member</small>
+        </div>
+      </ion-scroll>
+    </div>
+  </ion-content>
+</ion-view>
+

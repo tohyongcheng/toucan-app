@@ -12,13 +12,13 @@
     <div class="controller_area">
 
       <div class ="topbuttons">
-        <button class="button startstoprecord" ng-click="start_record()">
+        <button class="button startstoprecord" on-hold="start_record()" on-release="stop_record()">
           <img src="../img/MICROPHONE-01.png"/>
         </button>
       </div>
 
       <div class="bottombuttons">
-        <button class="button previousbutton" ng-click="stop_record()">
+        <button class="button previousbutton" ng-click="">
           <div class="control-buttons">
             <img src="../img/BACK.png"/>
           </div>

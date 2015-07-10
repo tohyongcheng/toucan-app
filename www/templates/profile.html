@@ -1,30 +1,36 @@
 <ion-view>
   <ion-nav-title class="header_title icon-left ion-android-home" >
-    HOME
+    PROFILE
   </ion-nav-title>
   <ion-content>
-    <ion-slide-box on-slide-changed="slideHasChanged($index)" class="homeslidebox">
-      <ion-slide class= "ionslide" ng-repeat="child in children">
-        <div class="boxicon" >
-          <img src = "../img/BOY-01.png"/>
-          <p>{{child.name}}</p>
+      <form ng-submit="updateParentParticulars()">
+      <!-- Image -->
+      <div class="list">        
+        <div class="parent_image">
+          <img src="../img/MOM-01.png"></img>
         </div>
-      </ion-slide>
-
-      <ion-slide class= "ionslide" ui-sref="app.createChild">
-        <div class="boxicon">
-          <!-- <i class="icon ion-ios-plus-outline"></i> -->
-          <img src = "../img/PLUS.png" />
+        <div class="photofield">
+          <label class="item takephoto">
+            <button class="button camerabutton button-full button-dark" ng-click='takephoto()'>
+              <img src="../img/CAMERA.png"/>
+            </button>
+          </label>
         </div>
-      </ion-slide>
-    </ion-slide-box>
-
-    <h2>Latest Activities</h2>
-    <ion-list>
-      <ion-item ng-repeat="notification in notifications">
-        Notification 1
-      </ion-item>
-    </ion-list>
+        <img src="" id="myImage"></img>
+        <label class="item item-input">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="user.name">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Contact No.</span>
+          <input type="tel" ng-model="user.mobile_number">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit" >Update</button>
+        </label>
+        
+      </div>
+    </form>
   </ion-content>
 </ion-view>
 

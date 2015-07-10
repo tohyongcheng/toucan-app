@@ -239,29 +239,38 @@ angular.module('starter.controllers', [])
     }).
     error(function(data) {
       console.log("error", data);
-    });    
+    });   
+
+    $http.get("http://localhost:3000/mobile_api/users/").
+    success(function(data) { 
+      console.log("family", data);
+      GlobalFactory._set_my_family(data);
+    }).
+    error(function(data){
+      console.log("error getting family");
+    });
   }); 
 })
 
-.controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage) {
+.controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera) {
   $scope.parentForm = {};
-  var options = {
-    quality: 50,
-    destinationType: Camera.DestinationType.DATA_URL,
-    sourceType: Camera.PictureSourceType.CAMERA,
-    allowEdit: false,
-    encodingType: Camera.EncodingType.JPEG,
-    targetWidth: 100,
-    targetHeight: 100,
-    popoverOptions: CameraPopoverOptions,
-    saveToPhotoAlbum: false
-  };
 
   $scope.$on('$ionicView.beforeEnter', function() {
     
   }); 
 
   $ionicPlatform.ready(function() {
+    var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: false,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 100,
+      targetHeight: 100,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false
+    };
     $scope.takephoto = function() {
       $cordovaCamera.getPicture(options).then(function(imageData) {
         var image = document.getElementById('myImage');
@@ -276,8 +285,6 @@ angular.module('starter.controllers', [])
   $scope.createFamilyMember = function() {
     $scope.parentForm = {};
   }
-
-  
 })
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $rootScope, $cordovaPush, $auth, $state) {
@@ -316,7 +323,7 @@ angular.module('starter.controllers', [])
 
   $scope.initMap = function() {
     if (($scope.children.length > 0) && (Object.keys($scope.locations).length > 0))  {
-      $scope.map = { center: { latitude: 1.3000, longitude: 103.8 }, zoom: 10 };
+      $scope.map = { center: { latitude: 1.3000, longitude: 103.8 }, zoom: 12 };
       console.log($scope.map);
       $scope.markers = [];
       for (key in $scope.locations) {
@@ -569,12 +576,31 @@ angular.module('starter.controllers', [])
     $scope.currently_playing.play();
   }
 })
-.controller('ProfileCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http) {
+.controller('ProfileCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, $auth) {
 
   $scope.$on('$ionicView.beforeEnter', function() {
     
   });
 
+  $scope.updateParentParticulars = function(){
+    $auth.updateAccount($scope.user)
+      .then(function(resp){
+        alert("Your profile has been updated.");
+      })
+    .catch(function(resp){
+      console.log(resp);
+    })
+  }
+
+  
+})
+.controller('FamilyCtrl',function($scope, $stateParams, $ionicPlatform, $state, GlobalFactory) {
+
+  $scope.$on('$ionicView.beforeEnter', function() {
+    $scope.children = GlobalFactory._get_my_children();
+    $scope.family_members = GlobalFactory._get_my_family();
+  });
+  
   
 });
 
