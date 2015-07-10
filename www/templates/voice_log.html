@@ -1,7 +1,14 @@
 <ion-view>
+
   <ion-nav-title class="voice_message_title icon-left ion-mic-a" >
     VOICE LOG
   </ion-nav-title>
+  <ion-nav-bar class="bar">
+    <ion-nav-back-button class="button-icon button-clear">
+      <i class="ion-ios-arrow-back"></i>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
 
   <ion-content>
     <div class="audio_area">
@@ -10,6 +17,6 @@
         {{audio_recording.created_at}}
       </a>
     </div>
-  </ion-list>
+  </ion-list> 
   </ion-content>
 </ion-view>

@@ -145,6 +145,7 @@ h5#tagline{
 .childlogo img {
 	max-width:10em;
 	border:3px solid black;
+	margin-top: 2em;
 }
 
 .inputfield{
@@ -338,9 +339,15 @@ h5#tagline{
 
 /* ######## map.html ######## */
 
+/* ######## voice_log.html ########*/
+.back-button{
+	color:white;
+	background-color: transparent;
+}
 
-
-
+.back-button > .back-text > .previous-title 
+    display:none;
+}
 
 
 
