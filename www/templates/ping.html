@@ -3,19 +3,50 @@
     	PING
   	</ion-nav-title>
   	<ion-content>
-    	<button ng-click="ping()" class="button">Ping</button>
-      <button ng-click="openModal()" class="button">Open Modal</button>
+      <div class="select-children">
+        <span ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
+          <div class="child-image" ng-class="is_selected(child)">
+            <img src="../img/BOY-01.png"/>
+          </div>
+          <small>{{child.name}}</small>
+        </span>
+      </div>
+
+      <div class="ping-colors" ng-show="show_colours">
+        <div>
+          <div class="one-third">
+            <a class="circle ping-button" ng-click="ping(0)"></a>
+          </div>
+          <div class="one-third">
+            <a class="circle ping-button" ng-click="ping(1)"></a>
+          </div>
+          <div class="one-third">
+            <a class="circle ping-button" ng-click="ping(2)"></a>
+          </div>
+        </div>
+        <div>
+          <div class="one-third">
+            <a class="circle ping-button" ng-click="ping(3)"></a>
+          </div>
+          <div class="one-third">
+            <a class="circle ping-button" ng-click="ping(4)"></a>
+          </div>
+          <div class="one-third">
+            <a class="circle ping-button" ng-click="ping(5)"></a>
+          </div>
+        </div>
+        <div>
+          <div class="one-third">
+            <a class="circle ping-button" ng-click="ping(6)"></a>
+          </div>
+          <div class="one-third">
+            <a class="circle ping-button" ng-click="ping(7)"></a>
+          </div>
+          <div class="one-third">
+            <a class="circle ping-button" ng-click="ping(8)"></a>
+          </div>
+        </div>
+      </div>
   	</ion-content>
 </ion-view>
 
-
-<script id="ping-modal.html" type="text/ng-template">
-  <ion-modal-view>
-    <ion-header-bar>
-      <h1 class="title">My Modal title</h1>
-    </ion-header-bar>
-    <ion-content>
-      Choose Colour 
-    </ion-content>
-  </ion-modal-view>
-</script>

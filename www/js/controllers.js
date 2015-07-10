@@ -333,47 +333,44 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('PingCtrl', function($scope, $http, $ionicModal, GlobalFactory) {
+.controller('PingCtrl', function($scope, $http, $ionicModal, $ionicPopup, GlobalFactory) {
   $scope.selected_children = {};
   $scope.selected_color = 0;
-  $scope.my_children = GlobalFactory._get_my_children();
-
-  $ionicModal.fromTemplateUrl('ping-modal.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  $scope.openModal = function() {
-    $scope.modal.show();
-  };
-  $scope.closeModal = function() {
-    $scope.modal.hide();
-  };
-
-
+  $scope.show_colours = false;
+  $scope.children = GlobalFactory._get_my_children();
   $scope.$on('$ionicView.beforeEnter', function() {
     
   });
 
   $scope.toggle_child = function(child) {
+    console.log("toggle child");
     if ($scope.selected_children[child.id]) {
       delete $scope.selected_children[child.id];
     } else {
       $scope.selected_children[child.id] = child;
     }
+    if (Object.keys($scope.selected_children).length > 0) $scope.show_colours = true;
+    else $scope.show_colours = false;
+
+    console.log($scope.selected_children);
+    console.log($scope.show_colours);
   }
 
-  $scope.ping =function() {
+  $scope.is_selected = function(child) {
+    if (child.id in $scope.selected_children) return "child-selected";
+    else return "child-not-selected";
+  }
 
+  $scope.ping = function(color) {
     angular.forEach($scope.selected_children, function(value, key) {
+      console.log(value, key);
       var data = {
-        ping_message : { color: $scope.selected_color, child_id: key }
+        ping_message : { color: color, child_id: parseInt(key) }
       };
 
       $http.post("http://localhost:3000/mobile_api/ping_messages", data).then(function(success) {
         console.log(success);
+        alert("Ping sent successfully!");
       }, function(error){
         console.log(error);
       });

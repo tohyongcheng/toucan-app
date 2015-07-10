@@ -276,6 +276,66 @@ h5#tagline{
 }
 
 
+.circle {
+	border-radius: 999px;
+	display: inline-block;
+}
+
+.ping-button {
+	width: 4em;
+	height: 4em;
+	background-color: #000;
+	cursor: pointer;
+}
+
+.child-image {
+	width: 6em;
+	height: 6em;
+}
+
+.child-image img {
+	width: 4em;
+	height: 4em;
+	margin: auto;
+	margin-top: 0.5em;
+}
+
+.child-not-selected {
+	border: 5px solid transparent;
+	border-radius:999px;
+}
+
+.child-selected {
+	border: 5px solid #000;
+	border-radius:999px;
+}
+
+.select-children {
+	padding: 2em;
+	text-align: center;
+}
+
+.select-children span {
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-align: center;
+}
+
+.ping-colors div {
+	margin-top: 2em;
+	height: 7em;
+	text-align: center;
+}
+
+.one-third {
+	width:30%;
+	display: inline-block;
+	text-align: center;
+}
+
+
+
 /* ######## map.html ######## */
 
 
