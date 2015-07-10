@@ -171,21 +171,19 @@ h5#tagline{
 	color:white;
 }
 
-.controller_area{
-	height:25em;
-	display:block;
-	margin:auto;
-}
-
 .topbuttons{
 	text-align: center;
 }
+
 .topbuttons button{
 	margin-top: 2em;
 	margin-left:auto;
 	margin-right:auto;
+	width: 15em;
+	height: 15em;
 	background-color: #B9DCD7;
-	border:none;
+	border: 1px solid #FFF;
+	border-radius:999px;
 }
 
 .topbuttons button img{
@@ -212,8 +210,6 @@ h5#tagline{
 }
 
 .audio_area{
-	border:3px solid purple;
-	clear:both;
 }
 
 .control-buttons {
@@ -317,6 +313,10 @@ h5#tagline{
 	margin-left: 10px;
 	margin-right: 10px;
 	text-align: center;
+}
+
+.select-children span small {
+	color: white;
 }
 
 .ping-colors div {

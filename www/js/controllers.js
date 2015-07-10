@@ -411,18 +411,17 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http) {
+.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, GlobalFactory, $auth) {
 
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.audio_file = null;
     $scope.audio_file_entry = null;
     $scope.audio_recordings = [];
     $scope.currently_playing = null;
-    console.log($cordovaMedia);
-    console.log($cordovaCapture);
-    console.log($cordovaFile);
-    console.log($cordovaFileTransfer);
-    console.log("READY");
+    
+    $scope.selected_children = {};
+    $scope.children = GlobalFactory._get_my_children();
+    $scope.ft = new FileTransfer();
 
     LoadingService.showLoading();
     $http.get("http://localhost:3000/mobile_api/audio_messages/?machine_uuid=1234567890").
@@ -434,6 +433,25 @@ angular.module('starter.controllers', [])
       console.log("Error: ", data);
     });
   });
+
+  $scope.toggle_child = function(child) {
+    console.log("toggle child");
+    if ($scope.selected_children[child.id]) {
+      delete $scope.selected_children[child.id];
+    } else {
+      $scope.selected_children[child.id] = child;
+    }
+    if (Object.keys($scope.selected_children).length > 0) $scope.show_colours = true;
+    else $scope.show_colours = false;
+
+    console.log($scope.selected_children);
+    console.log($scope.show_colours);
+  }
+
+  $scope.is_selected = function(child) {
+    if (child.id in $scope.selected_children) return "child-selected";
+    else return "child-not-selected";
+  }
 
   $scope.play_recording = function(recording) {
     console.log(recording);
@@ -510,20 +528,30 @@ angular.module('starter.controllers', [])
   }
 
   $scope.upload_record = function() {
-    console.log("uploading");
-    var options = {chunkedMode: false, fileKey: "file", fileName: "recording.m4a", mimeType: "audio/m4a", httpMethod: "POST"};
-    options.params = { machine_uuid: 1234567890 }
+    var options = {chunkedMode: false, fileKey: "file", fileName: "recording.m4a", mimeType: "audio/m4a", httpMethod: "POST", test: "asdfasdf",
+                    headers: $auth.retrieveData('auth_headers'), params: {}
+                  };
+    var children_id = [];
+    for (key in $scope.selected_children) {
+      children_id.push(key);
+    }
+    console.log("children id",children_id);
+    options.params = { "child_id": children_id.join() };
     var server = encodeURI("http://localhost:3000/mobile_api/audio_messages");
     var filePath = $scope.audio_file_entry.nativeURL;
     console.log('filePath', filePath);
+    console.log("child id params",options.params.child_id);
 
-    $cordovaFileTransfer.upload(server, filePath, options).then(function(result) {
-      console.log(result);
-    }, function(err) {
-      console.log(err);
-    }, function (progress) {
-      // constant progress updates
-    });
+
+    var win = function (result) {
+
+    }
+
+    var fail = function(err) {
+
+    }
+
+    $scope.ft.upload(filePath, server, win, fail, options);
   }
 
   $scope.captureAudio = function() {

@@ -3,14 +3,14 @@
     	PING
   	</ion-nav-title>
   	<ion-content>
-      <div class="select-children">
+      <ion-scroll direction="x" class="select-children">
         <span ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
           <div class="child-image" ng-class="is_selected(child)">
             <img src="../img/BOY-01.png"/>
           </div>
           <small>{{child.name}}</small>
         </span>
-      </div>
+      </ion-scroll>
 
       <div class="ping-colors" ng-show="show_colours">
         <div>
