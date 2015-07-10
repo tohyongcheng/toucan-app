@@ -12,7 +12,7 @@ h5#tagline{
 
 .header_title{
 	color:white;
-	font-size: 1.3em;
+	font-size: 1em;
 }
 
 
@@ -33,7 +33,6 @@ h5#tagline{
 
 
 .nav-bar-block .bar{
-
 	background-color:#A2D5D4;
 }
 
@@ -277,6 +276,18 @@ h5#tagline{
 }
 
 
+
+/* ######## map.html ######## */
+
+/* ######## voice_log.html ########*/
+
+
+.button-clear {
+	color: white !important;
+}
+
+/* ######## ping.html ########*/
+
 .circle {
 	border-radius: 999px;
 	display: inline-block;
@@ -334,21 +345,5 @@ h5#tagline{
 	display: inline-block;
 	text-align: center;
 }
-
-
-
-/* ######## map.html ######## */
-
-/* ######## voice_log.html ########*/
-.back-button{
-	color:white;
-	background-color: transparent;
-}
-
-.back-button > .back-text > .previous-title 
-    display:none;
-}
-
-
 
 

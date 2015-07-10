@@ -1,19 +1,26 @@
-
-
 <ion-view>
   <ion-nav-title class="header_title icon-left ion-map" >
     MAP
   </ion-nav-title>
   <ion-content>
     <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-      <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-        </ui-gmap-marker>
+      <ui-gmap-markers models="markers" coords="'coords'" options="{draggable: false}" fit='true' modelsbyref="false">
+      </ui-gmap-markers>
     </ui-gmap-google-map>
 
     <ion-list>
-      <ion-item ng-repeat="location in locations">
-        {{location.lat}}, {{location.lng}}
-      </ion-item>
+      <div class="item range">
+        <span>Latest</span>
+        <input type="range" name="volume" min="0" max="{{max_timestep_length-1}}" ng-model="timestep" ng-change="changeTimeStep(timestep)">
+        <span>Oldest</span>
+      </div>
+
+      <div class="item item-avatar" href="#" ng-repeat="child in children">
+        <img src="../img/BOY-01.png"/>
+        <h2>{{child.name}}</h2>
+        <p>Location at {{locations[child.id][timestep].lat}}, {{locations[child.id][timestep].lng}}</p>
+        <p>Time: {{locations[child.id][timestep].created_at | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</p>
+      </div>
     </ion-list>
   </ion-content>
 </ion-view>

@@ -1,4 +1,4 @@
-app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $authProvider, $ionicConfigProvider) {
   $stateProvider
   .state('landing', {
     url:'/landing',
@@ -116,6 +116,15 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
         controller:'ScanDeviceCtrl'
       }
     }
+  })
+  .state('app.profile', {
+    url:"/profile",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/profile.html",
+        controller:'ProfileCtrl'
+      }
+    }
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/landing');
@@ -125,4 +134,6 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
       apiUrl: 'http://localhost:3000',
       storage: 'localStorage'
   });
+
+  $ionicConfigProvider.backButton.previousTitleText(false);
 });

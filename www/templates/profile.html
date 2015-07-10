@@ -1,0 +1,30 @@
+<ion-view>
+  <ion-nav-title class="header_title icon-left ion-android-home" >
+    HOME
+  </ion-nav-title>
+  <ion-content>
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" class="homeslidebox">
+      <ion-slide class= "ionslide" ng-repeat="child in children">
+        <div class="boxicon" >
+          <img src = "../img/BOY-01.png"/>
+          <p>{{child.name}}</p>
+        </div>
+      </ion-slide>
+
+      <ion-slide class= "ionslide" ui-sref="app.createChild">
+        <div class="boxicon">
+          <!-- <i class="icon ion-ios-plus-outline"></i> -->
+          <img src = "../img/PLUS.png" />
+        </div>
+      </ion-slide>
+    </ion-slide-box>
+
+    <h2>Latest Activities</h2>
+    <ion-list>
+      <ion-item ng-repeat="notification in notifications">
+        Notification 1
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+

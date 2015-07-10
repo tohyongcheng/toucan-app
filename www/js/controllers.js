@@ -244,35 +244,33 @@ angular.module('starter.controllers', [])
 })
 
 .controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage) {
+  $scope.parentForm = {};
+  var options = {
+    quality: 50,
+    destinationType: Camera.DestinationType.DATA_URL,
+    sourceType: Camera.PictureSourceType.CAMERA,
+    allowEdit: false,
+    encodingType: Camera.EncodingType.JPEG,
+    targetWidth: 100,
+    targetHeight: 100,
+    popoverOptions: CameraPopoverOptions,
+    saveToPhotoAlbum: false
+  };
+
   $scope.$on('$ionicView.beforeEnter', function() {
-    $scope.parentForm = {};
-    var options = {
-      quality: 50,
-      destinationType: Camera.DestinationType.DATA_URL,
-      sourceType: Camera.PictureSourceType.CAMERA,
-      allowEdit: false,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 100,
-      targetHeight: 100,
-      popoverOptions: CameraPopoverOptions,
-      saveToPhotoAlbum: false
-    };
+    
+  }); 
 
-    $scope.$on('$ionicView.beforeEnter', function() {
-      
-    }); 
-
-    $ionicPlatform.ready(function() {
-      $scope.takephoto = function() {
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-          var image = document.getElementById('myImage');
-          image.src = "data:image/jpeg;base64," + imageData;
-        }, function(err) {
-        alert("error");
-        // error
-        });
-      }
-    });
+  $ionicPlatform.ready(function() {
+    $scope.takephoto = function() {
+      $cordovaCamera.getPicture(options).then(function(imageData) {
+        var image = document.getElementById('myImage');
+        image.src = "data:image/jpeg;base64," + imageData;
+      }, function(err) {
+      alert("error");
+      // error
+      });
+    }
   });
 
   $scope.createFamilyMember = function() {
@@ -298,39 +296,67 @@ angular.module('starter.controllers', [])
 
 .controller('MapCtrl', function($scope, uiGmapGoogleMapApi, $http, LoadingService, GlobalFactory) {
   LoadingService.showLoading();
-  $scope.locations = [];
+  $scope.locations = {};
+  $scope.children = GlobalFactory._get_my_children();
+  $scope.max_timestep_length = 0;
+  $scope.timestep = 0;
+  $scope.markers = [];
 
-  $http.get("http://localhost:3000/mobile_api/gps_messages/1?machine_uuid=1234567890").
-    success(function(data){
-      LoadingService.hideLoading();
-      $scope.locations = data;
-      if ($scope.locations.length > 0) {
-        $scope.map = { center: { latitude: $scope.locations[data.length-1].lat, longitude: $scope.locations[data.length-1].lng }, zoom: 13 };
-        $scope.marker = {
-          id: 0,
-          coords: {
-            latitude: $scope.locations[data.length-1].lat,
-            longitude: $scope.locations[data.length-1].lng
-          },
-          options: { draggable: false },
-          events: {}
-        };  
-      } else {
-        $scope.map = { center: { latitude: 1.3000, longitude: 103.8 }, zoom: 11 };
-        $scope.marker = {
-          id: 0,
-          coords: {
-            latitude: 1.3000,
-            longitude: 103.8
-          },
-          options: { draggable: false },
-          events: {}
-        };  
+  $scope.$on('$ionicView.beforeEnter', function() {
+    $scope.confirmed = 0;
+  });
+
+  $http.get("http://localhost:3000/mobile_api/gps_messages").
+  success(function(data){      
+    $scope.locations = data;
+    $scope.initMap();
+  }).error(function(data) {
+    console.log("Error: ", data);
+  });
+
+  $scope.initMap = function() {
+    if (($scope.children.length > 0) && (Object.keys($scope.locations).length > 0))  {
+      $scope.map = { center: { latitude: 1.3000, longitude: 103.8 }, zoom: 10 };
+      console.log($scope.map);
+      $scope.markers = [];
+      for (key in $scope.locations) {
+        console.log(key, $scope.locations[key]);
+        var len = $scope.locations[key].length;
+        $scope.max_timestep_length = Math.max(len, $scope.max_timestep_length);
+        if (len > 0) {
+          $scope.markers.push({
+            id: key,
+            coords: {
+              latitude: $scope.locations[key][len-1].lat,
+              longitude: $scope.locations[key][len-1].lng
+            }
+          });          
+        } else {
+          $scope.markers.push({
+            id: key
+          }); 
+        }
       }
-      
-    }).error(function(data) {
-      console.log("Error: ", data);
-    });
+      LoadingService.hideLoading();
+    } else {
+      $scope.map = { center: { latitude: 1.3000, longitude: 103.8 }, zoom: 11 };
+    }
+  }
+
+  $scope.changeTimeStep = function(timestep) {
+    var i = 0;
+    for (key in $scope.locations) {
+      $scope.markers[i] = {
+        id: key,
+        coords: {
+          latitude: $scope.locations[key][timestep].lat,
+          longitude: $scope.locations[key][timestep].lng
+        }
+      };
+      i++;
+    }
+  }
+  
 })
 
 .controller('PingCtrl', function($scope, $http, $ionicModal, $ionicPopup, GlobalFactory) {
@@ -511,8 +537,8 @@ angular.module('starter.controllers', [])
   }
 })
 .controller('VoiceLogCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http) {
-
   $scope.$on('$ionicView.beforeEnter', function() {
+    
     LoadingService.showLoading();
     $http.get("http://localhost:3000/mobile_api/audio_messages/?machine_uuid=1234567890").
     success(function(data){
