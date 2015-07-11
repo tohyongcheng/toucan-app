@@ -6,7 +6,7 @@
       <ion-scroll direction="x" class="select-children">
         <span ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
           <div class="child-image" ng-class="is_selected(child)">
-            <img src="../img/BOY-01.png"/>
+            <img src="img/BOY-01.png"/>
           </div>
           <small>{{child.name}}</small>
         </span>
@@ -46,9 +46,12 @@
             <a class="circle ping-button" ng-click="ping(8)"></a>
           </div>
         </div>
+
+        <p>Select a colour to send them!</p>
+      
       </div>
 
-      <div class="ping-colors" ng-hide="show_colours" style="text-align: center;">
+      <div class="ping-colors" ng-hide="show_colours">
         <p>Select any of your children first to ping them</p>
       </div>
   	</ion-content>

@@ -319,10 +319,18 @@ h5#tagline{
 	color: white;
 }
 
-.ping-colors div {
-	margin-top: 2em;
-	height: 7em;
+.ping-colors {
 	text-align: center;
+}
+
+.ping-colors p {
+	color: white;
+}
+
+.ping-colors div {
+	margin-bottom: 1em;
+	margin-top: 1em;
+	height: 7em;
 }
 
 .one-third {
@@ -353,4 +361,9 @@ h5#tagline{
 
 .word-center {
 	text-align: center
+}
+
+.camera-buttons {
+	text-align: center;
+
 }

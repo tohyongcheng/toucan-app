@@ -8,19 +8,17 @@
     CREATE FAMILY MEMBER
   </ion-nav-title>
   <ion-content>
-    <form ng-submit="nextStep()">
+    <form ng-submit="createFamilyMember()">
       <!-- Image -->
       <div class="list">
+        <div class="camera-buttons">
+          <button class="button button-clear icon ion-ios-camera-outline" ng-click="launch_camera()"></button>
+          <button class="button button-clear icon ion-ios-photos-outline" ng-click="launch_photo_library()"></button>
+        </div>
 
         <div class="parent_image">
-          <img src="../img/MOM-01.png"></img>
-        </div>
-        <div class="photofield">
-          <label class="item takephoto">
-            <button class="button camerabutton button-full button-dark" ng-click='takephoto()'>
-              <img src="../img/CAMERA.png"/>
-            </button>
-          </label>
+          <img src="img/MOM-01.png" ng-show="!parentForm.photo"></img>
+          <img src="{{parentForm.photo}}" ng-show="parentForm.photo"/>
         </div>
 
         <div class="inputfield">

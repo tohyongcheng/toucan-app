@@ -12,7 +12,7 @@
     <ion-scroll direction="x" class="horizontal-wide select-children">
       <span ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
         <div class="child-image" ng-class="is_selected(child)">
-          <img src="../img/BOY-01.png"/>
+          <img src="img/BOY-01.png"/>
         </div>
         <small>{{child.name}}</small>
       </span>
@@ -20,7 +20,7 @@
 
     <div class ="topbuttons">
       <button class="button startstoprecord" on-hold="start_record()" on-release="stop_record()">
-        <img src="../img/MICROPHONE-01.png"/>
+        <img src="img/MICROPHONE-01.png"/>
       </button>
     </div>
 
@@ -32,13 +32,13 @@
       </button> -->
       <button class="button playpausebutton" ng-click="play()">
         <div class="control-buttons">
-          <img src="../img/PLAY.png"/>
+          <img src="img/PLAY.png"/>
         </div>
       </button>
 
       <button class="button playpausebutton" ng-click="pause()">
         <div class="control-buttons">
-          <img src="../img/PAUSE.png"/>
+          <img src="img/PAUSE.png"/>
         </div>
       </button>
       <!-- <button class="button nextbutton" ng-click="stop()">

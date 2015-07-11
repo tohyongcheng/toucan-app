@@ -21,7 +21,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, $ionicCon
     controller: 'CreateChildCtrl'
   })
   .state('setupAccount', {
-    url: "/setupaccount",
+    url: "/setup_account",
     templateUrl: "templates/setupaccount.html",
     controller: 'SetupMyAccountCtrl'
   })

@@ -6,16 +6,16 @@
       <form ng-submit="updateParentParticulars()">
       <!-- Image -->
       <div class="list">        
+        <div class="camera-buttons">
+          <button class="button button-clear icon ion-ios-camera-outline" ng-click="launch_camera()"></button>
+          <button class="button button-clear icon ion-ios-photos-outline" ng-click="launch_photo_library()"></button>
+        </div>
+
         <div class="parent_image">
-          <img src="../img/MOM-01.png"></img>
+          <img src="img/MOM-01.png" ng-show="!user.photo"></img>
+          <img src="{{user.photo}}" ng-show="user.photo"/>
         </div>
-        <div class="photofield">
-          <label class="item takephoto">
-            <button class="button camerabutton button-full button-dark" ng-click='takephoto()'>
-              <img src="../img/CAMERA.png"/>
-            </button>
-          </label>
-        </div>
+
         <img src="" id="myImage"></img>
         <label class="item item-input">
           <span class="input-label">Name</span>
