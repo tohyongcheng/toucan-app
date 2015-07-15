@@ -29,7 +29,12 @@
         </label>
         <label class="item item-input">
           <span class="input-label">Birthday</span>
-          <input type="text" ng-model="childForm.birthday" ng-focus="show_datepicker()">
+          <input type="date" ng-model="childForm.birthday"/>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Mobile Number</span>
+          <input type="tel" ng-model="childForm.mobile_number">
         </label>
         <label class="item">
           <button class="button button-block button-positive" ng-click="nextStep()" ng-disabled="validate_first_step()">Next</button>

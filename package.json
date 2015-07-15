@@ -31,7 +31,15 @@
       "id": "com.phonegap.plugins.barcodescanner"
     },
     "cordova-plugin-camera",
-    "cordova-plugin-file-transfer"
+    "cordova-plugin-file-transfer",
+    {
+      "locator": "https://github.com/cordova-sms/cordova-sms-plugin.git",
+      "id": "com.cordova.plugins.sms"
+    },
+    {
+      "locator": "https://github.com/VitaliiBlagodir/cordova-plugin-datepicker.git",
+      "id": "cordova-plugin-datepicker"
+    }
   ],
   "cordovaPlatforms": [
     "android",

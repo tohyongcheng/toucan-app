@@ -143,28 +143,22 @@ angular.module('starter.controllers', [])
         LoadingService.hideLoading();
       });
     }
+
+    $scope.show_datepicker = function() {
+      var options = {
+          date: new Date(),
+          mode: 'date'
+      };
+      $cordovaDatePicker.show(options).then(function(date){
+          $scope.childForm.birthday = date;
+      });
+    }
   }, false);
 
-  $scope.show_datepicker = function() {
-    var options = {
-      date: new Date(),
-      mode: 'date', // or 'time'
-      minDate: new Date() - 10000,
-      allowOldDates: true,
-      allowFutureDates: false,
-      doneButtonLabel: 'DONE',
-      doneButtonColor: '#F2F3F4',
-      cancelButtonLabel: 'CANCEL',
-      cancelButtonColor: '#000000'
-    };
 
-    $cordovaDatePicker.show(options).then(function(date){
-        alert(date);
-    });
-  }
 
   $scope.create_child = function(){
-    $http.post("http://localhost:3000/mobile_api/children", $scope.childForm).success(function(data){
+    $http.post($auth.apiUrl() + "/mobile_api/children", $scope.childForm).success(function(data){
       $state.go("app.home");
       console.log(data);
     }).error(function(data) {
@@ -185,6 +179,7 @@ angular.module('starter.controllers', [])
   $scope.validate_first_step = function() {
     if (($scope.childForm.name == null) || ($scope.childForm.name == "")) return true;
     if (($scope.childForm.birthday == null) || ($scope.childForm.birthday == "")) return true;
+    if (($scope.childForm.mobile_number == null) || ($scope.childForm.birthday == "")) return true;
     return false;
   }
 
@@ -223,7 +218,7 @@ angular.module('starter.controllers', [])
   }
 
   $scope.create_child = function(){
-    $http.post("http://localhost:3000/mobile_api/children", $scope.childForm).success(function(data,status,headers,config){
+    $http.post($auth.apiUrl() + "/mobile_api/children", $scope.childForm).success(function(data,status,headers,config){
       console.log(data);
       $state.go('app.home');
     }).error(function(data,status,headers,config) {
@@ -304,38 +299,27 @@ angular.module('starter.controllers', [])
 .controller('HomeCtrl', function($scope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state, GlobalFactory) {
   $scope.$on('$ionicView.beforeEnter', function() {
     // Get Children
-    $http.get("http://localhost:3000/mobile_api/users/"+$localStorage.user_id).
+    $http.get($auth.apiUrl() + "/mobile_api/users/"+$localStorage.user_id).
     success(function(data) {
+      console.log(data.children);
       $scope.children = data.children;
       GlobalFactory._set_my_children(data.children);
       console.log($localStorage.children_id);
       console.log("get user data", data);
-
-      $ionicSlideBoxDelegate.update();
+      
       if (data.children.length == 0) {
         alert("Please create a child!");
-        // $state.go("app.createChild");
       } else {
-        // Get Notifications for each child
-        for (i=0;i<$scope.children.length;i++) {
-          var child = $scope.children[i];
-          $http.get("http://localhost:3000/mobile_api/user_notifications?child_id="+child.id).
-          success(function(data) {
-            child.notifications = data;
-            console.log("get user notifications for child", data);
-            $http.put("http://localhost:3000/mobile_api/user_notifications/update?child_id="+child.id);
-          }).
-          error(function(data) {
-
-          });
-        }  
+        $scope.notifications = $scope.children[0].latest_notifications;
+        $ionicSlideBoxDelegate.update();
       }
+
     }).
     error(function(data) {
       console.log("error", data);
     });   
 
-    $http.get("http://localhost:3000/mobile_api/users/").
+    $http.get($auth.apiUrl() + "/mobile_api/users/").
     success(function(data) { 
       console.log("family", data);
       GlobalFactory._set_my_family(data);
@@ -344,6 +328,23 @@ angular.module('starter.controllers', [])
       console.log("error getting family");
     });
   }); 
+
+  $scope.slideHasChanged = function(idx) {
+    if (idx < $scope.children.length) {
+      $scope.notifications = $scope.children[idx].latest_notifications;
+    } else {
+      $scope.notifications = [];
+    }
+  }
+
+  $scope.notificationClassType = function(notification_type) {
+    if (notification_type == "location") return "ion-location";
+    if (notification_type == "audio") return "ion-mic-a";
+    if (notification_type == "ping") return "ion-radio-waves";
+    if (notification_type == "battery") return "ion-battery-low";
+
+    return "";
+  }
 })
 
 .controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService) {
@@ -403,7 +404,7 @@ angular.module('starter.controllers', [])
   }, false);
 
   $scope.createFamilyMember = function() {
-    $http.post("http://localhost:3000/mobile_api/users", $scope.parentForm)
+    $http.post($auth.apiUrl() + "/mobile_api/users", $scope.parentForm)
     .success(function(data) {
       alert("Family Member created!");
       $scope.parentForm = {};
@@ -426,11 +427,12 @@ angular.module('starter.controllers', [])
     })
     .catch(function(resp) { 
       console.log("error in logging out", resp);// handle error response
+      $state.go('landing');
     });
   }
 })
 
-.controller('MapCtrl', function($scope, uiGmapGoogleMapApi, $http, LoadingService, GlobalFactory) {
+.controller('MapCtrl', function($scope, $auth, uiGmapGoogleMapApi, $http, LoadingService, GlobalFactory) {
   LoadingService.showLoading();
   $scope.locations = {};
   $scope.children = GlobalFactory._get_my_children();
@@ -442,7 +444,7 @@ angular.module('starter.controllers', [])
     $scope.confirmed = 0;
   });
 
-  $http.get("http://localhost:3000/mobile_api/gps_messages").
+  $http.get($auth.apiUrl() + "/mobile_api/gps_messages").
   success(function(data){      
     $scope.locations = data;
     $scope.initMap();
@@ -495,13 +497,13 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('PingCtrl', function($scope, $http, $ionicModal, $ionicPopup, GlobalFactory) {
-  $scope.selected_children = {};
-  $scope.selected_color = 0;
-  $scope.show_colours = false;
-  $scope.children = GlobalFactory._get_my_children();
+.controller('PingCtrl', function($scope, $http, $ionicModal, $ionicPopup, $auth, GlobalFactory) {
+  
   $scope.$on('$ionicView.beforeEnter', function() {
-    
+    $scope.selected_children = {};
+    $scope.selected_color = 0;
+    $scope.show_colours = false;
+    $scope.children = GlobalFactory._get_my_children();
   });
 
   $scope.toggle_child = function(child) {
@@ -530,7 +532,7 @@ angular.module('starter.controllers', [])
         ping_message : { color: color, child_id: parseInt(key) }
       };
 
-      $http.post("http://localhost:3000/mobile_api/ping_messages", data).then(function(success) {
+      $http.post($auth.apiUrl() + "/mobile_api/ping_messages", data).then(function(success) {
         console.log(success);
         alert("Ping sent successfully!");
       }, function(error){
@@ -540,7 +542,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, GlobalFactory, $auth) {
+.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, GlobalFactory, $auth, SMSService) {
 
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.audio_file = null;
@@ -553,7 +555,7 @@ angular.module('starter.controllers', [])
     $scope.ft = new FileTransfer();
 
     LoadingService.showLoading();
-    $http.get("http://localhost:3000/mobile_api/audio_messages/?machine_uuid=1234567890").
+    $http.get($auth.apiUrl() + "/mobile_api/audio_messages/?machine_uuid=1234567890").
     success(function(data){
       LoadingService.hideLoading();
       $scope.audio_recordings = data;
@@ -666,14 +668,17 @@ angular.module('starter.controllers', [])
     }
     console.log("children id",children_id);
     options.params = { "child_id": children_id.join() };
-    var server = encodeURI("http://localhost:3000/mobile_api/audio_messages");
+    var server = encodeURI($auth.apiUrl() + "/mobile_api/audio_messages");
     var filePath = $scope.audio_file_entry.nativeURL;
     console.log('filePath', filePath);
     console.log("child id params",options.params.child_id);
 
 
     var win = function (result) {
-
+      for (key in $scope.selected_children) {
+        SMSService.sendSMS($scope.selected_children[key].mobile_number, "Audio");
+        console.log("sending SMS from MediaCtrl");
+      }
     }
 
     var fail = function(err) {
@@ -700,11 +705,11 @@ angular.module('starter.controllers', [])
     });
   }
 })
-.controller('VoiceLogCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http) {
+.controller('VoiceLogCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, $auth) {
   $scope.$on('$ionicView.beforeEnter', function() {
     
     LoadingService.showLoading();
-    $http.get("http://localhost:3000/mobile_api/audio_messages/?machine_uuid=1234567890").
+    $http.get($auth.apiUrl() + "/mobile_api/audio_messages/?machine_uuid=1234567890").
     success(function(data){
       LoadingService.hideLoading();
       $scope.audio_recordings = data;
@@ -789,7 +794,7 @@ angular.module('starter.controllers', [])
   }, false);
 
   $scope.updateParentParticulars = function(){
-    $http.put("http://localhost:3000/mobile_api/users/update", $scope.user).
+    $http.put($auth.apiUrl() + "/mobile_api/users/update", $scope.user).
     success(function() {
       alert("Your profile has been updated.");
     }).
@@ -800,7 +805,7 @@ angular.module('starter.controllers', [])
 
   
 })
-.controller('FamilyCtrl',function($scope, $stateParams, $ionicPlatform, $state, GlobalFactory) {
+.controller('FamilyCtrl',function($scope, $stateParams, $ionicPlatform, $state, $auth, GlobalFactory) {
 
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.children = GlobalFactory._get_my_children();

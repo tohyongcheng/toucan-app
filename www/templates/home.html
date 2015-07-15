@@ -24,8 +24,10 @@
         Latest Activities
       <div>
       
-      <ion-item ng-repeat="notification in notifications">
-        Notification 1
+      <ion-item ng-repeat="notification in notifications" class="item-icon-left item-text-wrap">
+        <i class="icon clear:both;" ng-class="notificationClassType(notification.notification_type)"></i>
+        {{notification.message}}
+        <small style="display:block; float: right; font-size: 8px; clear:both;" am-time-ago="notification.created_at"></small>
       </ion-item>
     </ion-list>
   </ion-content>

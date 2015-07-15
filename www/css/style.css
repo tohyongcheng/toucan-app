@@ -101,6 +101,12 @@ h5#tagline{
 	max-width: 12em;
 }
 
+.item-text-wrap {
+	font-size: 0.9em;
+  text-overflow: inherit !important;
+  white-space: normal !important;
+}
+
 
 
 
