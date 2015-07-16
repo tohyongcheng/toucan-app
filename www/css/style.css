@@ -15,6 +15,13 @@ h5#tagline{
 	font-size: 1em;
 }
 
+.landing-content {
+	margin-top:2em; 
+	display:table; 
+	width: 100%; 
+	min-height: 100vh;
+
+}
 
 .item{
 	margin: auto;
@@ -278,14 +285,72 @@ h5#tagline{
 .circle {
 	border-radius: 999px;
 	display: inline-block;
+	border:1px solid white;
 }
 
-.ping-button {
-	width: 4em;
-	height: 4em;
-	background-color: #000;
+.ping-1 {
+	width: 6em;
+	height: 6em;
+	background-color: #FFB6C1;
 	cursor: pointer;
 }
+
+.ping-2 {
+	width: 6em;
+	height: 6em;
+	background-color: #87CEFA;
+	cursor: pointer;
+}
+
+.ping-3 {
+	width: 6em;
+	height: 6em;
+	background-color: #BA55D3;
+	cursor: pointer;
+}
+
+.ping-4 {
+	width: 6em;
+	height: 6em;
+	background-color: #FFA07A;
+	cursor: pointer;
+}
+
+.ping-5 {
+	width: 6em;
+	height: 6em;
+	background-color: #90EE90;
+	cursor: pointer;
+}
+
+.ping-6 {
+	width: 6em;
+	height: 6em;
+	background-color: #FFD700;
+	cursor: pointer;
+}
+
+.ping-7 {
+	width: 6em;
+	height: 6em;
+	background-color: #00CED1;
+	cursor: pointer;
+}
+
+.ping-8 {
+	width: 6em;
+	height: 6em;
+	background-color: #C71585;
+	cursor: pointer;
+}
+
+.ping-9 {
+	width: 6em;
+	height: 6em;
+	background-color: #7B68EE;
+	cursor: pointer;
+}
+
 
 .child-image {
 	width: 6em;
@@ -305,8 +370,9 @@ h5#tagline{
 }
 
 .child-selected {
-	border: 5px solid #000;
 	border-radius:999px;
+	border: 2px solid #FFA07A;
+	box-shadow: 0 0 1em 0.5em #FFA07A;
 }
 
 .select-children {
@@ -331,6 +397,12 @@ h5#tagline{
 
 .ping-colors p {
 	color: white;
+}
+
+.ping-instruction{
+	font-size: 2em;
+	text-align: center;
+	color:white;
 }
 
 .ping-colors div {
@@ -373,3 +445,48 @@ h5#tagline{
 	text-align: center;
 
 }
+
+/*settings.html*/
+.settings-page{
+	background-color: #B9DCD7;
+}
+
+.settings-page .item-divider{
+	background-color: transparent;
+	border-bottom: 1px solid white;
+	font-size: 1.5em;
+}
+
+
+.settings-page .item-input{
+	background-color: transparent;
+}
+
+.settings-page .input-label{
+	background-color: transparent;
+	color:gray;
+}
+
+select{
+	background-color: transparent;
+}
+
+.settings-page .item-input .selection-box {
+	background: transparent;
+}
+
+.settings-page .update-password {
+	background-color: transparent;
+	color:gray;
+}
+
+
+
+
+
+
+
+
+
+
+
