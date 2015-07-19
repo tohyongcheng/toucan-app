@@ -23,12 +23,11 @@ h5#tagline{
 
 }
 
-.item{
-	margin: auto;
+/*.item{
 	background-color: transparent;
 	color:black;
 	border-color: #FFF;
-}
+}*/
 
 .pane {
 	background-color: #B9DCD7;
@@ -75,23 +74,23 @@ h5#tagline{
 	color:white;
 }
 /* ######## home.html ######## */
-.home_title{
+.home-page .home_title{
 	color:white;
 	font-size: 1.3em;
 }
 
-.homeslidebox{
+.home-page .homeslidebox{
 	height:15em;
 }
 
 
-.boxicon{
+.home-page .boxicon{
 	text-align:center;
 	margin: auto;
 	
 }
-
-.boxicon img{
+ 
+.home-page .boxicon img{
 	max-width:12em;
 	width: 8em;
 	height: 8em;
@@ -100,20 +99,43 @@ h5#tagline{
 	border: 2px solid white;
 }
 
-.boxicon.plus img{
+.home-page .boxicon.plus img{
 	padding: 2em;
 }
 
-.add_child_icon{
+.home-page .add_child_icon{
 	max-width: 12em;
 }
 
-.item-text-wrap {
+.home-page .item-text-wrap {
 	font-size: 0.9em;
-  text-overflow: inherit !important;
-  white-space: normal !important;
+  	text-overflow: inherit !important;
+  	white-space: normal !important;
 }
 
+.home-page .latest-activities{
+	margin: 2em 2em 0em 2em;
+	background-color: #79CECB;
+	border:3px solid white;
+
+}
+
+.home-page .latest-activities .latest-activities-title{
+	/*border:3px solid white;*/
+	background-color: #79CECB;
+	text-align: center;
+	font-size: 1.5em;
+	color:white;
+	padding-top: 0.7em;
+	padding-bottom: 0.7em;
+}
+
+
+
+.home-page .latest-activities .latest-activities-contents{
+	border-top:2px solid white;
+	font-size:1.3em;
+}
 
 
 
@@ -151,8 +173,6 @@ h5#tagline{
 
 
 
-
-
 /* ######## create_child.html ######## */
 
 
@@ -162,8 +182,11 @@ h5#tagline{
 
 .childlogo img {
 	max-width:10em;
-	border:3px solid black;
 	margin-top: 2em;
+	border-radius: 999px;
+	border:1px solid white;
+	width:9em;
+	height:9em;
 }
 
 .inputfield{
@@ -182,6 +205,12 @@ h5#tagline{
 
 .voice_message_title{
 	color:white;
+
+}
+
+.record-page .child-selected {
+	border-radius:999px;
+	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
 }
 
 .topbuttons{
@@ -234,16 +263,23 @@ h5#tagline{
 	max-height: 5em;
 }
 
+/* ######## voice_log.html ########*/
+
+
 
 /* ######## create_family_member.html ######## */
 
 .parent_image{
 	text-align: center;
 	margin-top: 2em;
+
 }
 
 .parent_image img{
-	max-width: 10em;
+	border-radius: 999px;
+	border:1px solid white;
+	width:9em;
+	height:9em;
 }
 
 .takephoto{
@@ -364,12 +400,12 @@ h5#tagline{
 	margin-top: 1em;
 }
 
-.child-not-selected {
+.ping-page .child-not-selected {
 	border: 1px solid #FFF;
 	border-radius:999px;
 }
 
-.child-selected {
+.ping-page .child-selected {
 	border-radius:999px;
 	border: 2px solid #FFA07A;
 	box-shadow: 0 0 1em 0.5em #FFA07A;
@@ -421,7 +457,7 @@ h5#tagline{
 /*family.html*/
 
 .horizontal-wide {
-  overflow: scroll;
+  overflow: auto;
   white-space: nowrap;
 }
 
@@ -446,6 +482,47 @@ h5#tagline{
 
 }
 
+/*profile.html*/
+.profile-page .profile-info{
+	display: block;
+	margin:auto;
+
+}
+
+.profile-page .profile-img-div{
+	text-align: center;
+}
+
+.profile-page .profile-img-div img{
+	margin:auto;
+	border-radius: 999px;
+	border: 1px solid white;
+	width:7em;
+	height:7em;
+
+}
+
+.profile-page .profile-info .item{
+	background-color: transparent;
+	width:100%;
+	display: block;
+}
+
+
+.profile-page .profile-info .item .input-info{
+	text-align: center;
+	font-size: 1em;
+	border:1px solid gray;
+	margin-right:1em;
+
+}
+
+
+
+
+
+
+
 /*settings.html*/
 .settings-page{
 	background-color: #B9DCD7;
@@ -464,7 +541,7 @@ h5#tagline{
 
 .settings-page .input-label{
 	background-color: transparent;
-	color:gray;
+	color:black;
 }
 
 select{
@@ -475,12 +552,29 @@ select{
 	background: transparent;
 }
 
-.settings-page .update-password {
-	background-color: transparent;
+.settings-page .item-input .input-label{
+	color:white;
+}
+
+.settings-page .device-info {
+	display:block;
+	font-size: 0.9em;
 	color:gray;
 }
 
+.settings-page .device-info .input-label{
+	color:white;
+}
 
+
+
+.settings-page .change-password a{
+	background-color: #3CB371;
+	text-align: center;;
+	color:white;
+	border:1px solid #2E8B57;
+
+}
 
 
 

@@ -8,8 +8,8 @@
     </a>
   </ion-nav-buttons>
 
-  <ion-content>
-    <ion-scroll direction="x" class="horizontal-wide select-children">
+  <ion-content class="record-page">
+    <ion-scroll direction="x" scrollbar-x="false" class="horizontal-wide select-children" >
       <span ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
         <div class="child-image" ng-class="is_selected(child)">
           <img src="img/BOY-01.png"/>

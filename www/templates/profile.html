@@ -2,34 +2,38 @@
   <ion-nav-title class="header_title icon-left ion-android-home" >
     PROFILE
   </ion-nav-title>
-  <ion-content>
+  <ion-content class="profile-page">
       <form ng-submit="updateParentParticulars()">
       <!-- Image -->
       <div class="list">        
+
         <div class="camera-buttons">
           <button class="button button-clear icon ion-ios-camera-outline" ng-click="launch_camera()"></button>
           <button class="button button-clear icon ion-ios-photos-outline" ng-click="launch_photo_library()"></button>
         </div>
 
-        <div class="parent_image">
+        <div class="profile-info profile-img-div">
           <img src="img/MOM-01.png" ng-show="!user.photo"></img>
           <img src="{{user.photo}}" ng-show="user.photo"/>
         </div>
 
-        <img src="" id="myImage"></img>
-        <label class="item item-input">
-          <span class="input-label">Name</span>
-          <input type="text" ng-model="user.name">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Contact No.</span>
-          <input type="tel" ng-model="user.mobile_number">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit" >Update</button>
-        </label>
+        <div class="profile-info">
+          <label class="item item-input">
+            <span class="input-label">Name</span>
+            <input class = "input-info" type="text" ng-model="user.name">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Contact No.</span>
+            <input class="input-info" type="tel" ng-model="user.mobile_number">
+          </label>
+
+          <label class="item">
+            <button class="button button-block button-balanced icon ion-checkmark-round" type="submit" ></button>
+          </label>
+        </div>
         
       </div>
+      
     </form>
   </ion-content>
 </ion-view>

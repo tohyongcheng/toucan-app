@@ -2,7 +2,7 @@
   <ion-nav-title class="header_title icon-left ion-android-home" >
     HOME
   </ion-nav-title>
-  <ion-content>
+  <ion-content class="home-page">
     <ion-list>
       <ion-slide-box on-slide-changed="slideHasChanged($index)" class="homeslidebox">
         <ion-slide class= "ionslide" ng-repeat="child in children">
@@ -20,15 +20,22 @@
         </ion-slide>
       </ion-slide-box>
 
-      <div class="item item-divider">
-        Latest Activities
-      <div>
-      
-      <ion-item ng-repeat="notification in notifications" class="item-icon-left item-text-wrap">
-        <i class="icon clear:both;" ng-class="notificationClassType(notification.notification_type)"></i>
-        {{notification.message}}
-        <small style="display:block; float: right; font-size: 8px; clear:both;" am-time-ago="notification.created_at"></small>
-      </ion-item>
+      <div class="latest-activities">
+        <div class="latest-activities-title item-divider ion-ios-flag-outline">
+          Latest Activities
+        </div>
+        <div class="latest-activities-contents">
+          <ion-item ng-repeat="notification in notifications" class="item-icon-left item-text-wrap">
+            
+            <i class="icon clear:both;" ng-class="notificationClassType(notification.notification_type)"></i>
+
+            {{notification.message}}
+
+            <small style="display:block; float: right; font-size: 0.6em; clear:both;" am-time-ago="notification.created_at"></small>
+          
+          </ion-item>
+        </div>
+      </div>
     </ion-list>
   </ion-content>
 </ion-view>
