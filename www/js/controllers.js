@@ -355,14 +355,15 @@ angular.module('starter.controllers', [])
     $http.get($auth.apiUrl() + "/mobile_api/users/"+$localStorage.user_id).
     success(function(data) {
       console.log(data.children);
-      $scope.children = data.children;
       GlobalFactory._set_my_children(data.children);
+      $scope.children = data.children;
       console.log($localStorage.children_id);
       console.log("get user data", data);
       
       if (data.children.length == 0) {
-        alert("Please create a child!");
+        // alert("Please create a child!");
       } else {
+        $scope.selected_child = $scope.children[0];
         $scope.notifications = $scope.children[0].latest_notifications;
         $ionicSlideBoxDelegate.update();
       }
@@ -384,6 +385,7 @@ angular.module('starter.controllers', [])
 
   $scope.slideHasChanged = function(idx) {
     if (idx < $scope.children.length) {
+      $scope.selected_child = $scope.children[idx];
       $scope.notifications = $scope.children[idx].latest_notifications;
     } else {
       $scope.notifications = [];
