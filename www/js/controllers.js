@@ -60,11 +60,64 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('SettingsCtrl', function($scope, $auth, $state, $rootScope) {
+.controller('SettingsCtrl', function($scope, $auth, $state, $rootScope, $http, LoadingService, GlobalFactory) {
   $scope.settings = {};
+
   $scope.$on('$ionicView.beforeEnter', function() {
-    
+    LoadingService.showLoading();
+    $scope.selected_children = {};
+    $scope.children = GlobalFactory._get_my_children();
+    $scope.all_settings = {};
+    var children_id = [];
+    var children_id_string = "";
+    for (var i = 0; i < $scope.children.length; i++) {
+      children_id.push($scope.children[i].id);
+    }
+    children_id_string = children_id.join(",");
+
+    $http.get($auth.apiUrl() + "/mobile_api/toucan_devices/"+children_id_string).success(function(data){
+      LoadingService.hideLoading();
+      $scope.all_settings = data;
+      if (children_id.length > 0) {
+        $scope.toggle_child($scope.children[0]);  
+      }
+      
+    }).error(function(err){
+
+    });
   });
+
+  $scope.is_selected = function(child) {
+    if ($scope.selected_children == child.id ) return "child-selected";
+    else return "child-not-selected";
+  }
+
+  $scope.toggle_child = function(child) {
+    if (!($scope.selected_children) && (child.id == $scope.selected_children)) {
+      $scope.selected_children = null;  
+      $scope.settings = null;
+    } else {
+      $scope.selected_children = child.id;
+      console.log($scope.all_settings[child.id]);
+      $scope.settings = {
+        update_frequency: $scope.all_settings[child.id].update_frequency,
+        battery_level_update: $scope.all_settings[child.id].battery_level_update,
+        machine_uuid: $scope.all_settings[child.id].machine_uuid.toUpperCase(),
+        battery: $scope.all_settings[child.id].battery
+      };
+    }
+  }
+
+  $scope.update_settings = function() {
+    $http.put($auth.apiUrl() + "/mobile_api/toucan_devices/"+$scope.selected_children, $scope.settings).success(function(data) {
+      console.log(data);
+      alert("Successfully Updated!");
+    }).error(function(err){
+      alert("Error!");
+      console.log(err);
+    })
+  }
+
 })
 
 .controller('UpdatePasswordCtrl', function($scope, $auth, $state, $rootScope) {
@@ -555,14 +608,6 @@ angular.module('starter.controllers', [])
     $scope.ft = new FileTransfer();
 
     LoadingService.showLoading();
-    $http.get($auth.apiUrl() + "/mobile_api/audio_messages/?machine_uuid=1234567890").
-    success(function(data){
-      LoadingService.hideLoading();
-      $scope.audio_recordings = data;
-      $scope.audio_recordings.reverse();
-    }).error(function(data) {
-      console.log("Error: ", data);
-    });
   });
 
   $scope.toggle_child = function(child) {
@@ -705,15 +750,29 @@ angular.module('starter.controllers', [])
     });
   }
 })
-.controller('VoiceLogCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, $auth) {
+.controller('VoiceLogCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, $auth, GlobalFactory) {
   $scope.$on('$ionicView.beforeEnter', function() {
     
     LoadingService.showLoading();
-    $http.get($auth.apiUrl() + "/mobile_api/audio_messages/?machine_uuid=1234567890").
-    success(function(data){
+    $scope.selected_children = {};
+    $scope.children = GlobalFactory._get_my_children();
+    $scope.recordings = [];
+    
+    var children_id = [];
+    var children_id_string = "";
+    for (var i = 0; i < $scope.children.length; i++) {
+      children_id.push($scope.children[i].id);
+    }
+    children_id_string = children_id.join(",");
+    $http.get($auth.apiUrl() + "/mobile_api/audio_messages?child_id="+children_id_string)
+    .success(function(data) {
+      $scope.all_audio_recordings = data;
+      if (children_id.length > 0) {
+        var first_child = $scope.children[0];
+        $scope.toggle_child(first_child);  
+      }
+      
       LoadingService.hideLoading();
-      $scope.audio_recordings = data;
-      $scope.audio_recordings.reverse();
     }).error(function(data) {
       console.log("Error: ", data);
     });
@@ -736,6 +795,27 @@ angular.module('starter.controllers', [])
         console.log("recordAudio():Audio Error: "+ err.code);
     });
     $scope.currently_playing.play();
+  }
+
+  $scope.is_selected = function(child) {
+    if ($scope.selected_children == child.id ) return "child-selected";
+    else return "child-not-selected";
+  }
+
+  $scope.toggle_child = function(child) {
+    if (!($scope.selected_children) && (child.id == $scope.selected_children)) {
+      $scope.selected_children = null;  
+      $scope.recordings = [];
+    } else {
+      $scope.selected_children = child.id;
+      $scope.recordings = $scope.all_audio_recordings[child.id];
+      console.log($scope.recordings);
+    }
+  }
+
+  $scope.show_recordings = function() {
+    if (($scope.recordings)&&($scope.recordings.length == 0)) return false;
+    else return true;
   }
 })
 .controller('ProfileCtrl',function($scope, $stateParams, $cordovaCamera, $timeout, LoadingService, $http, $auth) {

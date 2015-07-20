@@ -10,11 +10,23 @@
 
 
   <ion-content>
+    <ion-scroll direction="x" class="horizontal-wide select-children">
+      <span ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
+        <div class="child-image" ng-class="is_selected(child)">
+          <img src="img/BOY-01.png"/>
+        </div>
+        <small>{{child.name}}</small>
+      </span>
+    </ion-scroll>
+    <div class="item item-divider">
+      Voice Logs
+    </div>
     <div class="audio_area">
       <a class="item item-icon" ng-repeat="audio_recording in audio_recordings" ng-click="play_recording(audio_recording)">
         <i class="icon ion-chatbubble-working"></i>
         {{audio_recording.created_at}}
       </a>
+      <a class="item" ng-hide="show_recordings()"> No Voice Logs have been recorded yet.</p>
     </div>
   </ion-list> 
   </ion-content>

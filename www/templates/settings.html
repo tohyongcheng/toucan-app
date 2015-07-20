@@ -4,50 +4,63 @@
   </ion-nav-title>
   <ion-content class="settings-page">
     <ion-list>
-
+      <div class="item item-divider">
+        Select Child Device
+      </div>
+      <ion-scroll direction="x" class="horizontal-wide select-children">
+        <span ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
+          <div class="child-image" ng-class="is_selected(child)">
+            <img src="img/BOY-01.png"/>
+          </div>
+          <small>{{child.name}}</small>
+        </span>
+      </ion-scroll>
       <div class="item item-divider">
         General Settings
       </div>
       <label class="item item-input item-select general-settings-input">
         <span class="input-label">Update Frequency of Toucan</span>
         <select class="selection-box" ng-model="settings.update_frequency" >
-          <option>5 min</option>
-          <option>10 min</option>
-          <option>15 min</option>
-          <option>20 min</option>
-          <option>30 min</option>
+          <option value="5">5min</option>
+          <option value="10">10min</option>
+          <option value="15">15min</option>
+          <option value="20">20min</option>
+          <option value="30">30min</option>
         </select>
       </label>
 
       <label class="item item-input item-select general-settings-input">
         <span class="input-label">Update me when Toucan battery reaches </span>
-        <select class="selection-box" ng-model="settings.battery">
-          <option>5%</option>
-          <option>10%</option>
-          <option>15%</option>
-          <option>20%</option>
+        <select class="selection-box" ng-model="settings.battery_level_update">
+          <option value="5">5%</option>
+          <option value="10">10%</option>
+          <option value="15">15%</option>
+          <option value="20">20%</option>
         </select>
       </label>
 
       <div class="item item-divider">
         Device Information
       </div>
-      <label class="item device-info item-input">
+      <label class="item item-input">
         <span class="input-label">Device Serial No. </span>
-        1234567890
+        {{settings.machine_uuid}}
       </label>
-      <label class="item device-info item-input">
-        <span class="input-label">Device Data Usage: </span>
-        10.0MB
+      <label class="item item-input">
+        <span class="input-label">Device Battery Level </span>
+        {{settings.battery}}
       </label>
 
-      <div class="item item-divider">
+      <!-- <div class="item item-divider">
         App Settings
+      </div> -->
+      <!-- 
+      <ion-item class="update-password" menu-close href="#">
+        Update Password
+      </ion-item> -->
+      <div style="padding: 2em;">
+        <button class="button button-positive button-block" ng-click="update_settings()">Update</button>
       </div>
-
-      <ion-item class="change-password" menu-close href="#">
-        Change Password
-      </ion-item>
     </ion-list>
   </ion-content>
 </ion-view>

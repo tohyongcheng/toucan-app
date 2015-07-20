@@ -19,7 +19,7 @@
         <img src="img/BOY-01.png"/>
         <h2>{{child.name}}</h2>
         <p>Location at {{locations[child.id][timestep].lat}}, {{locations[child.id][timestep].lng}}</p>
-        <p>Time: {{locations[child.id][timestep].created_at | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</p>
+        <p>Time: {{locations[child.id][timestep].created_at | amDateFormat:'ddd, MMMM Do YYYY, h:mm:ss a'}}</p>
       </div>
     </ion-list>
   </ion-content>
