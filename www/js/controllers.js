@@ -311,24 +311,21 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('HomeCtrl', function($scope, $rootScope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state, GlobalFactory, LoadingService) {
+.controller('HomeCtrl', function($scope, $rootScope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state, $ionicPopup, $timeout, GlobalFactory, LoadingService) {
   $scope.$on('$ionicView.beforeEnter', function() {
     // Get Children
     LoadingService.showLoading();
     $http.get($auth.apiUrl() + "/mobile_api/users/"+$localStorage.user_id).
     success(function(data) {
-      console.log($auth.retrieveData('auth_headers'));
-      console.log(data.children);
       GlobalFactory._set_my_children(data.children);
       $scope.children = data.children;
-      console.log($localStorage.children_id);
-      console.log("get user data", data);
       
       if (data.children.length == 0) {
         // alert("Please create a child!");
       } else {
         $scope.selected_child = $scope.children[0];
         $scope.notifications = $scope.children[0].latest_notifications;
+        $scope.checkForEmergency();
         $ionicSlideBoxDelegate.update();
       }
       LoadingService.hideLoading();
@@ -355,6 +352,30 @@ angular.module('starter.controllers', [])
     } else {
       $scope.notifications = [];
     }
+  }
+
+  $scope.checkForEmergency = function() {
+    for (var i=0; i < $scope.children.length; i++) {
+      if ($scope.children[i].require_response) {
+        var alertPopup = $ionicPopup.alert({
+           title: 'EMERGENCY!',
+           template: $scope.children[i].name + ' has activated the SOS button! Confirm to start a voice call now.'
+         });
+         alertPopup.then(function(res) {
+           $rootScope.callNumber($scope.children[i].mobile_number);
+           $http.get($auth.apiUrl() + "/mobile_api/children/" + $scope.children[i].id + "/disable_emergency").success(function(data) {
+            console.log("disabled emergency");
+           }).error(function(err){
+            console.log("error disabling emergency");
+           })
+         });
+        break;
+      }
+    }
+  }
+
+  $rootScope.callNumber = function(n) {
+    window.open('tel:' + n, '_system');
   }
 
   $scope.notificationClassType = function(notification_type) {
