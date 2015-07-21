@@ -410,6 +410,33 @@ angular.module('starter.controllers', [])
 
 })
 
+.controller('EditEmergencyMobileNumbersCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService, $state) {
+  $scope.$on('$ionicView.beforeEnter', function() {
+    $scope.submitForm = {mobile_numbers: []};
+    $scope.get_current_numbers();
+  }); 
+
+  $scope.get_current_numbers = function() {
+    $http.get($auth.apiUrl()+"/mobile_api/families").success(function(data){
+      if ((data.mobile_numbers) && (data.mobile_numbers.length > 0))
+        $scope.submitForm.mobile_numbers = data.mobile_numbers;
+    }).error(function(err){
+
+    })
+  }
+
+  $scope.update_mobile_numbers = function() {
+    console.log("submitForm", $scope.submitForm);
+    $http.put($auth.apiUrl()+"/mobile_api/families/1", $scope.submitForm).success(function(data){
+      alert("Emergency mobile numbers updated.");
+      console.log(data);
+    }).error(function(err) {
+      console.log(err);
+    })
+  }
+})
+
+
 .controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService, $state) {
   $scope.parentForm = { relationship: "mother" };
   $scope.$on('$ionicView.beforeEnter', function() {

@@ -126,6 +126,24 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, $ionicCon
       }
     }
   })
+  .state('app.emergency', {
+    url:"/family",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/emergency.html",
+        controller:'EditEmergencyMobileNumbersCtrl'
+      }
+    }
+  })
+  .state('app.setupemergency', {
+    url:"/family",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/setupemergency.html",
+        controller:'EditEmergencyMobileNumbersCtrl'
+      }
+    }
+  })
   .state('app.family', {
     url:"/family",
     views: {
