@@ -132,7 +132,7 @@ angular.module('starter.controllers', [])
   // Setup BeforeEnter
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.showChildParticulars = true;
-    $scope.childForm = {};
+    $scope.childForm = { gender: "boy"};
   });
 
   // Setup Barcode Scanner Function
@@ -213,11 +213,11 @@ angular.module('starter.controllers', [])
   $scope.create_child = function(){
     $http.post($auth.apiUrl() + "/mobile_api/children", $scope.childForm).success(function(data){
       $state.go("app.home");
-      console.log(data);
     }).error(function(data) {
-      console.log(data);
+      alert("There was an error creating the child.", data);
     });
   };  
+
 
   $scope.nextStep = function() {
     console.log("next step");
@@ -240,44 +240,6 @@ angular.module('starter.controllers', [])
     if ($scope.childForm.machine_uuid == null) return true;
     return false;
   }
-})
-
-.controller('CreateFirstChildCtrl', function($scope, $auth, $state, $rootScope, $cordovaDatePicker, $ionicPlatform, $http) {
-  $ionicPlatform.ready(function() {
-    
-  });
-
-  $scope.$on('$ionicView.beforeEnter', function() {
-    console.log("trying beforeEnter");
-  });
-
-  $scope.childForm = {};
-  var options = {
-    date: new Date(),
-    mode: 'date', // or 'time'
-    minDate: new Date() - 10000,
-    allowOldDates: true,
-    allowFutureDates: false,
-    doneButtonLabel: 'DONE',
-    doneButtonColor: '#F2F3F4',
-    cancelButtonLabel: 'CANCEL',
-    cancelButtonColor: '#000000'
-  };
-  
-  $scope.show_datepicker = function() {
-    $cordovaDatePicker.show(options).then(function(date){
-        alert(date);
-    });
-  }
-
-  $scope.create_child = function(){
-    $http.post($auth.apiUrl() + "/mobile_api/children", $scope.childForm).success(function(data,status,headers,config){
-      console.log(data);
-      $state.go('app.home');
-    }).error(function(data,status,headers,config) {
-      console.log(data);
-    });
-  };  
 })
 
 .controller('SetupMyAccountCtrl', function($scope, $auth, $state, $rootScope, $cordovaCamera, $ionicPlatform, LoadingService) {
@@ -349,11 +311,13 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('HomeCtrl', function($scope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state, GlobalFactory) {
+.controller('HomeCtrl', function($scope, $rootScope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state, GlobalFactory, LoadingService) {
   $scope.$on('$ionicView.beforeEnter', function() {
     // Get Children
+    LoadingService.showLoading();
     $http.get($auth.apiUrl() + "/mobile_api/users/"+$localStorage.user_id).
     success(function(data) {
+      console.log($auth.retrieveData('auth_headers'));
       console.log(data.children);
       GlobalFactory._set_my_children(data.children);
       $scope.children = data.children;
@@ -367,6 +331,7 @@ angular.module('starter.controllers', [])
         $scope.notifications = $scope.children[0].latest_notifications;
         $ionicSlideBoxDelegate.update();
       }
+      LoadingService.hideLoading();
 
     }).
     error(function(data) {
@@ -400,10 +365,31 @@ angular.module('starter.controllers', [])
 
     return "";
   }
+
+  $scope.happiness_face = function(val) {
+    if (val < 20) return "img/20.png";
+    else if (val < 40) return "img/40.png";
+    else if (val < 60) return "img/60.png";
+    else if (val < 80) return "img/80.png";
+    else return "img/100.png";
+  }
+
+  $rootScope.childTypeImage = function(gender) {
+    if (gender == "boy") return "img/BOY-01.png";
+    else if (gender == "girl") return "img/GIRL-01.png";
+    else return "img/BOY-01.png";
+  }
+
+  $rootScope.parentTypeImage = function(relationship) {
+    if (relationship == "mother") return "img/MOM-01.png";
+    else if (relationship == "father") return "img/DAD-01.png";
+    else if (relationship == "grandmother") return "img/GRANDMA-01.png";
+    else if (relationship == "grandfather") return "img/GRANDPA-01.png";
+  }
 })
 
 .controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService) {
-  $scope.parentForm = {};
+  $scope.parentForm = { relationship: "mother" };
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.parentForm.photo = null;
   }); 
@@ -459,11 +445,14 @@ angular.module('starter.controllers', [])
   }, false);
 
   $scope.createFamilyMember = function() {
+    LoadingService.showLoading();
     $http.post($auth.apiUrl() + "/mobile_api/users", $scope.parentForm)
     .success(function(data) {
       alert("Family Member created!");
       $scope.parentForm = {};
       $scope.parentForm.photo = null;
+      LoadingService.hideLoading();
+      $state.go("app.home");
     }).
     error(function(error) {
       console.log(error);
@@ -597,7 +586,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, GlobalFactory, $auth, SMSService) {
+.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaFileTransfer, $timeout, LoadingService, $http, GlobalFactory, $auth) {
 
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.audio_file = null;
@@ -608,8 +597,6 @@ angular.module('starter.controllers', [])
     $scope.selected_children = {};
     $scope.children = GlobalFactory._get_my_children();
     $scope.ft = new FileTransfer();
-
-    LoadingService.showLoading();
   });
 
   $scope.toggle_child = function(child) {
@@ -706,7 +693,7 @@ angular.module('starter.controllers', [])
   }
 
   $scope.upload_record = function() {
-    var options = {chunkedMode: false, fileKey: "file", fileName: "recording.m4a", mimeType: "audio/m4a", httpMethod: "POST", test: "asdfasdf",
+    var options = {chunkedMode: true, fileKey: "file", fileName: "recording.m4a", mimeType: "audio/m4a", httpMethod: "POST", 
                     headers: $auth.retrieveData('auth_headers'), params: {}
                   };
     var children_id = [];
@@ -714,51 +701,34 @@ angular.module('starter.controllers', [])
       children_id.push(key);
     }
     console.log("children id",children_id);
-    options.params = { "child_id": children_id.join() };
+    options.params = { child_id: children_id.join() };
     var server = encodeURI($auth.apiUrl() + "/mobile_api/audio_messages");
     var filePath = $scope.audio_file_entry.nativeURL;
     console.log('filePath', filePath);
     console.log("child id params",options.params.child_id);
-
+    LoadingService.showLoading();
 
     var win = function (result) {
-      for (key in $scope.selected_children) {
-        SMSService.sendSMS($scope.selected_children[key].mobile_number, "Audio");
-        console.log("sending SMS from MediaCtrl");
-      }
+      alert("Voice Message sent successfully!");
+      $scope.audio_file = null;
+      LoadingService.hideLoading();
     }
 
     var fail = function(err) {
-
+      alert("There was an error sending the voice message.");
     }
 
     $scope.ft.upload(filePath, server, win, fail, options);
   }
 
-  $scope.captureAudio = function() {
-    var options = { limit: 3, duration: 10 };
-
-    $cordovaCapture.captureAudio(options).then(function(audioData) {
-      // Success! Audio data is here
-      var i, path, len;
-      for (i = 0, len = audioData.length; i < len; i += 1) {
-          path = audioData[i].fullPath;
-          console.log(path);
-          $scope.audio_file = $cordovaMedia.newMedia(path);
-          // do something interesting with the file
-      }
-    }, function(err) {
-      // An error occurred. Show a message to the user
-    });
-  }
 })
 .controller('VoiceLogCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, $auth, GlobalFactory) {
   $scope.$on('$ionicView.beforeEnter', function() {
     
     LoadingService.showLoading();
-    $scope.selected_children = {};
     $scope.children = GlobalFactory._get_my_children();
-    $scope.recordings = [];
+    $scope.audio_recordings = [];
+    $scope.selected_child = null;
     
     var children_id = [];
     var children_id_string = "";
@@ -770,8 +740,8 @@ angular.module('starter.controllers', [])
     .success(function(data) {
       $scope.all_audio_recordings = data;
       if (children_id.length > 0) {
-        var first_child = $scope.children[0];
-        $scope.toggle_child(first_child);  
+        $scope.selected_child = $scope.children[0];
+        $scope.toggle_child($scope.selected_child);  
       }
       
       LoadingService.hideLoading();
@@ -800,18 +770,18 @@ angular.module('starter.controllers', [])
   }
 
   $scope.is_selected = function(child) {
-    if ($scope.selected_children == child.id ) return "child-selected";
+    if ($scope.selected_child == child.id ) return "child-selected";
     else return "child-not-selected";
   }
 
   $scope.toggle_child = function(child) {
-    if (!($scope.selected_children) && (child.id == $scope.selected_children)) {
-      $scope.selected_children = null;  
-      $scope.recordings = [];
+    if (!($scope.selected_child) && (child.id == $scope.selected_child)) {
+      $scope.selected_child = null;  
+      $scope.audio_recordings = [];
     } else {
-      $scope.selected_children = child.id;
-      $scope.recordings = $scope.all_audio_recordings[child.id];
-      console.log($scope.recordings);
+      $scope.selected_child = child.id;
+      $scope.audio_recordings = $scope.all_audio_recordings[child.id];
+      console.log($scope.audio_recordings);
     }
   }
 

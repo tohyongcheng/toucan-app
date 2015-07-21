@@ -19,14 +19,23 @@
 
       <!-- Image -->
       <div class="childlogo">
-        <img src="img/BOY-01.png" ng-show="!childForm.photo">
+        <img ng-src="{{childTypeImage(childForm.gender)}}" ng-hide="childForm.photo"/>
         <img src="{{childForm.photo}}" ng-show="childForm.photo"/>
       </div>
       <div class="inputfield list">
+        <div class="item item-divider">Personal Information</div> 
+        <label class="item item-select">
+          <span class="input-label">Gender</span>
+          <select ng-model="childForm.gender">
+            <option value="boy">Boy</option>
+            <option value="girl">Girl</option>
+          </select>
+        </label>
         <label class="item item-input">
           <span class="input-label">Name</span>
           <input type="text" ng-model="childForm.name">
         </label>
+        
         <label class="item item-input">
           <span class="input-label">Birthday</span>
           <input type="date" ng-model="childForm.birthday"/>

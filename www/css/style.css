@@ -237,6 +237,14 @@ h5#tagline{
 
 }
 
+.inputfield .radio {
+  background-color: transparent;
+}
+
+.inputfield .item-radio input:checked ~ .item-content {
+	background-color: transparent;
+}
+
 
 /* ######## voice_log.html ######## */
 
@@ -378,7 +386,10 @@ h5#tagline{
 
 /* ######## voice_log.html ########*/
 
-
+.voice-log-page .child-selected {
+	border-radius:999px;
+	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
+}
 
 /* ######## create_family_member.html ######## */
 
@@ -507,6 +518,7 @@ h5#tagline{
 	height: 4em;
 	margin: auto;
 	margin-top: 1em;
+	border-radius:999px;
 }
 
 .ping-page .child-not-selected {
