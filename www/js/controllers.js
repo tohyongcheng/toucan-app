@@ -597,7 +597,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, GlobalFactory, $auth, SMSService) {
+.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, GlobalFactory, $auth) {
 
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.audio_file = null;
@@ -608,8 +608,6 @@ angular.module('starter.controllers', [])
     $scope.selected_children = {};
     $scope.children = GlobalFactory._get_my_children();
     $scope.ft = new FileTransfer();
-
-    LoadingService.showLoading();
   });
 
   $scope.toggle_child = function(child) {
@@ -722,14 +720,11 @@ angular.module('starter.controllers', [])
 
 
     var win = function (result) {
-      for (key in $scope.selected_children) {
-        SMSService.sendSMS($scope.selected_children[key].mobile_number, "Audio");
-        console.log("sending SMS from MediaCtrl");
-      }
+      alert("Voice Message sent successfully!");
     }
 
     var fail = function(err) {
-
+      alert("There was an error sending the voice message.");
     }
 
     $scope.ft.upload(filePath, server, win, fail, options);
@@ -756,9 +751,9 @@ angular.module('starter.controllers', [])
   $scope.$on('$ionicView.beforeEnter', function() {
     
     LoadingService.showLoading();
-    $scope.selected_children = {};
     $scope.children = GlobalFactory._get_my_children();
-    $scope.recordings = [];
+    $scope.audio_recordings = [];
+    $scope.selected_child = null;
     
     var children_id = [];
     var children_id_string = "";
@@ -770,8 +765,8 @@ angular.module('starter.controllers', [])
     .success(function(data) {
       $scope.all_audio_recordings = data;
       if (children_id.length > 0) {
-        var first_child = $scope.children[0];
-        $scope.toggle_child(first_child);  
+        $scope.selected_child = $scope.children[0];
+        $scope.toggle_child($scope.selected_child);  
       }
       
       LoadingService.hideLoading();
@@ -800,18 +795,18 @@ angular.module('starter.controllers', [])
   }
 
   $scope.is_selected = function(child) {
-    if ($scope.selected_children == child.id ) return "child-selected";
+    if ($scope.selected_child == child.id ) return "child-selected";
     else return "child-not-selected";
   }
 
   $scope.toggle_child = function(child) {
-    if (!($scope.selected_children) && (child.id == $scope.selected_children)) {
-      $scope.selected_children = null;  
-      $scope.recordings = [];
+    if (!($scope.selected_child) && (child.id == $scope.selected_child)) {
+      $scope.selected_child = null;  
+      $scope.audio_recordings = [];
     } else {
-      $scope.selected_children = child.id;
-      $scope.recordings = $scope.all_audio_recordings[child.id];
-      console.log($scope.recordings);
+      $scope.selected_child = child.id;
+      $scope.audio_recordings = $scope.all_audio_recordings[child.id];
+      console.log($scope.audio_recordings);
     }
   }
 
