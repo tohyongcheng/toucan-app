@@ -91,11 +91,10 @@ h5#tagline{
 }
  
 .home-page .boxicon img{
-	max-width:12em;
 	width: 8em;
 	height: 8em;
 	margin-top:2em;
-	border-radius: 50%;
+	border-radius: 999px;
 	border: 2px solid white;
 }
 
@@ -120,12 +119,12 @@ h5#tagline{
 }
 
 .home-page .intimacy-level .intimacy-face{
-	margin-top: 0.7em;
+	margin-top: 1em;
 }
 
 .home-page .intimacy-level .intimacy-face img{
-	width:3em;
-	height:3em;
+	width:5em;
+	height:5em;
 }
 
 .home-page .intimacy-level .intimacy-comment{
@@ -209,11 +208,16 @@ h5#tagline{
 /* ######## create_child.html ######## */
 
 
-.childlogo {
+.create-child-page .camera-buttons {
 	text-align: center;
 }
 
-.childlogo img {
+
+.create-child-page .childlogo {
+	text-align: center;
+}
+
+.create-child-page .childlogo img {
 	max-width:10em;
 	margin-top: 2em;
 	border-radius: 999px;
@@ -222,28 +226,104 @@ h5#tagline{
 	height:9em;
 }
 
-.inputfield{
+.create-child-page .inputfield{
 	margin-left:auto;
 	margin-right:auto;
 }
 
-.inputfield .item{
+.create-child-page .inputfield .item{
 	background-color: #B9DCD7;
 	border:1px solid white;
 
 }
 
 
+/* ######## voice_log.html ######## */
+
+.voice-page .voice_message_title{
+	color:white;
+}
+
+.voice-page .child-image {
+	width: 6em;
+	height: 6em;
+}
+
+.voice-page .select-children {
+	padding: 2em;
+	text-align: center;
+}
+
+.voice-page .child-not-selected {
+	border-radius:999px;
+	border:1px solid white;
+}
+
+.voice-page .child-selected {
+	border-radius:999px;
+	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
+}
+
+.voice-page .child-image img {
+	width: 4em;
+	height: 4em;
+	margin: auto;
+	margin-top: 1em;
+}
+
+.voice-page .select-children span {
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-align: center;
+}
+
+.voice-page .select-children span small {
+	color: white;
+}
 /* ######## record.html ######## */
 
-.voice_message_title{
-	color:white;
+.record-page .child-image {
+	width: 6em;
+	height: 6em;
+}
 
+.record-page .child-image img {
+	width: 4em;
+	height: 4em;
+	margin: auto;
+	margin-top: 1em;
+}
+
+.record-page .child-not-selected {
+	border-radius:999px;
+	border:1px solid white;
 }
 
 .record-page .child-selected {
 	border-radius:999px;
 	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
+}
+
+.record-page .select-children {
+	padding: 2em;
+	text-align: center;
+}
+
+.record-page .select-children span {
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-align: center;
+}
+
+.record-page .select-children span small {
+	color: white;
+}
+
+
+.record-page .children-options{
+	display:inline;
 }
 
 .topbuttons{
@@ -302,39 +382,34 @@ h5#tagline{
 
 /* ######## create_family_member.html ######## */
 
-.parent_image{
+.create-family-member-page .camera-buttons {
+	text-align: center;
+}
+.create-family-member-page .parent_image{
 	text-align: center;
 	margin-top: 2em;
 
 }
 
-.parent_image img{
+.create-family-member-page .parent_image img{
 	border-radius: 999px;
 	border:1px solid white;
 	width:9em;
 	height:9em;
 }
 
-.takephoto{
+.create-family-member-page .takephoto{
 	text-align: center;
 	background-color: #B9DCD7;
 	margin-left: auto;
 }
 
-.photofield .item button{
-	width:6em;
-	height:6em;
-	border-radius: 50%;
-	margin:auto;
+.create-family-member-page .inputfield{
+	margin-bottom:1em;
 }
 
 
-.photofield .item button img{
-	max-width:3em;
-	margin-top:1em;
-}
-
-.proceedfield  .item{
+.create-family-member-page .proceedfield .item{
 	background-color: #B9DCD7;
 }
 
@@ -351,69 +426,70 @@ h5#tagline{
 
 /* ######## ping.html ########*/
 
-.circle {
+.ping-page .circle {
 	border-radius: 999px;
 	display: inline-block;
 	border:1px solid white;
 }
 
-.ping-1 {
+
+.ping-page .ping-1 {
 	width: 6em;
 	height: 6em;
 	background-color: #FFB6C1;
 	cursor: pointer;
 }
 
-.ping-2 {
+.ping-page .ping-2 {
 	width: 6em;
 	height: 6em;
 	background-color: #87CEFA;
 	cursor: pointer;
 }
 
-.ping-3 {
+.ping-page .ping-3 {
 	width: 6em;
 	height: 6em;
 	background-color: #BA55D3;
 	cursor: pointer;
 }
 
-.ping-4 {
+.ping-page .ping-4 {
 	width: 6em;
 	height: 6em;
 	background-color: #FFA07A;
 	cursor: pointer;
 }
 
-.ping-5 {
+.ping-page .ping-5 {
 	width: 6em;
 	height: 6em;
 	background-color: #90EE90;
 	cursor: pointer;
 }
 
-.ping-6 {
+.ping-page .ping-6 {
 	width: 6em;
 	height: 6em;
 	background-color: #FFD700;
 	cursor: pointer;
 }
 
-.ping-7 {
+.ping-page .ping-7 {
 	width: 6em;
 	height: 6em;
 	background-color: #00CED1;
 	cursor: pointer;
 }
 
-.ping-8 {
+.ping-page .ping-8 {
 	width: 6em;
 	height: 6em;
 	background-color: #C71585;
 	cursor: pointer;
 }
 
-.ping-9 {
+.ping-page .ping-9 {
 	width: 6em;
 	height: 6em;
 	background-color: #7B68EE;
@@ -421,12 +497,12 @@ h5#tagline{
 }
 
 
-.child-image {
+.ping-page .child-image {
 	width: 6em;
 	height: 6em;
 }
 
-.child-image img {
+.ping-page .child-image img {
 	width: 4em;
 	height: 4em;
 	margin: auto;
@@ -444,43 +520,46 @@ h5#tagline{
 	box-shadow: 0 0 1em 0.5em #FFA07A;
 }
 
-.select-children {
+.ping-page .select-children {
 	padding: 2em;
 	text-align: center;
 }
 
-.select-children span {
+
+
+.ping-page .select-children span {
 	display: inline-block;
 	margin-left: 10px;
 	margin-right: 10px;
 	text-align: center;
 }
 
-.select-children span small {
+.ping-page .select-children span small {
 	color: white;
 }
 
-.ping-colors {
+
+.ping-page .ping-colors {
 	text-align: center;
 }
 
-.ping-colors p {
+.ping-page .ping-colors p {
 	color: white;
 }
 
-.ping-instruction{
-	font-size: 2em;
+.ping-page .ping-instruction{
+	font-size: 1.2em;
 	text-align: center;
 	color:white;
 }
 
-.ping-colors div {
+.ping-page .ping-colors div {
 	margin-bottom: 1em;
 	margin-top: 1em;
 	height: 7em;
 }
 
-.one-third {
+.ping-page .one-third {
 	width:30%;
 	display: inline-block;
 	text-align: center;
@@ -489,33 +568,57 @@ h5#tagline{
 
 /*family.html*/
 
-.horizontal-wide {
+.family-page .horizontal-wide {
   overflow: auto;
   white-space: nowrap;
 }
 
-.inline {
+.family-page .inline {
 	display: inline-block;
 	margin-left: 1em;
 	margin-right: 1em;
 }
 
-.family-children, .family-members {
+.family-page .family-children, .family-members {
 	padding-top: 2;
 	height: 30vh;
 	text-align: center;
 }
 
-.word-center {
+.family-page .word-center {
 	text-align: center
 }
 
-.camera-buttons {
+.family-page .camera-buttons {
 	text-align: center;
-
 }
 
+.family-page .child-image,
+.family-page .family-member-image {
+	width: 6em;
+	height: 6em;
+}
+
+.family-page .child-image img,
+.family-page .family-member-image img {
+	width: 4em;
+	height: 4em;
+	margin: auto;
+	margin-top: 1em;
+}
+
+.family-page .family-children .child-not-selected,
+.family-page .family-members .family-member-not-selected{
+	border-radius: 999px;
+	border:2px solid white;
+}
+
+
 /*profile.html*/
+.profile-page .camera-buttons{
+	text-align: center;
+}
+
 .profile-page .profile-info{
 	display: block;
 
@@ -528,9 +631,9 @@ h5#tagline{
 .profile-page .profile-img-div img{
 	margin:auto;
 	border-radius: 999px;
-	border: 1px solid white;
-	width:7em;
-	height:7em;
+	border: 2px solid white;
+	width:8em;
+	height:8em;
 
 }
 
@@ -580,6 +683,44 @@ h5#tagline{
 
 select{
 	background-color: transparent;
+}
+
+.settings-page .child-image {
+	width: 6em;
+	height: 6em;
+}
+
+.settings-page .select-children {
+	padding: 2em;
+	text-align: center;
+}
+
+.settings-page .child-not-selected {
+	border-radius:999px;
+	border:1px solid white;
+}
+
+.settings-page .child-selected {
+	border-radius:999px;
+	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
+}
+
+.settings-page .child-image img {
+	width: 4em;
+	height: 4em;
+	margin: auto;
+	margin-top: 1em;
+}
+
+.settings-page .select-children span {
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+	text-align: center;
+}
+
+.settings-page .select-children span small {
+	color: white;
 }
 
 .settings-page .item-input .selection-box {

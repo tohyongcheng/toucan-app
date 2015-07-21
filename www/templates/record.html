@@ -10,11 +10,13 @@
 
   <ion-content class="record-page">
     <ion-scroll direction="x" scrollbar-x="false" class="horizontal-wide select-children" >
-      <span ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
+      <span class="children-options" ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
+
         <div class="child-image" ng-class="is_selected(child)">
           <img src="img/BOY-01.png"/>
         </div>
         <small>{{child.name}}</small>
+
       </span>
     </ion-scroll>
 
