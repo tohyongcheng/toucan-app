@@ -10,7 +10,8 @@
       <ion-scroll direction="x" class="horizontal-wide select-children">
         <span ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
           <div class="child-image" ng-class="is_selected(child)">
-            <img src="img/BOY-01.png"/>
+            <img ng-src="{{childTypeImage(child.gender)}}" ng-hide="child.photo_url">
+            <img src="{{child.photo_url}}" ng-show="child.photo_url"/>
           </div>
           <small>{{child.name}}</small>
         </span>

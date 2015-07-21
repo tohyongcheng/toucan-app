@@ -18,7 +18,7 @@
 
       <!-- Image -->
       <div class="childlogo">
-        <img src="img/BOY-01.png" ng-show="!childForm.photo">
+        <img ng-src="{{childTypeImage(childForm.gender)}}" ng-hide="childForm.photo"/>
         <img src="{{childForm.photo}}" ng-show="childForm.photo"/>
       </div>
       <div class="inputfield list">

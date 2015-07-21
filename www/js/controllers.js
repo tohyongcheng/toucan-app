@@ -132,7 +132,7 @@ angular.module('starter.controllers', [])
   // Setup BeforeEnter
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.showChildParticulars = true;
-    $scope.childForm = {};
+    $scope.childForm = { gender: "boy"};
   });
 
   // Setup Barcode Scanner Function
@@ -213,11 +213,11 @@ angular.module('starter.controllers', [])
   $scope.create_child = function(){
     $http.post($auth.apiUrl() + "/mobile_api/children", $scope.childForm).success(function(data){
       $state.go("app.home");
-      console.log(data);
     }).error(function(data) {
-      console.log(data);
+      alert("There was an error creating the child.", data);
     });
   };  
+
 
   $scope.nextStep = function() {
     console.log("next step");
@@ -240,44 +240,6 @@ angular.module('starter.controllers', [])
     if ($scope.childForm.machine_uuid == null) return true;
     return false;
   }
-})
-
-.controller('CreateFirstChildCtrl', function($scope, $auth, $state, $rootScope, $cordovaDatePicker, $ionicPlatform, $http) {
-  $ionicPlatform.ready(function() {
-    
-  });
-
-  $scope.$on('$ionicView.beforeEnter', function() {
-    console.log("trying beforeEnter");
-  });
-
-  $scope.childForm = {};
-  var options = {
-    date: new Date(),
-    mode: 'date', // or 'time'
-    minDate: new Date() - 10000,
-    allowOldDates: true,
-    allowFutureDates: false,
-    doneButtonLabel: 'DONE',
-    doneButtonColor: '#F2F3F4',
-    cancelButtonLabel: 'CANCEL',
-    cancelButtonColor: '#000000'
-  };
-  
-  $scope.show_datepicker = function() {
-    $cordovaDatePicker.show(options).then(function(date){
-        alert(date);
-    });
-  }
-
-  $scope.create_child = function(){
-    $http.post($auth.apiUrl() + "/mobile_api/children", $scope.childForm).success(function(data,status,headers,config){
-      console.log(data);
-      $state.go('app.home');
-    }).error(function(data,status,headers,config) {
-      console.log(data);
-    });
-  };  
 })
 
 .controller('SetupMyAccountCtrl', function($scope, $auth, $state, $rootScope, $cordovaCamera, $ionicPlatform, LoadingService) {
@@ -349,7 +311,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('HomeCtrl', function($scope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state, GlobalFactory, LoadingService) {
+.controller('HomeCtrl', function($scope, $rootScope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state, GlobalFactory, LoadingService) {
   $scope.$on('$ionicView.beforeEnter', function() {
     // Get Children
     LoadingService.showLoading();
@@ -411,10 +373,23 @@ angular.module('starter.controllers', [])
     else if (val < 80) return "img/80.png";
     else return "img/100.png";
   }
+
+  $rootScope.childTypeImage = function(gender) {
+    if (gender == "boy") return "img/BOY-01.png";
+    else if (gender == "girl") return "img/GIRL-01.png";
+    else return "img/BOY-01.png";
+  }
+
+  $rootScope.parentTypeImage = function(relationship) {
+    if (relationship == "mother") return "img/MOM-01.png";
+    else if (relationship == "father") return "img/DAD-01.png";
+    else if (relationship == "grandmother") return "img/GRANDMA-01.png";
+    else if (relationship == "grandfather") return "img/GRANDPA-01.png";
+  }
 })
 
 .controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService) {
-  $scope.parentForm = {};
+  $scope.parentForm = { relationship: "mother" };
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.parentForm.photo = null;
   }); 
@@ -470,11 +445,14 @@ angular.module('starter.controllers', [])
   }, false);
 
   $scope.createFamilyMember = function() {
+    LoadingService.showLoading();
     $http.post($auth.apiUrl() + "/mobile_api/users", $scope.parentForm)
     .success(function(data) {
       alert("Family Member created!");
       $scope.parentForm = {};
       $scope.parentForm.photo = null;
+      LoadingService.hideLoading();
+      $state.go("app.home");
     }).
     error(function(error) {
       console.log(error);
@@ -728,10 +706,12 @@ angular.module('starter.controllers', [])
     var filePath = $scope.audio_file_entry.nativeURL;
     console.log('filePath', filePath);
     console.log("child id params",options.params.child_id);
+    LoadingService.showLoading();
 
     var win = function (result) {
       alert("Voice Message sent successfully!");
       $scope.audio_file = null;
+      LoadingService.hideLoading();
     }
 
     var fail = function(err) {

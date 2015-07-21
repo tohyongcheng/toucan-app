@@ -3,7 +3,7 @@
     PROFILE
   </ion-nav-title>
   <ion-content class="profile-page">
-      <form ng-submit="updateParentParticulars()">
+      <form>
       <!-- Image -->
       <div class="list">        
 
@@ -13,7 +13,8 @@
         </div>
 
         <div class="profile-info profile-img-div">
-          <img src="img/MOM-01.png" ng-show="!user.photo"></img>
+          <img ng-src="{{parentTypeImage(user.relationship)}}" ng-hide="(user.photo_url || user.photo)"></img>
+          <img src="{{user.photo_url}}" ng-show="(user.photo_url && !user.photo)"/>
           <img src="{{user.photo}}" ng-show="user.photo"/>
         </div>
 
@@ -28,7 +29,7 @@
           </label>
 
           <label class="item">
-            <button class="button button-full button-balanced icon ion-checkmark-round" type="submit" ></button>
+            <button class="button button-full button-balanced icon ion-checkmark-round" ng-click="updateParentParticulars()" ></button>
           </label>
         </div>
 

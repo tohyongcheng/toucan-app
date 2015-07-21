@@ -233,6 +233,14 @@ h5#tagline{
 
 }
 
+.inputfield .radio {
+  background-color: transparent;
+}
+
+.inputfield .item-radio input:checked ~ .item-content {
+	background-color: transparent;
+}
+
 
 /* ######## record.html ######## */
 
@@ -434,6 +442,7 @@ h5#tagline{
 	height: 4em;
 	margin: auto;
 	margin-top: 1em;
+	border-radius:999px;
 }
 
 .ping-page .child-not-selected {
