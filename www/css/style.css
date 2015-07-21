@@ -514,10 +514,8 @@ h5#tagline{
 }
 
 .ping-page .child-image img {
-	width: 4em;
-	height: 4em;
-	margin: auto;
-	margin-top: 1em;
+	width: 100%;
+	height: 100%;
 	border-radius:999px;
 }
 

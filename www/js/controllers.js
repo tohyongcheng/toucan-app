@@ -388,7 +388,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService) {
+.controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService, $state) {
   $scope.parentForm = { relationship: "mother" };
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.parentForm.photo = null;
