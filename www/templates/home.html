@@ -22,9 +22,18 @@
         </ion-slide>
       </ion-slide-box>
 
-      <div class="item item-divider">
-        Intimacy Level: {{selected_child.happiness_value}}%
+      <div class="intimacy-level intimacy-block item item-divider ">
+        <p> Intimacy Level: {{selected_child.happiness_value}}% </p>
+        <div class="intimacy-block intimacy-face">
+          <img src = "img/40.png" class="foo"/>
+        </div>
+        
+        <ion-item class="intimacy-block intimacy-comment item-text-wrap">
+          Hey, your child may be feeling neglected now. Why not PING him just for fun? :)
+        </ion-item>
       </div>
+
+
       <div class="latest-activities" ng-hide="notifications.length == 0">
         <div class="latest-activities-title item-divider ion-ios-flag-outline">
           Latest Activities
@@ -40,6 +49,7 @@
       </div>     
 
     </ion-list>
+
   </ion-content>
 </ion-view>
 
