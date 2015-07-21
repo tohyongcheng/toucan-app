@@ -1,0 +1,44 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="goBack()">Back</button>
+    </div>
+    <h1 class="title">Set Emergency Numbers</h1>
+  </ion-header-bar>
+
+  <ion-content class="emergency-page">
+    <div class="list">
+      <div class="item item-divider">Mobile Numbers</div>
+      <label class="item item-input">
+        <span class="input-label">1</span>
+        <input type="tel" ng-model="submitForm.mobile_numbers[0]">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">2</span>
+        <input type="tel" ng-model="submitForm.mobile_numbers[1]">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">3</span>
+        <input type="tel" ng-model="submitForm.mobile_numbers[2]">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">4</span>
+        <input type="tel" ng-model="submitForm.mobile_numbers[3]">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">5</span>
+        <input type="tel" ng-model="submitForm.mobile_numbers[4]">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">6</span>
+        <input type="tel" ng-model="submitForm.mobile_numbers[5]">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">7</span>
+        <input type="tel" ng-model="submitForm.mobile_numbers[6]">
+      </label>
+      <button class="button button-positive button-block" ng-click="update_mobile_numbers()">Update</button>
+    </div>
+  </ion-content>
+</ion-view>
+

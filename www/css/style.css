@@ -244,6 +244,31 @@ h5#tagline{
   background-color: transparent;
 }
 
+/*.create-child-page .inputfield .item{
+    height: 5em;
+}*/
+/*.create-child-page .inputfield .item-select-gender{
+    height: 3em;
+}*/
+
+.create-child-page .inputfield .item .input-gender{
+    display: inline-table;
+    /*border: 1px;*/
+    height: 0.8em;
+    font-size: 0.8em;
+    text-align: center;
+    /*margin: 1px;
+    padding: 1px;*/
+}
+
+.create-child-page .inputfield .item .input-label-gender{
+    float: left;
+}
+
+.create-child-page .inputfield .item .gender-selector{
+    float: right;
+}
+
 .inputfield .item-radio input:checked ~ .item-content {
 	background-color: transparent;
 }

@@ -126,6 +126,24 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, $ionicCon
       }
     }
   })
+  .state('app.emergency', {
+    url:"/family",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/emergency.html",
+        controller:'EditEmergencyMobileNumbersCtrl'
+      }
+    }
+  })
+  .state('app.setupemergency', {
+    url:"/family",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/setupemergency.html",
+        controller:'EditEmergencyMobileNumbersCtrl'
+      }
+    }
+  })
   .state('app.family', {
     url:"/family",
     views: {
@@ -140,8 +158,8 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, $ionicCon
 
 
   $authProvider.configure({
-      apiUrl: 'http://localhost:3000',
-      // apiUrl: 'http://128.199.103.102',
+      //apiUrl: 'http://localhost:3000',
+      apiUrl: 'http://128.199.103.102',
       storage: 'localStorage'
   });
 

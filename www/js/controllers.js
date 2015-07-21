@@ -374,6 +374,7 @@ angular.module('starter.controllers', [])
     else return "img/100.png";
   }
 
+
   $rootScope.childTypeImage = function(gender) {
     if (gender == "boy") return "img/BOY-01.png";
     else if (gender == "girl") return "img/GIRL-01.png";
@@ -386,7 +387,55 @@ angular.module('starter.controllers', [])
     else if (relationship == "grandmother") return "img/GRANDMA-01.png";
     else if (relationship == "grandfather") return "img/GRANDPA-01.png";
   }
+
+  $scope.happiness_text = function(val) {
+    var emotion;
+    if (val < 20) emotion = " may be feeling neglected. You should ping";
+    else if (val < 40) emotion = " may be missing you. How about sending a short voice message to ";
+    else if (val < 60) emotion = " is feeling happy but a little more attention would definitely excite ";
+    else if (val < 80) emotion = " is happy. Keep it up! Ping";
+    else emotion = "is thrilled because you are constantly talking to";
+
+    return emotion;
+    
+  }
+
+  $scope.gender_select = function(val) {
+    var gender;
+    if (val == "boy") gender = "him";
+    else gender = "her";
+
+    return gender;
+  }
+
 })
+
+.controller('EditEmergencyMobileNumbersCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService, $state) {
+  $scope.$on('$ionicView.beforeEnter', function() {
+    $scope.submitForm = {mobile_numbers: []};
+    $scope.get_current_numbers();
+  }); 
+
+  $scope.get_current_numbers = function() {
+    $http.get($auth.apiUrl()+"/mobile_api/families").success(function(data){
+      if ((data.mobile_numbers) && (data.mobile_numbers.length > 0))
+        $scope.submitForm.mobile_numbers = data.mobile_numbers;
+    }).error(function(err){
+
+    })
+  }
+
+  $scope.update_mobile_numbers = function() {
+    console.log("submitForm", $scope.submitForm);
+    $http.put($auth.apiUrl()+"/mobile_api/families/1", $scope.submitForm).success(function(data){
+      alert("Emergency mobile numbers updated.");
+      console.log(data);
+    }).error(function(err) {
+      console.log(err);
+    })
+  }
+})
+
 
 .controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService, $state) {
   $scope.parentForm = { relationship: "mother" };
