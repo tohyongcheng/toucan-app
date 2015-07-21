@@ -103,6 +103,37 @@ h5#tagline{
 	padding: 2em;
 }
 
+.home-page .intimacy-block {
+	display: block;
+	background-color:#887ab8;
+}
+
+.home-page .intimacy-level {
+	text-align: center;
+	border:1px solid white;
+}
+
+.home-page .intimacy-level p{
+	font-size: 1.5em;
+	color:white;
+	padding-bottom: 0.15em;
+}
+
+.home-page .intimacy-level .intimacy-face{
+	margin-top: 0.7em;
+}
+
+.home-page .intimacy-level .intimacy-face img{
+	width:3em;
+	height:3em;
+}
+
+.home-page .intimacy-level .intimacy-comment{
+	/*font-style: italic;*/
+	font-family: Arial;
+}
+
+
 .home-page .add_child_icon{
 	max-width: 12em;
 }
@@ -515,7 +546,7 @@ h5#tagline{
 .profile-page .profile-info .input-info{
 	text-align: center;
 	font-size: 1em;
-	width:90%;
+	width:95%;
 	border:1px solid gray;
 }
 
