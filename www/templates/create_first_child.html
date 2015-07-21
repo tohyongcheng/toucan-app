@@ -22,20 +22,28 @@
         <img src="{{childForm.photo}}" ng-show="childForm.photo"/>
       </div>
       <div class="inputfield list">
+        <div class="item item-divider">Personal Information</div> 
+        <label class="item item-select">
+          <span class="input-label">Gender</span>
+          <select ng-model="childForm.gender">
+            <option value="boy">Boy</option>
+            <option value="girl">Girl</option>
+          </select>
+        </label>
         <label class="item item-input">
           <span class="input-label">Name</span>
           <input type="text" ng-model="childForm.name">
         </label>
+        
         <label class="item item-input">
           <span class="input-label">Birthday</span>
-          <input type="date" ng-model="childForm.birthday">
+          <input type="date" ng-model="childForm.birthday"/>
         </label>
 
         <label class="item item-input">
           <span class="input-label">Mobile Number</span>
           <input type="tel" ng-model="childForm.mobile_number">
         </label>
-
         <label class="item">
           <button class="button button-block button-positive" ng-click="nextStep()" ng-disabled="validate_first_step()">Next</button>
         </label>
