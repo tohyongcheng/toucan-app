@@ -374,6 +374,7 @@ angular.module('starter.controllers', [])
     else return "img/100.png";
   }
 
+
   $rootScope.childTypeImage = function(gender) {
     if (gender == "boy") return "img/BOY-01.png";
     else if (gender == "girl") return "img/GIRL-01.png";
@@ -386,6 +387,27 @@ angular.module('starter.controllers', [])
     else if (relationship == "grandmother") return "img/GRANDMA-01.png";
     else if (relationship == "grandfather") return "img/GRANDPA-01.png";
   }
+
+  $scope.happiness_text = function(val) {
+    var emotion;
+    if (val < 20) emotion = " may be feeling neglected. You should ping";
+    else if (val < 40) emotion = " may be missing you. How about sending a short voice message to ";
+    else if (val < 60) emotion = " is feeling happy but a little more attention would definitely excite ";
+    else if (val < 80) emotion = " is happy. Keep it up! Ping";
+    else emotion = "is thrilled because you are constantly talking to";
+
+    return emotion;
+    
+  }
+
+  $scope.gender_select = function(val) {
+    var gender;
+    if (val == "boy") gender = "him";
+    else gender = "her";
+
+    return gender;
+  }
+
 })
 
 .controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService, $state) {

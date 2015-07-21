@@ -30,7 +30,11 @@
         </div>
         
         <ion-item class="intimacy-block intimacy-comment item-text-wrap">
-          Hey, your child may be feeling neglected now. Why not PING him just for fun? :)
+            <p>{{selected_child.name}}
+              <span ng-bind ="happiness_text(selected_child.happiness_value)"></span> 
+              <span ng-bind ="gender_select(selected_child.gender)"></span>!
+            </p>
+
         </ion-item>
       </div>
 
