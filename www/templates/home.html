@@ -25,7 +25,7 @@
       <div class="intimacy-level intimacy-block item item-divider ">
         <p> Intimacy Level: {{selected_child.happiness_value}}% </p>
         <div class="intimacy-block intimacy-face">
-          <img src = "img/40.png" class="foo"/>
+          <img ng-src="{{happiness_face(selected_child.happiness_value)}}" class="foo"/>
         </div>
         
         <ion-item class="intimacy-block intimacy-comment item-text-wrap">
