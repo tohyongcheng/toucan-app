@@ -28,9 +28,9 @@
       Voice Logs
     </div>
     <div class="audio_area">
-      <a class="item item-icon" ng-repeat="audio_recording in audio_recordings" ng-click="play_recording(audio_recording)">
-        <i class="icon ion-chatbubble-working"></i>
-        {{audio_recording.created_at | amDateFormat:'ddd, MMMM Do YYYY, h:mm:ss a'}} 
+      <a class="item item-icon recording" ng-repeat="audio_recording in audio_recordings" ng-click="play_recording(audio_recording)" ng-class="recording_class(audio_recording)">
+        <span class="icon ion-play play-button"></span>
+        <small>{{audio_recording.created_at | amDateFormat:'MMMM Do YYYY, h:mm a'}} </small>
       </a>
       <a class="item" ng-hide="show_recordings()"> No Voice Logs have been recorded yet.</p>
     </div>
