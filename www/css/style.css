@@ -158,6 +158,7 @@ h5#tagline{
 
 .home-page .intimacy-level .intimacy-comment{
 	font-family: Arial;
+	margin-top:0.5em;
 }
 
 .home-page .item-text-wrap {
@@ -188,6 +189,7 @@ h5#tagline{
 .home-page .latest-activities .latest-activities-contents{
 	border-top:2px solid white;
 	font-size:1.3em;
+	height:15em;
 	/*margin-bottom: -3em;*/
 	overflow-x:hidden;
 	overflow-y:auto;
@@ -305,7 +307,7 @@ h5#tagline{
 	color: white !important;
 }
 
-.voice-log-page .voice_message_title{
+.voice_message_title{
 	color:white;
 }
 
@@ -391,7 +393,8 @@ h5#tagline{
 	width: 6em;
 	height: 6em;
 	border-radius:999px;
-	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
+	border: 2px solid white;
+	box-shadow: 0 0 1em 0.5em white;
 	text-align: center;
 	margin:auto;
 }
@@ -640,8 +643,8 @@ h5#tagline{
 
 .ping-page .child-selected {
 	border-radius:999px;
-	border: 2px solid #FFA07A;
-	box-shadow: 0 0 1em 0.5em #FFA07A;
+	border: 2px solid white;
+	box-shadow: 0 0 1em 0.5em white;
 }
 
 .ping-page .select-children span {
@@ -702,6 +705,7 @@ h5#tagline{
 	text-align: center;
 }
 
+
 .family-page .word-center {
 	text-align: center
 }
@@ -719,7 +723,6 @@ h5#tagline{
 .family-page .family-members .family-member-image{
 	width:6em;
 	height:6em;
-	/*border-radius: 999px;*/
 }
 
 .family-page .family-children .child-image img,
@@ -729,6 +732,26 @@ h5#tagline{
 	border-radius: 999px;
 	border:1px solid white;
 }
+
+.family-page .add-member-image{
+	text-align: center;
+	margin:auto;
+	width:6em;
+	height:6em;
+	border-radius: 999px;
+	border:1px solid white;
+}
+
+.family-page .add-member-image img{
+	width:50%;
+	height:50%;
+	margin-top:1.5em;
+}
+
+
+
+
+
 
 /*emergency.html*/
 .emergency-page .list .item-divider{
