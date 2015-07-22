@@ -54,18 +54,39 @@ h5#tagline{
 	border: 1px solid white;
 }
 
-/* ######## login.html ######## */
-.input-label{
-	background-color: #B9DCD7;
-}
+/*register.html*/
 
-.inputfield{
+.sign-up-page .inputfield{
 	margin-left: 2em; 
 	margin-right: 2em; 
 	margin-top: 5em;
 }
 
-.inputfield .item{
+.sign-up-page .inputfield .list .item-input{
+	border:1px solid white;
+}
+
+.sign-up-page .inputfield .list .input-label{
+	background-color: transparent;
+}
+
+.sign-up-page .inputfield .list .item{
+	background-color: transparent;
+}
+
+
+/* ######## login.html ######## */
+.login-page .input-label{
+	background-color: #B9DCD7;
+}
+
+.login-page .inputfield{
+	margin-left: 2em; 
+	margin-right: 2em; 
+	margin-top: 5em;
+}
+
+.login-page .inputfield .item{
 	background-color: #B9DCD7;
 	border:1px solid white;
 }
@@ -87,12 +108,14 @@ h5#tagline{
 .home-page .boxicon{
 	text-align:center;
 	margin: auto;
+	width: 8em;
+	height: 8em;
 	
 }
  
 .home-page .boxicon img{
-	width: 8em;
-	height: 8em;
+	width:100%;
+	height:100%;
 	margin-top:2em;
 	border-radius: 999px;
 	border: 2px solid white;
@@ -100,6 +123,8 @@ h5#tagline{
 
 .home-page .boxicon.plus img{
 	padding: 2em;
+	width:100%;
+	height:100%;
 }
 
 .home-page .intimacy-block {
@@ -119,22 +144,20 @@ h5#tagline{
 }
 
 .home-page .intimacy-level .intimacy-face{
+	margin: auto;
 	margin-top: 1em;
-}
-
-.home-page .intimacy-level .intimacy-face img{
+	text-align: center;
 	width:5em;
 	height:5em;
 }
 
-.home-page .intimacy-level .intimacy-comment{
-	/*font-style: italic;*/
-	font-family: Arial;
+.home-page .intimacy-level .intimacy-face img{
+	width:100%;
+	height:100%;
 }
 
-
-.home-page .add_child_icon{
-	max-width: 12em;
+.home-page .intimacy-level .intimacy-comment{
+	font-family: Arial;
 }
 
 .home-page .item-text-wrap {
@@ -212,29 +235,34 @@ h5#tagline{
 	text-align: center;
 }
 
-
 .create-child-page .childlogo {
 	text-align: center;
+	margin:auto;
+	width:9em;
+	height:9em;
 }
 
 .create-child-page .childlogo img {
-	max-width:10em;
 	margin-top: 2em;
 	border-radius: 999px;
-	border:1px solid white;
-	width:9em;
-	height:9em;
+	border:2px solid white;
+	width:100%;
+	height:100%;
 }
 
 .create-child-page .inputfield{
 	margin-left:auto;
 	margin-right:auto;
+	margin-top: 5em;
+}
+.create-child-page .inputfield .item-divider{
+	border:none;
+	background-color: transparent;
 }
 
-.create-child-page .inputfield .item{
+.create-child-page .inputfield label{
 	background-color: #B9DCD7;
 	border:1px solid white;
-
 }
 
 .inputfield .radio {
@@ -273,13 +301,12 @@ h5#tagline{
 
 /* ######## voice_log.html ######## */
 
-.voice-page .voice_message_title{
-	color:white;
+.button-clear {
+	color: white !important;
 }
 
-.voice-page .child-image {
-	width: 6em;
-	height: 6em;
+.voice-log-page .voice_message_title{
+	color:white;
 }
 
 .voice-page .select-children {
@@ -287,21 +314,36 @@ h5#tagline{
 	text-align: center;
 }
 
+
 .voice-page .child-not-selected {
+	width: 6em;
+	height: 6em;
 	border-radius:999px;
 	border:1px solid white;
+	text-align: center;
+	margin:auto;
+}
+
+.voice-page .select-children .child-not-selected img{
+	width:100%;
+	height:100%;
+	border-radius:999px;
 }
 
 .voice-page .child-selected {
+	width: 6em;
+	height: 6em;
 	border-radius:999px;
-	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
+	text-align: center;
+	margin:auto;
 }
 
-.voice-page .child-image img {
-	width: 4em;
-	height: 4em;
-	margin: auto;
-	margin-top: 1em;
+.voice-page .select-children .child-selected img{
+	width:100%;
+	height:100%;
+	border-radius:999px;
+	border: 2px solid white;
+	box-shadow: 0 0 1em 0.5em white;
 }
 
 .voice-page .select-children span {
@@ -345,32 +387,48 @@ h5#tagline{
 
 /* ######## record.html ######## */
 
-.record-page .child-image {
+/*.record-page .child-image {
 	width: 6em;
 	height: 6em;
-}
-
-.record-page .child-image img {
-	width: 4em;
-	height: 4em;
-	margin: auto;
-	margin-top: 1em;
-}
-
-.record-page .child-not-selected {
 	border-radius:999px;
-	border:1px solid white;
-}
-
-.record-page .child-selected {
-	border-radius:999px;
-	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
-}
+	border:10px solid yellow;
+}*/
 
 .record-page .select-children {
 	padding: 2em;
 	text-align: center;
 }
+
+.record-page .child-not-selected {
+	width: 6em;
+	height: 6em;
+	border-radius:999px;
+	border:1px solid white;
+	text-align: center;
+	margin:auto;
+}
+
+.record-page .select-children .child-not-selected img{
+	width:100%;
+	height:100%;
+	border-radius:999px;
+}
+
+.record-page .child-selected {
+	width: 6em;
+	height: 6em;
+	border-radius:999px;
+	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
+	text-align: center;
+	margin:auto;
+}
+
+.record-page .select-children .child-selected img{
+	width:100%;
+	height:100%;
+	border-radius:999px;
+}
+
 
 .record-page .select-children span {
 	display: inline-block;
@@ -438,12 +496,7 @@ h5#tagline{
 	max-height: 5em;
 }
 
-/* ######## voice_log.html ########*/
 
-.voice-log-page .child-selected {
-	border-radius:999px;
-	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
-}
 
 /* ######## create_family_member.html ######## */
 
@@ -470,24 +523,52 @@ h5#tagline{
 }
 
 .create-family-member-page .inputfield{
-	margin-bottom:1em;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 5em;
 }
 
+.create-family-member-page .inputfield .item-divider{
+	border:none;
+	background-color: transparent;
+}
 
-.create-family-member-page .proceedfield .item{
+.create-family-member-page .inputfield .relationship-option{
+	background-color: transparent;
+}
+
+.create-family-member-page .inputfield label{
+	background-color: transparent;
+	border:1px solid white;
+}
+
+/*.create-family-member-page .inputfield label{
+	background-color: transparent;
+	border:1px solid white;
+}*/
+
+/*.create-family-member-page .inputfield .foo{
+	background-color: transparent;
+	border:1px solid white;
+}*/
+
+/*.create-family-member-page .proceedfield .item{
 	background-color: #B9DCD7;
-}
+}*/
+
+
+
 
 
 
 /* ######## map.html ######## */
-
-/* ######## voice_log.html ########*/
-
-
-.button-clear {
-	color: white !important;
+.map-page .children-whereabouts img{
+	border-radius: 999px;
+	border:1px solid white;
+	width:100%;
+	height:100%;
 }
+
 
 /* ######## ping.html ########*/
 
@@ -561,10 +642,16 @@ h5#tagline{
 	cursor: pointer;
 }
 
+.ping-page .select-children {
+	padding: 2em;
+	text-align: center;
+	margin:auto;
+}
 
 .ping-page .child-image {
 	width: 6em;
 	height: 6em;
+	border-radius:999px;
 }
 
 .ping-page .child-image img {
@@ -574,7 +661,7 @@ h5#tagline{
 }
 
 .ping-page .child-not-selected {
-	border: 1px solid #FFF;
+	border: 1px solid white;
 	border-radius:999px;
 }
 
@@ -583,13 +670,6 @@ h5#tagline{
 	border: 2px solid #FFA07A;
 	box-shadow: 0 0 1em 0.5em #FFA07A;
 }
-
-.ping-page .select-children {
-	padding: 2em;
-	text-align: center;
-}
-
-
 
 .ping-page .select-children span {
 	display: inline-block;
@@ -657,24 +737,44 @@ h5#tagline{
 	text-align: center;
 }
 
-.family-page .child-image,
-.family-page .family-member-image {
-	width: 6em;
-	height: 6em;
+.family-page .family-children,
+.family-page .family-members{
+	text-align: center;
 }
 
-.family-page .child-image img,
-.family-page .family-member-image img {
-	width: 4em;
-	height: 4em;
-	margin: auto;
-	margin-top: 1em;
+.family-page .family-children .child-image,
+.family-page .family-members .family-member-image{
+	width:6em;
+	height:6em;
+	/*border-radius: 999px;*/
 }
 
-.family-page .family-children .child-not-selected,
-.family-page .family-members .family-member-not-selected{
+.family-page .family-children .child-image img,
+.family-page .family-members .family-member-image img{
+	width:100%;
+	height:100%;
 	border-radius: 999px;
-	border:2px solid white;
+	border:1px solid white;
+}
+
+/*emergency.html*/
+.emergency-page .list .item-divider{
+	background-color: transparent;
+}
+
+.emergency-page .item-input{
+	background-color: transparent;
+}
+
+
+.emergency-page .item-input .input-label{
+	background-color: transparent;
+	float:left;
+}
+
+.emergency-page .item-input input{
+	border:1px solid white;
+	margin-right: 2em;
 }
 
 
@@ -685,19 +785,21 @@ h5#tagline{
 
 .profile-page .profile-info{
 	display: block;
-
 }
 
 .profile-page .profile-img-div{
 	text-align: center;
+	margin:auto;
+	width:8em;
+	height:8em;
+	border-radius: 999px;
 }
 
 .profile-page .profile-img-div img{
-	margin:auto;
+	width:100%;
+	height:100%;
 	border-radius: 999px;
 	border: 2px solid white;
-	width:8em;
-	height:8em;
 
 }
 
@@ -721,9 +823,6 @@ h5#tagline{
 }
 
 
-
-
-
 /*settings.html*/
 .settings-page{
 	background-color: #B9DCD7;
@@ -735,7 +834,6 @@ h5#tagline{
 	font-size: 1.5em;
 }
 
-
 .settings-page .item-input{
 	background-color: transparent;
 }
@@ -745,13 +843,8 @@ h5#tagline{
 	color:black;
 }
 
-select{
+.setings-page select{
 	background-color: transparent;
-}
-
-.settings-page .child-image {
-	width: 6em;
-	height: 6em;
 }
 
 .settings-page .select-children {
@@ -761,19 +854,28 @@ select{
 
 .settings-page .child-not-selected {
 	border-radius:999px;
+	width: 6em;
+	height: 6em;
+}
+
+.settings-page .child-not-selected img{
+	border-radius:999px;
+	width:100%;
+	height:100%;
 	border:1px solid white;
 }
 
 .settings-page .child-selected {
 	border-radius:999px;
+	width: 6em;
+	height: 6em;
 	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
 }
 
-.settings-page .child-image img {
-	width: 4em;
-	height: 4em;
-	margin: auto;
-	margin-top: 1em;
+.settings-page .child-selected img{
+	border-radius:999px;
+	width:100%;
+	height:100%;
 }
 
 .settings-page .select-children span {
@@ -804,8 +906,6 @@ select{
 .settings-page .device-info .input-label{
 	color:white;
 }
-
-
 
 .settings-page .change-password a{
 	background-color: #3CB371;

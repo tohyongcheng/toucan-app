@@ -2,7 +2,7 @@
   <ion-nav-title class="header_title icon-left ion-map" >
     MAP
   </ion-nav-title>
-  <ion-content>
+  <ion-content class="map-page">
     <ui-gmap-google-map center='map.center' zoom='map.zoom'>
       <ui-gmap-markers models="markers" coords="'coords'" options="{draggable: false}" modelsbyref="false">
       </ui-gmap-markers>
@@ -15,7 +15,7 @@
         <span>Oldest</span>
       </div>
 
-      <div class="item item-avatar" href="#" ng-repeat="child in children">
+      <div class="children-whereabouts item item-avatar" href="#" ng-repeat="child in children">
         <img ng-src="{{childTypeImage(child.gender)}}" ng-hide="child.photo_url">
         <img src="{{child.photo_url}}" ng-show="child.photo_url"/>
         <h2>{{child.name}}</h2>
