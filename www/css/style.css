@@ -157,22 +157,22 @@ h5#tagline{
 }
 
 .home-page .intimacy-level .intimacy-comment{
-	font-family: Arial;
+	font-weight: 200;
+	font-size: 0.8em;
 	margin-top:0.5em;
 	padding-bottom:0;
 }
 
 .home-page .item-text-wrap {
 	font-size: 0.9em;
-  	text-overflow: inherit !important;
-  	white-space: normal !important;
+	text-overflow: inherit !important;
+	white-space: normal !important;
 }
 
 .home-page .latest-activities{
 	margin: 2em 2em 0em 2em;
 	background-color: #79CECB;
 	border:3px solid white;
-
 }
 
 .home-page .latest-activities .latest-activities-title{
@@ -195,6 +195,9 @@ h5#tagline{
 	overflow-y:auto;
 }
 
+.home-page .item p {
+	color: white;
+}
 
 /* ######## menu.html ######## */
 

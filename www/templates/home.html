@@ -62,9 +62,9 @@
           Latest Activities
         </div>
         <div class="latest-activities-contents">
-            <ion-item ng-repeat="notification in notifications" class="item-icon-left item-text-wrap">
+            <ion-item ng-repeat="notification in notifications" class="item-icon-left item-text-wrap notification">
               <i class="icon clear:both;" ng-class="notificationClassType(notification.notification_type)"></i>
-              {{notification.message}}
+              <p>{{notification.message}}</p>
               <small style="display:block; float: right; font-size: 0.6em; clear:both;" am-time-ago="notification.created_at"></small>
             </ion-item>
         
