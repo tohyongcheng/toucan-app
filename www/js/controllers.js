@@ -791,6 +791,11 @@ angular.module('starter.controllers', [])
     $scope.ft.upload(filePath, server, win, fail, options);
   }
 
+  $scope.audio_file_disabled = function() {
+    if (($scope.audio_file != null) && ((Object.keys($scope.selected_children).length > 0))) return false;
+    return true;
+  }
+
 })
 .controller('VoiceLogCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaCapture, $cordovaFileTransfer, $timeout, LoadingService, $http, $auth, GlobalFactory) {
   $scope.$on('$ionicView.beforeEnter', function() {
@@ -809,6 +814,12 @@ angular.module('starter.controllers', [])
     $http.get($auth.apiUrl() + "/mobile_api/audio_messages?child_id="+children_id_string)
     .success(function(data) {
       $scope.all_audio_recordings = data;
+      for (var key in $scope.all_audio_recordings) {
+        if ($scope.all_audio_recordings.hasOwnProperty(key)) {
+          $scope.all_audio_recordings[key].reverse();
+        }
+      }
+
       if (children_id.length > 0) {
         $scope.selected_child = $scope.children[0];
         $scope.toggle_child($scope.selected_child);  
@@ -827,6 +838,7 @@ angular.module('starter.controllers', [])
       $scope.currently_playing.release();  
       $scope.currently_playing = null;
     }
+
     src = recording.audio_message_url;
     console.log("src", src);
     $scope.currently_playing = new Media(src,
@@ -835,6 +847,8 @@ angular.module('starter.controllers', [])
     },
     function(err) {
         console.log("recordAudio():Audio Error: "+ err.code);
+    }, function(status){
+        
     });
     $scope.currently_playing.play();
   }
@@ -858,6 +872,12 @@ angular.module('starter.controllers', [])
   $scope.show_recordings = function() {
     if (($scope.recordings)&&($scope.recordings.length == 0)) return false;
     else return true;
+  }
+
+  $scope.recording_class = function(recording) {
+    if (recording.message_type == "device") return "user-recording";
+    else if (recording.message_type == "user") return "child-recording";
+    return "user-recording";
   }
 })
 .controller('ProfileCtrl',function($scope, $stateParams, $cordovaCamera, $timeout, LoadingService, $http, $auth) {

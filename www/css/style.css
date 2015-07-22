@@ -314,6 +314,35 @@ h5#tagline{
 .voice-page .select-children span small {
 	color: white;
 }
+
+.user-recording {
+	float: left;
+	clear: both;
+}
+
+.child-recording {
+	float: right;
+	clear: both;
+}
+
+.recording {
+	margin:0.5em;
+	border-radius: 999px;
+	border: 1px solid #FFF;
+	padding: none;
+}
+
+.recording small {
+	font-size: 0.5em;
+	padding: none;
+}
+
+.play-button {
+
+	
+}
+
+
 /* ######## record.html ######## */
 
 .record-page .child-image {
