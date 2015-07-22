@@ -28,7 +28,7 @@
       </div>
  -->
       <div class="intimacy-level intimacy-block item item-divider" ng-if="selected_child">
-        <p>Intimacy</p>
+        <p><i class="ion-ios-heart-outline" style="margin-right: 5px;"></i>Intimacy</p>
         <div class="intimacy-block intimacy-face">
           <img ng-src="{{happiness_face(selected_child.happiness_value)}}" class="foo"/>
         </div>
@@ -52,7 +52,6 @@
               <span ng-bind ="happiness_text(selected_child.happiness_value)"></span> 
               <span ng-bind ="gender_select(selected_child.gender)"></span>!
             </p>
-
         </ion-item>
       </div>
 

@@ -170,13 +170,13 @@ h5#tagline{
 }
 
 .home-page .latest-activities{
-	margin: 2em 2em 0em 2em;
+	/*margin: 2em 2em 0em 2em;*/
 	background-color: #79CECB;
-	border:3px solid white;
+	/*border:3px solid white;*/
 }
 
 .home-page .latest-activities .latest-activities-title{
-	/*border:3px solid white;*/
+	border-bottom:1px solid white;
 	background-color: #79CECB;
 	text-align: center;
 	font-size: 1.5em;
@@ -188,15 +188,19 @@ h5#tagline{
 
 
 .home-page .latest-activities .latest-activities-contents{
-	border-top:2px solid white;
+	/*border-top:2px solid white;*/
 	font-size:1.3em;
 	/*margin-bottom: -3em;*/
 	overflow-x:hidden;
 	overflow-y:auto;
 }
 
-.home-page .item p {
+.home-page .notification p {
 	color: white;
+}
+
+.home-page .notification {
+	margin-top: 2px;
 }
 
 /* ######## menu.html ######## */

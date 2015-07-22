@@ -321,6 +321,9 @@ angular.module('starter.controllers', [])
     success(function(data) {
       GlobalFactory._set_my_children(data.children);
       $scope.children = data.children;
+      for (var i=0;i<$scope.children.length;i++){
+        $scope.children[i].latest_notifications.reverse();
+      }
       
       if (data.children.length == 0) {
         // alert("Please create a child!");
