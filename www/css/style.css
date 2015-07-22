@@ -133,30 +133,33 @@ h5#tagline{
 .home-page .intimacy-level {
 	text-align: center;
 	border:1px solid white;
+	padding: 1em 0;
 }
 
 .home-page .intimacy-level p{
 	font-size: 1.5em;
 	color:white;
-	padding-bottom: 0.15em;
+	padding-bottom: 1em;
 }
 
 .home-page .intimacy-level .intimacy-face{
 	margin: auto;
-	margin-top: 1em;
 	text-align: center;
-	width:5em;
-	height:5em;
+	width: 100%;
+	position:absolute;
+	background-color: transparent;
+  margin-top: 3.5em;
 }
 
 .home-page .intimacy-level .intimacy-face img{
-	width:100%;
-	height:100%;
+	width:5em;
+	height:5em;
 }
 
 .home-page .intimacy-level .intimacy-comment{
 	font-family: Arial;
 	margin-top:0.5em;
+	padding-bottom:0;
 }
 
 .home-page .item-text-wrap {

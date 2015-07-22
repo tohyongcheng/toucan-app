@@ -669,7 +669,11 @@ angular.module('starter.controllers', [])
     
     $scope.selected_children = {};
     $scope.children = GlobalFactory._get_my_children();
+    if ($scope.children.length > 0) {
+      $scope.toggle_child($scope.children[0]);
+    }
     $scope.ft = new FileTransfer();
+    console.log(Media);
   });
 
   $scope.toggle_child = function(child) {

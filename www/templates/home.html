@@ -28,10 +28,24 @@
       </div>
  -->
       <div class="intimacy-level intimacy-block item item-divider" ng-if="selected_child">
-        <p> Intimacy Level: {{selected_child.happiness_value}}% </p>
+        <p>Intimacy</p>
         <div class="intimacy-block intimacy-face">
           <img ng-src="{{happiness_face(selected_child.happiness_value)}}" class="foo"/>
         </div>
+        <div
+          round-progress
+          max="100"
+          current="selected_child.happiness_value"
+          color="#B9DCD7"
+          bgcolor="#eaeaea"
+          radius="100"
+          stroke="15"
+          semi="false"
+          rounded="true"
+          clockwise="true"
+          iterations="100"
+          animation="easeInOutQuart">
+        </div>        
         
         <ion-item class="intimacy-block intimacy-comment item-text-wrap">
             <p>{{selected_child.name}}
