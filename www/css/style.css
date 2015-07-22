@@ -54,18 +54,39 @@ h5#tagline{
 	border: 1px solid white;
 }
 
-/* ######## login.html ######## */
-.input-label{
-	background-color: #B9DCD7;
-}
+/*register.html*/
 
-.inputfield{
+.sign-up-page .inputfield{
 	margin-left: 2em; 
 	margin-right: 2em; 
 	margin-top: 5em;
 }
 
-.inputfield .item{
+.sign-up-page .inputfield .list .item-input{
+	border:1px solid white;
+}
+
+.sign-up-page .inputfield .list .input-label{
+	background-color: transparent;
+}
+
+.sign-up-page .inputfield .list .item{
+	background-color: transparent;
+}
+
+
+/* ######## login.html ######## */
+.login-page .input-label{
+	background-color: #B9DCD7;
+}
+
+.login-page .inputfield{
+	margin-left: 2em; 
+	margin-right: 2em; 
+	margin-top: 5em;
+}
+
+.login-page .inputfield .item{
 	background-color: #B9DCD7;
 	border:1px solid white;
 }
@@ -232,12 +253,16 @@ h5#tagline{
 .create-child-page .inputfield{
 	margin-left:auto;
 	margin-right:auto;
+	margin-top: 5em;
+}
+.create-child-page .inputfield .item-divider{
+	border:none;
+	background-color: transparent;
 }
 
-.create-child-page .inputfield .item{
+.create-child-page .inputfield label{
 	background-color: #B9DCD7;
 	border:1px solid white;
-
 }
 
 .inputfield .radio {
@@ -276,6 +301,10 @@ h5#tagline{
 
 /* ######## voice_log.html ######## */
 
+.button-clear {
+	color: white !important;
+}
+
 .voice-log-page .voice_message_title{
 	color:white;
 }
@@ -305,7 +334,6 @@ h5#tagline{
 	width: 6em;
 	height: 6em;
 	border-radius:999px;
-	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
 	text-align: center;
 	margin:auto;
 }
@@ -314,6 +342,8 @@ h5#tagline{
 	width:100%;
 	height:100%;
 	border-radius:999px;
+	border: 2px solid white;
+	box-shadow: 0 0 1em 0.5em white;
 }
 
 .voice-page .select-children span {
@@ -439,12 +469,7 @@ h5#tagline{
 	max-height: 5em;
 }
 
-/* ######## voice_log.html ########*/
 
-.voice-log-page .child-selected {
-	border-radius:999px;
-	box-shadow: inset 0 0 0 1px #20b392,inset 0 5px 30px #20b392;
-}
 
 /* ######## create_family_member.html ######## */
 
@@ -471,13 +496,41 @@ h5#tagline{
 }
 
 .create-family-member-page .inputfield{
-	margin-bottom:1em;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 5em;
 }
 
+.create-family-member-page .inputfield .item-divider{
+	border:none;
+	background-color: transparent;
+}
 
-.create-family-member-page .proceedfield .item{
+.create-family-member-page .inputfield .relationship-option{
+	background-color: transparent;
+}
+
+.create-family-member-page .inputfield label{
+	background-color: transparent;
+	border:1px solid white;
+}
+
+/*.create-family-member-page .inputfield label{
+	background-color: transparent;
+	border:1px solid white;
+}*/
+
+/*.create-family-member-page .inputfield .foo{
+	background-color: transparent;
+	border:1px solid white;
+}*/
+
+/*.create-family-member-page .proceedfield .item{
 	background-color: #B9DCD7;
-}
+}*/
+
+
+
 
 
 
@@ -488,12 +541,7 @@ h5#tagline{
 	width:100%;
 	height:100%;
 }
-/* ######## voice_log.html ########*/
 
-
-.button-clear {
-	color: white !important;
-}
 
 /* ######## ping.html ########*/
 
@@ -680,6 +728,26 @@ h5#tagline{
 	height:100%;
 	border-radius: 999px;
 	border:1px solid white;
+}
+
+/*emergency.html*/
+.emergency-page .list .item-divider{
+	background-color: transparent;
+}
+
+.emergency-page .item-input{
+	background-color: transparent;
+}
+
+
+.emergency-page .item-input .input-label{
+	background-color: transparent;
+	float:left;
+}
+
+.emergency-page .item-input input{
+	border:1px solid white;
+	margin-right: 2em;
 }
 
 
