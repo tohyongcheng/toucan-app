@@ -27,7 +27,7 @@
         Call {{selected_child.name}}
       </div>
  -->
-      <div class="intimacy-level intimacy-block item item-divider ">
+      <div class="intimacy-level intimacy-block item item-divider" ng-if="selected_child">
         <p> Intimacy Level: {{selected_child.happiness_value}}% </p>
         <div class="intimacy-block intimacy-face">
           <img ng-src="{{happiness_face(selected_child.happiness_value)}}" class="foo"/>
@@ -43,7 +43,7 @@
       </div>
 
 
-      <div class="latest-activities" ng-hide="notifications.length == 0">
+      <div class="latest-activities" ng-if="selected_child">
         <div class="latest-activities-title item-divider ion-ios-flag-outline">
           Latest Activities
         </div>

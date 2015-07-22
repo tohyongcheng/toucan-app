@@ -315,6 +315,8 @@ angular.module('starter.controllers', [])
   $scope.$on('$ionicView.beforeEnter', function() {
     // Get Children
     LoadingService.showLoading();
+    $scope.children = [];
+    $ionicSlideBoxDelegate.update();
     $http.get($auth.apiUrl() + "/mobile_api/users/"+$localStorage.user_id).
     success(function(data) {
       GlobalFactory._set_my_children(data.children);
@@ -350,6 +352,7 @@ angular.module('starter.controllers', [])
       $scope.selected_child = $scope.children[idx];
       $scope.notifications = $scope.children[idx].latest_notifications;
     } else {
+      $scope.selected_child = null;
       $scope.notifications = [];
     }
   }
