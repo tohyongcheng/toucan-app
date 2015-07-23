@@ -398,13 +398,12 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('HomeCtrl', function($scope, $rootScope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state, $ionicPopup, $timeout, $cordovaPush, GlobalFactory, LoadingService) {
+.controller('HomeCtrl', function($scope, $rootScope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state, $ionicPopup, $timeout, $cordovaPush, $cordovaDevice, $cordovaDialogs, GlobalFactory, LoadingService) {
   $scope.$on('$ionicView.beforeEnter', function() {
     // Get Children
     LoadingService.showLoading();
     $scope.children = [];
     $ionicSlideBoxDelegate.update();
-    $scope.registerDeviceToken();
     $http.get($auth.apiUrl() + "/mobile_api/users/"+$localStorage.user_id).
     success(function(data) {
       console.log(data);
@@ -439,50 +438,70 @@ angular.module('starter.controllers', [])
     });
   }); 
 
-  $scope.registerDeviceToken = function() {
-    var iosConfig = {
-      "badge": true,
-      "sound": true,
-      "alert": true,
-    };
+  document.addEventListener("deviceready", function(){
+    // Recommended to unregister before registering.
+    $cordovaPush.unregister({}).then(function(result) {
+    }, function(err) {
+    });
 
-    $cordovaPush.register(iosConfig).then(function(result) {
+    var config = null;
+    if (ionic.Platform.isIOS()) {
+      config = {
+        "badge": true,
+        "sound": true,
+        "alert": true,
+      };
+    }
+
+    $cordovaPush.register(config).then(function(result) {
       // Success -- send deviceToken to server, and store for future use
-      console.log("result: " + result)
-      var device_type = $cordovaDevice.getPlatform();
-      var device_token = result;
-      var data = { device_type: device_type, device_token: device_token };
-      $http.post($auth.apiUrl() + "/mobile_api/user_devices", data).success(function(data) {
-        console.log("successfully posted device token",data);
-      }).error(function(err) {
+      console.log("device token result: " + result)
+      // Only iOS one is set here
+      if (ionic.Platform.isIOS()) {
+        var device_type = $cordovaDevice.getPlatform();
+        var device_token = result;
+        var formData = { device_type: device_type, device_token: device_token };
+        $http.post($auth.apiUrl() + "/mobile_api/user_devices", formData).success(function(data) {
+          console.log("successfully posted device token", data);
+        }).error(function(err) {
 
-      });
-      console.log("tried to update user device");
+        });
+      }
     }, function(error) {
+      $rootScope.validate_error(error);
     });
 
     $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
-    
-      console.log('notification: ', notification)
-      if (notification.alert) {
-        navigator.notification.alert(notification.alert);
-        console.log('alert: ', notification.alert);
-      }
-
-      if (notification.sound) {
-        var snd = new Media(event.sound);
-        snd.play();
-        console.log('sound: ', notification.sound);
-      }
-
-      if (notification.badge) {
-        $cordovaPush.setBadgeNumber(notification.badge).then(function(result) {
-          console.log('badge: ', notification.badge);
-        }, function(error) {
-        });
+      if (ionic.Platform.isIOS()) {
+          handleIOS(notification);
       }
     });
+  }, false);
+
+
+  handleIOS = function(notification) {
+    console.log('notification: ', notification)
+    if (notification.alert) {
+      navigator.notification.alert(notification.alert);
+      console.log('alert: ', notification.alert);
+    }
+
+    if (notification.sound) {
+      var snd = new Media(event.sound);
+      snd.play();
+      console.log('sound: ', notification.sound);
+    }
+
+    if (notification.badge) {
+      $cordovaPush.setBadgeNumber(notification.badge).then(function(result) {
+        // Success!
+        console.log('badge: ', notification.badge);
+      }, function(error) {
+        $rootScope.validate_error(error);
+      });
+    }
   }
+
 
   $scope.slideHasChanged = function(idx) {
     if (idx < $scope.children.length) {
