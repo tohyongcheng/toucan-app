@@ -21,7 +21,7 @@
       </div>
       <label class="item item-input item-select general-settings-input">
         <span class="input-label">Location Update Frequency</span>
-        <select class="selection-box" ng-model="settings.update_frequency" >
+        <select class="selection-box input-font" ng-model="settings.update_frequency" >
           <option value="5">5min</option>
           <option value="10">10min</option>
           <option value="15">15min</option>
@@ -32,7 +32,7 @@
 
       <label class="item item-input item-select general-settings-input">
         <span class="input-label">Battery Critical Threshold </span>
-        <select class="selection-box" ng-model="settings.battery_level_update">
+        <select class="selection-box input-font" ng-model="settings.battery_level_update">
           <option value="5">5%</option>
           <option value="10">10%</option>
           <option value="15">15%</option>
@@ -43,11 +43,11 @@
       <div class="item item-divider">
         Device Information
       </div>
-      <label class="item item-input">
+      <label class="item item-input input-font">
         <span class="input-label">Device Serial No. </span>
         {{settings.machine_uuid}}
       </label>
-      <label class="item item-input">
+      <label class="item item-input input-font">
         <span class="input-label">Device Battery Level </span>
         {{settings.battery}}
       </label>
