@@ -7,6 +7,11 @@
 	font-size: 1em;
 }
 
+.transparent-background{
+	background-color: transparent;
+	border:10px solid yellow;
+}
+
 #title{
 	color: white;
 	margin-top: 30px;
@@ -255,6 +260,8 @@ h5#tagline{
 	height:9em;
 }
 
+
+
 /* ######## create_child.html ######## */
 
 
@@ -319,6 +326,16 @@ h5#tagline{
 
 .create-child-page .inputfield .item .gender-selector{
     float: right;
+}
+
+.create-child-page .inputfield .item .gender-selector .disable-pointer-events{
+	background-color: transparent;
+}
+
+.create-child-page .inputfield .item .gender-selector .radio-icon{
+	/*margin:auto;*/
+	/*text-align: center;*/
+	top:-0.2em;
 }
 
 .inputfield .item-radio input:checked ~ .item-content {

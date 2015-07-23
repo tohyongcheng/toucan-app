@@ -1,6 +1,10 @@
 <ion-header-bar>
   <div class="buttons">
-    <button class="button button-clear" ng-click="goBack()">Back</button>
+    <button class="button button-clear icon ion-ios-arrow-back" ng-click="goBack()">
+    </button>
+    <!-- <ion-nav-back-button class="button button-icon button-clear">
+      <i class="ion-ios-arrow-back"></i>
+    </ion-nav-back-button> -->
   </div>
   <h1 class="title">I am...</h1>
 </ion-header-bar>
@@ -39,7 +43,7 @@
             <input type="tel" ng-model="parentForm.mobile_number">
           </label>
         </div>
-        <label class="item" >
+        <label class="item" style="background-color:transparent">
           <button class="button button-block button-positive" ng-click="updateParentParticulars()">Proceed</button>
         </label>
         
