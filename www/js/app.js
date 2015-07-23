@@ -47,47 +47,6 @@ app.run(function($ionicPlatform, $rootScope, $state, $cordovaPush) {
         else if (relationship == "grandfather") return "img/GRANDPA-01.png";
       }
 
-    // var iosConfig = {
-    //   "badge": true,
-    //   "sound": true,
-    //   "alert": true,
-    // };
-
-    // $cordovaPush.register(iosConfig).then(function(result) {
-    //   // Success -- send deviceToken to server, and store for future use
-    //   console.log("result: " + result)
-    //   device_type = $cordovaDevice.getPlatform();
-    //   device_token = result;
-    //   // UserFactory.update_user_device(device_type, device_token);
-    //   console.log("tried to update user device");
-    // }, function(error) {
-    //   // console.log("Registration error: " + err);
-    //   $rootScope.validate_error(error);
-    // });
-
-    // $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
-    
-    //   console.log('notification: ', notification)
-    //   if (notification.alert) {
-    //     navigator.notification.alert(notification.alert);
-    //     console.log('alert: ', notification.alert);
-    //   }
-
-    //   if (notification.sound) {
-    //     var snd = new Media(event.sound);
-    //     snd.play();
-    //     console.log('sound: ', notification.sound);
-    //   }
-
-    //   if (notification.badge) {
-    //     $cordovaPush.setBadgeNumber(notification.badge).then(function(result) {
-    //       // Success!
-    //       console.log('badge: ', notification.badge);
-    //     }, function(error) {
-    //       $rootScope.validate_error(error);
-    //     });
-    //   }
-    // });
 
     $state.go('app.home');
   });

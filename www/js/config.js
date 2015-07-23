@@ -167,7 +167,7 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, $ionicCon
 
 
   $authProvider.configure({
-      //apiUrl: 'http://localhost:3000',
+      // apiUrl: 'http://localhost:3000',
       apiUrl: 'http://128.199.103.102',
       storage: 'localStorage'
   });
