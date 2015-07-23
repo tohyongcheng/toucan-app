@@ -7,10 +7,11 @@
 	font-size: 1em;
 }
 
-.transparent-background{
-	background-color: transparent;
-	border:10px solid yellow;
+.input-font{
+	color:white !important;
 }
+
+
 
 #title{
 	color: white;
@@ -230,6 +231,7 @@ h5#tagline{
 .menu-left .scroll-content{
 	background-color: #A2D5D4
 }
+
 
 .bar-header p{
 	margin:auto;
@@ -870,13 +872,14 @@ h5#tagline{
 }
 
 .profile-page .profile-info .item .input-label{
+	color:white;
 }
 
 .profile-page .profile-info .input-info{
 	text-align: center;
 	font-size: 1em;
 	width:95%;
-	border:1px solid gray;
+	border:1px solid white;
 }
 
 .profile-page .profile-info .item .button{
