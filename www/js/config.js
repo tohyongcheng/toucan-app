@@ -45,6 +45,15 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider, $ionicCon
       }
     }
   })
+  .state('app.editChild', {
+    url: "/edit_child/:id",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/edit_child.html",
+        controller: 'EditChildCtrl'
+      }
+    }
+  })
   .state('app.createFamilyMember', {
     url: "/create_family_member",
     views: {

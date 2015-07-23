@@ -12,7 +12,7 @@
 
       <ion-scroll direction="x" scrollbar-x ="false" class="horizontal-wide item family-children">
         <div ng-repeat="child in children" class="inline">
-          <div class="child-image">
+          <div class="child-image" ui-sref="app.editChild({ id: $index })">
             <img ng-src="{{childTypeImage(child.gender)}}" ng-hide="child.photo_url">
             <img src="{{child.photo_url}}" ng-show="child.photo_url"/>
           </div>

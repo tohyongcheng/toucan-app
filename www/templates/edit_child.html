@@ -1,0 +1,56 @@
+<ion-view>
+  <ion-nav-bar>
+    <ion-nav-back-button class="button-clear">
+      <i class="ion-arrow-left-c"></i>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-nav-title class="header_title icon-left ion-person-add" >
+    EDIT
+  </ion-nav-title>
+  <ion-content class="create-child-page">
+    <div>
+      <!-- Photo Buttons -->
+
+      <div class="camera-buttons">
+        <button class="button button-clear icon ion-ios-camera-outline" ng-click="launch_camera()"></button>
+        <button class="button button-clear icon ion-ios-photos-outline" ng-click="launch_photo_library()"></button>
+      </div>
+
+      <!-- Image -->
+      <div class="childlogo">
+        <img ng-src="{{childTypeImage(childForm.gender)}}" ng-hide="(childForm.photo_url || childForm.photo)"/>
+        <img ng-src="{{childForm.photo_url}}" ng-show="(childForm.photo_url && !childForm.photo)"/>
+        <img src="{{childForm.photo}}" ng-show="childForm.photo"/>
+      </div>
+
+      <div class="inputfield list">
+        <div class="item item-divider">Personal Information</div> 
+        <label class="item item-select item-select-gender">
+          <span class="input-label input-label-gender">Gender</span>
+          <div class="gender-selector">
+            <ion-radio class = "input-gender" ng-model="childForm.gender" value="boy">Boy</ion-radio>
+            <ion-radio class = "input-gender" ng-model="childForm.gender" value="girl">Girl</ion-radio>
+          </div>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="childForm.name">
+        </label>
+        
+        <label class="item item-input">
+          <span class="input-label">Birthday</span>
+          <input type="date" ng-model="childForm.birthday"/>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Mobile Number</span>
+          <input type="tel" ng-model="childForm.mobile_number">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" ng-click="update_child()">Update</button>
+        </label>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
