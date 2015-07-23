@@ -31,7 +31,7 @@ h5#tagline{
 }
 
 .bar-header {
-    border: 0px ;
+    border: 0px;
     border-bottom-color: transparent;
     background-image: none;
     background-color: #A2D5D4;
@@ -219,7 +219,7 @@ h5#tagline{
 .menu-left .bar-header{
 	height:5em;
 	background-color: #A2D5D4;
-	border-bottom: 1px solid white;
+	border-bottom: 1px solid white !important;
 }
 
 .menu-left .scroll-content{
@@ -243,7 +243,17 @@ h5#tagline{
 	margin-top: 1.8em;
 }
 
+/*setup_account.html*/
+.setup-account-page .camera-buttons {
+	text-align: center;
+}
 
+.setup-account-page .childlogo {
+	text-align: center;
+	margin:auto;
+	width:9em;
+	height:9em;
+}
 
 /* ######## create_child.html ######## */
 
