@@ -34,6 +34,19 @@ app.run(function($ionicPlatform, $rootScope, $state, $cordovaPush) {
       console.log("validation success");
     });  
 
+    $rootScope.childTypeImage = function(gender) {
+        if (gender == "boy") return "img/BOY-01.png";
+        else if (gender == "girl") return "img/GIRL-01.png";
+        else return "img/BOY-01.png";
+      }
+
+      $rootScope.parentTypeImage = function(relationship) {
+        if (relationship == "mother") return "img/MOM-01.png";
+        else if (relationship == "father") return "img/DAD-01.png";
+        else if (relationship == "grandmother") return "img/GRANDMA-01.png";
+        else if (relationship == "grandfather") return "img/GRANDPA-01.png";
+      }
+
     // var iosConfig = {
     //   "badge": true,
     //   "sound": true,

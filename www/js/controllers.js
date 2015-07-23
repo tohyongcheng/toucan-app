@@ -127,7 +127,7 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('CreateChildCtrl', function($scope, $auth, $state, $rootScope, $cordovaDatePicker, $ionicPlatform, $http, $cordovaBarcodeScanner, $cordovaCamera, LoadingService) {
+.controller('CreateChildCtrl', function($scope, $auth, $state, $rootScope, $cordovaDatePicker, $ionicPlatform, $http, $cordovaBarcodeScanner, $cordovaCamera, $ionicHistory, LoadingService) {
   
   // Setup BeforeEnter
   $scope.$on('$ionicView.beforeEnter', function() {
@@ -212,7 +212,13 @@ angular.module('starter.controllers', [])
 
   $scope.create_child = function(){
     $http.post($auth.apiUrl() + "/mobile_api/children", $scope.childForm).success(function(data){
-      $state.go("app.home");
+      console.log($ionicHistory.currentView());
+      if ($ionicHistory.currentView().stateName == "createFirstChild") {
+        $state.go("app.emergency");
+      } else {
+        $state.go("app.home");        
+      }
+
     }).error(function(data) {
       alert("There was an error creating the child.", data);
     });
@@ -226,7 +232,8 @@ angular.module('starter.controllers', [])
 
   $scope.goBack = function() {
     console.log("go back");
-    $scope.showChildParticulars = true;
+    if ($scope.showChildParticulars) $ionicHistory.goBack();
+    else $scope.showChildParticulars = true;
   }
 
   $scope.validate_first_step = function() {
@@ -403,19 +410,6 @@ angular.module('starter.controllers', [])
   }
 
 
-  $rootScope.childTypeImage = function(gender) {
-    if (gender == "boy") return "img/BOY-01.png";
-    else if (gender == "girl") return "img/GIRL-01.png";
-    else return "img/BOY-01.png";
-  }
-
-  $rootScope.parentTypeImage = function(relationship) {
-    if (relationship == "mother") return "img/MOM-01.png";
-    else if (relationship == "father") return "img/DAD-01.png";
-    else if (relationship == "grandmother") return "img/GRANDMA-01.png";
-    else if (relationship == "grandfather") return "img/GRANDPA-01.png";
-  }
-
   $scope.happiness_text = function(val) {
     var emotion;
     if (val < 20) emotion = " may be feeling neglected. You should ping";
@@ -438,7 +432,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('EditEmergencyMobileNumbersCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService, $state) {
+.controller('EditEmergencyMobileNumbersCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService, $state, $ionicHistory) {
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.submitForm = {mobile_numbers: []};
     $scope.get_current_numbers();
@@ -456,7 +450,11 @@ angular.module('starter.controllers', [])
   $scope.update_mobile_numbers = function() {
     console.log("submitForm", $scope.submitForm);
     $http.put($auth.apiUrl()+"/mobile_api/families/1", $scope.submitForm).success(function(data){
-      alert("Emergency mobile numbers updated.");
+      // alert("Emergency mobile numbers updated.");
+      $ionicHistory.nextViewOptions({
+        disableBack: true
+      });
+      $state.go("app.home");
       console.log(data);
     }).error(function(err) {
       console.log(err);
