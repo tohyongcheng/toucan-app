@@ -1,5 +1,5 @@
 <ion-view>
-  <ion-nav-title class="voice_message_title icon-left ion-mic-a">
+  <ion-nav-title class="header_title icon-left ion-mic-a">
     VOICE LOG
   </ion-nav-title>
   <ion-nav-bar class="voice-log-bar">
@@ -10,8 +10,6 @@
 
 
   <ion-content class="voice-page">
-
-  
     <ion-scroll direction="x" class="horizontal-wide select-children">
       <span ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
         <div class="child-image" ng-class="is_selected(child)">
