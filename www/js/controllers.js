@@ -245,6 +245,7 @@ angular.module('starter.controllers', [])
 .controller('SetupMyAccountCtrl', function($scope, $auth, $state, $rootScope, $cordovaCamera, $ionicPlatform, LoadingService) {
 
   $scope.parentForm = {};
+  $scope.parentForm = { relationship: "mother" };
   $scope.$on('$ionicView.beforeEnter', function() {
     
   }); 
