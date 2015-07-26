@@ -21,30 +21,41 @@
         <img ng-src="{{childTypeImage(childForm.gender)}}" ng-hide="childForm.photo"/>
         <img src="{{childForm.photo}}" ng-show="childForm.photo"/>
       </div>
-      <div class="inputfield list">
-        <div class="item item-divider">Personal Information</div> 
-        <label class="item item-select item-select-gender">
-          <span class="input-label input-label-gender">Gender</span>
+
+      <div class="inputfield">
+        <label class="item item-input">
+          <span class="input-label">
+            <i class="icon ion-female"></i>
+            <i class="icon ion-male"></i>
+          </span>
           <div class="gender-selector">
-            <ion-radio class = "input-gender" ng-model="childForm.gender" value="boy">Boy</ion-radio>
-            <ion-radio class = "input-gender" ng-model="childForm.gender" value="girl">Girl</ion-radio>
+            <ion-radio class = "input-gender input-font-white" ng-model="childForm.gender" value="boy">Boy</ion-radio>
+            <ion-radio class = "input-gender input-font-white" ng-model="childForm.gender" value="girl">Girl</ion-radio>
           </div>
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Name</span>
-          <input type="text" ng-model="childForm.name">
-        </label>
-        
-        <label class="item item-input">
-          <span class="input-label">Birthday</span>
-          <input type="date" ng-model="childForm.birthday"/>
         </label>
 
         <label class="item item-input">
-          <span class="input-label">Mobile Number</span>
-          <input type="tel" ng-model="childForm.mobile_number">
+          <span class="input-label">
+            <i class="icon ion-person"></i>
+          </span>
+          <input class="input-font-white" type="text" ng-model="childForm.name" placeholder="Enter child's name">
         </label>
-        <label class="item" style="border-bottom-color: transparent;">
+        
+        <label class="item item-input">
+          <span class="input-label">
+            <i class="fa fa-birthday-cake"></i>
+          </span>
+          <input class="input-font-white" type="date" ng-model="childForm.birthday" placeholder="Enter child's birthday"/>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">
+            <i class="icon ion-ios-telephone"></i>
+          </span>
+          <input class="input-font-white" type="tel" ng-model="childForm.mobile_number" placeholder="Enter child's phone number">
+        </label>
+
+        <label class="item">
           <button class="button button-block button-positive" ng-click="nextStep()" ng-disabled="validate_first_step()">Next</button>
         </label>
       </div>
@@ -52,9 +63,9 @@
 
     <div ng-show="!showChildParticulars">
 
-      <div style="height: 50vh; text-align: center; margin-top: 2em;">
+      <div style="height: 50vh; text-align: center; margin-top: 2em; color:white">
         <p>Take a photo of the QR Code on the Toucan Device, or enter it yourself.</p>
-        <div style="margin: 3em; padding: 3em; border: 1px solid white;">
+        <div style="margin: 3em; padding: 3em;">
           <div style="text-align: center">
             <label>Device Unique ID</label>
             <input type="text" name="machine_uuid" style="padding:1em;margin: 1em auto;" ng-model="childForm.machine_uuid" placeholder="e.g. 1234567890"></input>
@@ -64,7 +75,7 @@
         
       </div>
       
-      <div class="item">
+      <div class="item" style="background-color:transparent">
         <button class="button button-block button-positive" ng-disabled="validate_form()" ng-click="create_child()">Register</button>
         <button class="button button-block button-assertive" ng-click="goBack()">Back</button>
       </div>

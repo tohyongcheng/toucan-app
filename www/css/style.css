@@ -1,17 +1,115 @@
 /* Empty. Add your own CSS if you like */
 
+/*@font-face {
+    font-family: 'fontawesome';
+    src:url('../fonts/fontawesome-webfont.eot');
+    src:url('../fonts/fontawesome-webfont.eot') format('embedded-opentype'),
+        url('../fonts/fontawesome-webfont.woff') format('woff'),
+        url('../fonts/fontawesome-webfont.ttf') format('truetype'),
+        url('../fonts/fontawesome-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.icon-google-wallet:before {
+    font-family: "fontawesome";
+    content: "\f1ee";
+}*/
+
+
+
+/*UNIVERSAL*/
+
+.camera-buttons {
+	text-align: center;
+}
+
+.parent_image{
+	text-align: center;
+	margin-top: 2em;
+}
+
+.takephoto{
+	text-align: center;
+	background-color: #B9DCD7;
+	margin-left: auto;
+}
+
+.parent_image img{
+	border-radius: 999px;
+	border:1px solid white;
+	width:9em;
+	height:9em;
+}
+
+.inputfield{
+	width:90%;
+	margin:auto;
+	margin-top: 5em;
+}
+
+.input-label{
+	text-align: center;
+}
+
+.inputfield .item-input{
+	width:90%;
+	margin:auto;
+	border-bottom:1px solid rgba(255, 255, 255, .5);
+}
+
+.inputfield .item{
+	background-color: transparent;
+}
+
+.inputfield .input-label{
+	color:white;
+	width:5em;
+}
+
+.input-label i{
+	font-size:1.6em;
+}
+
+
+.input-font-white{
+	color:white !important;
+	text-shadow: 1px 1px 2px gray;
+}
+
+
+.input-font-gray{
+	color:#6A5D54 !important;
+}
+
+
+.font-white{
+	color:white;
+}
+
+::-webkit-input-placeholder {
+   text-shadow: none;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-shadow: none;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-shadow: none;
+}
+
+:-ms-input-placeholder {  
+   text-shadow: none;
+}
+
+
 /* ######## landing.html ######## */
 .title{
 	color: white;
 	margin-top: 30px;
 	font-size: 1em;
 }
-
-.input-font{
-	color:white !important;
-}
-
-
 
 #title{
 	color: white;
@@ -72,44 +170,15 @@ h5#tagline{
 
 /*register.html*/
 
-.sign-up-page .inputfield{
-	margin-left: 2em; 
-	margin-right: 2em; 
-	margin-top: 5em;
-}
-
-.sign-up-page .inputfield .list .item-input{
-	border:1px solid white;
-}
-
-.sign-up-page .inputfield .list .input-label{
-	background-color: transparent;
-}
-
-.sign-up-page .inputfield .list .item{
-	background-color: transparent;
-}
 
 
 /* ######## login.html ######## */
-.login-page .input-label{
-	background-color: #B9DCD7;
-}
-
-.login-page .inputfield{
-	margin-left: 2em; 
-	margin-right: 2em; 
-	margin-top: 5em;
-}
-
-.login-page .inputfield .item{
-	background-color: #B9DCD7;
-	border:1px solid white;
-}
 
 .backbutton{
 	color:white;
 }
+
+
 /* ######## home.html ######## */
 .home-page .home_title{
 	color:white;
@@ -192,7 +261,7 @@ h5#tagline{
 }
 
 .home-page .latest-activities .latest-activities-title{
-	border-bottom:1px solid white;
+	/*border-bottom:1px solid white;*/
 	background-color: #79CECB;
 	text-align: center;
 	font-size: 1.5em;
@@ -204,9 +273,7 @@ h5#tagline{
 
 
 .home-page .latest-activities .latest-activities-contents{
-	/*border-top:2px solid white;*/
 	font-size:1.3em;
-	/*margin-bottom: -3em;*/
 	overflow-x:hidden;
 	overflow-y:auto;
 }
@@ -251,25 +318,40 @@ h5#tagline{
 }
 
 /*setup_account.html*/
-.setup-account-page .camera-buttons {
-	text-align: center;
+
+
+.setup-account-page .inputfield .relationship-option{
+	background-color: transparent;
+	float:left;
+	position: relative;
+	width: 100%;
+	direction:ltr;
+	padding-left: 0px;
 }
 
-.setup-account-page .childlogo {
-	text-align: center;
-	margin:auto;
-	width:9em;
-	height:9em;
+
+/*.setup-account-page .inputfield .input-label{
+	border:3px solid red;
+}*/
+
+
+
+
+.setup-account-page .inputfield .item-divider p{
+	color:white;
+	font-size: 1.2em;
 }
+
+
+
+
+
 
 
 
 /* ######## create_child.html ######## */
 
 
-.create-child-page .camera-buttons {
-	text-align: center;
-}
 
 .create-child-page .childlogo {
 	text-align: center;
@@ -286,20 +368,20 @@ h5#tagline{
 	height:100%;
 }
 
-.create-child-page .inputfield{
+/*.create-child-page .inputfield{
 	margin-left:auto;
 	margin-right:auto;
 	margin-top: 5em;
-}
-.create-child-page .inputfield .item-divider{
+}*/
+/*.create-child-page .inputfield .item-divider{
 	border:none;
 	background-color: transparent;
 }
-
-.create-child-page .inputfield label{
+*/
+/*.create-child-page .inputfield label{
 	background-color: #B9DCD7;
 	border:1px solid white;
-}
+}*/
 
 .inputfield .radio {
   background-color: transparent;
@@ -308,9 +390,7 @@ h5#tagline{
 /*.create-child-page .inputfield .item{
     height: 5em;
 }*/
-/*.create-child-page .inputfield .item-select-gender{
-    height: 3em;
-}*/
+
 
 .create-child-page .inputfield .item .input-gender{
     display: inline-table;
@@ -335,14 +415,22 @@ h5#tagline{
 }
 
 .create-child-page .inputfield .item .gender-selector .radio-icon{
-	/*margin:auto;*/
-	/*text-align: center;*/
 	top:-0.2em;
 }
 
 .inputfield .item-radio input:checked ~ .item-content {
-	background-color: transparent;
+	/*border:3px solid blue;*/
+	border-radius:10px;
+	border:1px solid white;
+	/*inset 0 5px 30px #193047;*/
 }
+
+
+/*.inputfield .item-radio input:checked ~. .item-content{
+	box-shadow: inset 0 0 0 1px blue,inset 0 5px 30px yellow;
+	border:3px solid blue;
+}*/
+
 
 
 /* ######## voice_log.html ######## */
@@ -543,27 +631,9 @@ h5#tagline{
 
 /* ######## create_family_member.html ######## */
 
-.create-family-member-page .camera-buttons {
-	text-align: center;
-}
-.create-family-member-page .parent_image{
-	text-align: center;
-	margin-top: 2em;
 
-}
 
-.create-family-member-page .parent_image img{
-	border-radius: 999px;
-	border:1px solid white;
-	width:9em;
-	height:9em;
-}
 
-.create-family-member-page .takephoto{
-	text-align: center;
-	background-color: #B9DCD7;
-	margin-left: auto;
-}
 
 .create-family-member-page .inputfield{
 	margin-left:auto;
@@ -585,15 +655,9 @@ h5#tagline{
 	border:1px solid white;
 }
 
-/*.create-family-member-page .inputfield label{
-	background-color: transparent;
-	border:1px solid white;
-}*/
-
-/*.create-family-member-page .inputfield .foo{
-	background-color: transparent;
-	border:1px solid white;
-}*/
+.create-family-member-page .inputfield .input-label{
+	color:white;
+}
 
 /*.create-family-member-page .proceedfield .item{
 	background-color: #B9DCD7;
@@ -611,6 +675,8 @@ h5#tagline{
 	width:100%;
 	height:100%;
 }
+
+
 
 
 /* ######## ping.html ########*/
@@ -777,9 +843,6 @@ h5#tagline{
 	text-align: center
 }
 
-.family-page .camera-buttons {
-	text-align: center;
-}
 
 .family-page .family-children,
 .family-page .family-members{
@@ -825,6 +888,7 @@ h5#tagline{
 	background-color: transparent;
 }
 
+
 .emergency-page .item-input{
 	background-color: transparent;
 }
@@ -833,11 +897,14 @@ h5#tagline{
 .emergency-page .item-input .input-label{
 	background-color: transparent;
 	float:left;
+	color:white;
 }
 
 .emergency-page .item-input input{
 	border:1px solid white;
 	margin-right: 2em;
+	color:white;
+	text-shadow: 1px 1px 2px gray;
 }
 
 

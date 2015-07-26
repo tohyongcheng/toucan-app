@@ -21,16 +21,22 @@
       <form ng-submit="register()">
         <div class="list">
           <label class="item item-input">
-            <span class="input-label">Email</span>
-            <input type="text" ng-model="registrationForm.email">
+            <span class="input-label">
+              <i class="icon ion-ios-email"></i>
+            </span>
+            <input class="input-font-white" type="text" ng-model="registrationForm.email" placeholder="example@email.com">
           </label>
           <label class="item item-input">
-            <span class="input-label">Password</span>
-            <input type="password" ng-model="registrationForm.password">
+            <span class="input-label">
+              <i class="icon ion-android-lock"></i>
+            </span>
+            <input class="input-font-white" type="password" ng-model="registrationForm.password" placeholder="Enter password">
           </label>
           <label class="item item-input">
-            <span class="input-label">Password confirmation</span>
-            <input type="password" ng-model="registrationForm.password_confirmation">
+            <span class="input-label">
+              <i class="icon ion-android-lock"></i>
+            </span>
+            <input class="input-font-white" type="password" ng-model="registrationForm.password_confirmation" placeholder="Re-type password">
           </label>
           <label class="item">
             <button class="button button-block button-positive" type="submit">Register</button>

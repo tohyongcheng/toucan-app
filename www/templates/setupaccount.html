@@ -1,16 +1,14 @@
-<ion-header-bar>
-  <div class="buttons">
-    <button class="button button-clear icon ion-ios-arrow-back" ng-click="goBack()">
-    </button>
-    <!-- <ion-nav-back-button class="button button-icon button-clear">
-      <i class="ion-ios-arrow-back"></i>
-    </ion-nav-back-button> -->
-  </div>
-  <h1 class="title">I am...</h1>
-</ion-header-bar>
-<ion-content class="create-family-member-page">
+<ion-modal-view>
+  <ion-header-bar>
+    <!-- <div class="buttons">
+      <button class="button button-clear icon ion-ios-arrow-back" ng-click="goBack()"></button>
+    </div> -->
+    <h1 class="title">Personal Information</h1>
+  </ion-header-bar>
+
+
+  <ion-content class="setup-account-page">
     <form>
-      <!-- Image -->
       <div class="list">
         <div class="camera-buttons">
           <button class="button button-clear icon ion-ios-camera-outline" ng-click="launch_camera()"></button>
@@ -23,14 +21,19 @@
         </div>
 
         <div class="inputfield">
-          <div class="item item-divider">Personal Information</div>
+          <div class="item item-divider">
+            </div>
           <label class="item item-input">
-            <span class="input-label">Name</span>
-            <input type="text" ng-model="parentForm.name">
+            <span class="input-label">
+              <i class="icon ion-person"></i>
+            </span>
+            <input class="input-font-white" type="text" ng-model="parentForm.name" placeholder="What's your name?">
           </label>
-          <label class="item item-select">
-            <span class="input-label">Relationship</span>
-            <select class="relationship-option" type="select" ng-model="parentForm.relationship">
+          <label class="item item-input item-select relationship-div">
+            <span class="input-label">
+              <i class="icon ion-ios-heart"></i>
+            </span>
+            <select class="relationship-option input-font-white" type="select" ng-model="parentForm.relationship">
               <option value="mother">Mother</option>
               <option value="father">Father</option>
               <option value="grandmother">Grandmother</option>
@@ -39,15 +42,19 @@
           </label>
 
           <label class="item item-input">
-            <span class="input-label">Contact No.</span>
-            <input type="tel" ng-model="parentForm.mobile_number">
+            <span class="input-label">
+              <i class="icon ion-ios-telephone"></i>
+            </span>
+            <input class="input-font-white" type="tel" ng-model="parentForm.mobile_number" placeholder="What's your phone no?">
+          </label>
+
+          <label class="item" style="background-color:transparent">
+          <button class="button button-block button-positive" ng-click="updateParentParticulars()">Proceed</button>
           </label>
         </div>
-        <label class="item" style="background-color:transparent">
-          <button class="button button-block button-positive" ng-click="updateParentParticulars()">Proceed</button>
-        </label>
+        
         
       </div>
     </form>
   </ion-content>
-
+</ion-modal-view>

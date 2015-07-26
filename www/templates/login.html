@@ -21,12 +21,24 @@
       <form ng-submit="login()">
         <div class="list">
           <label class="item item-input">
-            <span class="input-label">Email</span>
-            <input type="email" ng-model="loginForm.email">
+            <span class="input-label">
+              <i class="icon ion-ios-email"></i>
+            </span>
+
+
+            <input class="input-font-white" type="email" ng-model="loginForm.email" ng-focus="searchFocused = true" placeholder="example@email.com">
+
+
           </label>
           <label class="item item-input">
-            <span class="input-label">Password</span>
-            <input type="password" ng-model="loginForm.password">
+            <span class="input-label">
+              <i class="icon ion-android-lock"></i>
+            </span>
+
+
+            <input class="input-font-white" type="password" ng-model="loginForm.password" placeholder="Enter Password">
+
+
           </label>
           <label class="item">
             <button class="button button-block button-positive" type="submit">Log in</button>
