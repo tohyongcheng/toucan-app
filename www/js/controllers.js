@@ -74,11 +74,7 @@ angular.module('starter.controllers', [])
       children_id.push($scope.children[i].id);
     }
     children_id_string = children_id.join(",");
-    $scope.get_all_settings();
-    
-  });
 
-  $scope.get_all_settings = function() {
     $http.get($auth.apiUrl() + "/mobile_api/toucan_devices/"+children_id_string).success(function(data){
       LoadingService.hideLoading();
       $scope.all_settings = data;
@@ -89,7 +85,7 @@ angular.module('starter.controllers', [])
     }).error(function(err){
 
     });
-  }
+  });
 
   $scope.is_selected = function(child) {
     if ($scope.selected_children == child.id ) return "child-selected";
