@@ -400,8 +400,16 @@ angular.module('starter.controllers', [])
 
 .controller('HomeCtrl', function($scope, $rootScope, $http, $auth, $localStorage, $ionicSlideBoxDelegate, $state, $ionicPopup, $timeout, $cordovaPush, $cordovaDevice, $cordovaDialogs, GlobalFactory, LoadingService) {
   $scope.$on('$ionicView.beforeEnter', function() {
-    // Get Children
+    $scope.init();
+  }); 
+
+  $scope.init = function() {
     LoadingService.showLoading();
+    $scope.getChildren();
+    $scope.getFamily();
+  }
+
+  $scope.getChildren = function() {
     $scope.children = [];
     $ionicSlideBoxDelegate.update();
     $http.get($auth.apiUrl() + "/mobile_api/users/"+$localStorage.user_id).
@@ -422,12 +430,13 @@ angular.module('starter.controllers', [])
         $ionicSlideBoxDelegate.update();
       }
       LoadingService.hideLoading();
-
     }).
     error(function(data) {
       console.log("error", data);
     });   
+  }
 
+  $scope.getFamily = function() {
     $http.get($auth.apiUrl() + "/mobile_api/users/").
     success(function(data) { 
       console.log("family", data);
@@ -436,7 +445,7 @@ angular.module('starter.controllers', [])
     error(function(data){
       console.log("error getting family");
     });
-  }); 
+  }
 
   document.addEventListener("deviceready", function(){
     // Recommended to unregister before registering.
@@ -484,6 +493,7 @@ angular.module('starter.controllers', [])
     if (notification.alert) {
       navigator.notification.alert(notification.alert);
       console.log('alert: ', notification.alert);
+      $state.go("app.home");
     }
 
     if (notification.sound) {
@@ -542,6 +552,7 @@ angular.module('starter.controllers', [])
     if (notification_type == "audio") return "ion-mic-a";
     if (notification_type == "ping") return "ion-radio-waves";
     if (notification_type == "battery") return "ion-battery-low";
+    if (notification_type == "sos") return "ion-alert";
 
     return "";
   }
