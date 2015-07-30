@@ -421,10 +421,6 @@ angular.module('starter.controllers', [])
       console.log(data);
       GlobalFactory._set_my_children(data.children);
       $scope.children = data.children;
-      for (var i=0;i<$scope.children.length;i++){
-        $scope.children[i].latest_notifications.reverse();
-      }
-      
       if (data.children.length > 0) {
         // alert("Please create a child!");
         $scope.selected_child = $scope.children[0];
@@ -682,14 +678,16 @@ angular.module('starter.controllers', [])
     LoadingService.showLoading();
     $http.post($auth.apiUrl() + "/mobile_api/users", $scope.parentForm)
     .success(function(data) {
-      $ionicPopup.alert({
+      LoadingService.hideLoading();
+      var pop = $ionicPopup.alert({
          title: 'Success',
          template: 'Family Member created!'
        });
-      $scope.parentForm = {};
-      $scope.parentForm.photo = null;
-      LoadingService.hideLoading();
-      $state.go("app.home");
+
+      pop.then(function(res) {
+        $state.go("app.home");
+      });
+      
     }).
     error(function(error) {
       console.log(error);
@@ -780,7 +778,7 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('PingCtrl', function($scope, $http, $ionicModal, $ionicPopup, $auth, GlobalFactory) {
+.controller('PingCtrl', function($scope, $http, $ionicModal, $ionicPopup, $auth, LoadingService, GlobalFactory) {
   
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.selected_children = {};
@@ -809,14 +807,14 @@ angular.module('starter.controllers', [])
   }
 
   $scope.ping = function(color) {
+    LoadingService.showLoading();
     angular.forEach($scope.selected_children, function(value, key) {
-      console.log(value, key);
       var data = {
         ping_message : { color: color, child_id: parseInt(key) }
       };
 
       $http.post($auth.apiUrl() + "/mobile_api/ping_messages", data).then(function(success) {
-        console.log(success);
+        LoadingService.hideLoading();
         $ionicPopup.alert({
           title: 'Success',
           template: 'Ping sent!'
@@ -910,6 +908,12 @@ angular.module('starter.controllers', [])
     
     // Record audio
     $scope.audio_file.startRecord();
+    var recTime = 0;
+    var recInterval = setInterval(function() {
+      var snd = new Media(event.sound);
+      snd.play();
+      clearInterval(recInterval);
+    }, 1000);
   }
 
   $scope.stop_record = function() {
@@ -917,13 +921,14 @@ angular.module('starter.controllers', [])
     if (ionic.Platform.isIOS()) { 
       $cordovaFile.checkFile(cordova.file.documentsDirectory, "myrecording.m4a").then(function(success) {
         $scope.audio_file_entry = success;
+        console.log("The audio is " +  $scope.audio_file.getDuration() + "seconds long.");
       });
     }
 
     if (ionic.Platform.isAndroid()) { 
       
     }
-    console.log("The audio is " +  $scope.audio_file.getDuration() + "seconds long.");
+    
   }
 
   $scope.play = function() {
@@ -1132,13 +1137,38 @@ angular.module('starter.controllers', [])
 
   
 })
-.controller('FamilyCtrl',function($scope, $stateParams, $ionicPlatform, $state, $auth, GlobalFactory) {
+.controller('FamilyCtrl',function($scope, $stateParams, $ionicPlatform, $state, $auth, $http, GlobalFactory, $localStorage) {
 
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.children = GlobalFactory._get_my_children();
     $scope.family_members = GlobalFactory._get_my_family();
+    $scope.getFamily();
+    $scope.getChildren();
   });
   
-  
+  $scope.getFamily = function() {
+    $http.get($auth.apiUrl() + "/mobile_api/users/").
+    success(function(data) { 
+      console.log("family", data);
+      GlobalFactory._set_my_family(data);
+      $scope.family_members = GlobalFactory._get_my_family();
+    }).
+    error(function(data){
+      console.log("error getting family");
+    });
+  }
+
+  $scope.getChildren = function() {
+    $scope.children = [];
+    $http.get($auth.apiUrl() + "/mobile_api/users/"+$localStorage.user_id).
+    success(function(data) {
+      GlobalFactory._set_my_children(data.children);
+      $scope.children = data.children;
+    }).
+    error(function(data) {
+      console.log("error", data);
+    });   
+  }
+
 });
 

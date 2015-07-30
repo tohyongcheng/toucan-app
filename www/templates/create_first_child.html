@@ -17,9 +17,9 @@
       </div>
 
       <!-- Image -->
-      <div class="childlogo">
-        <img ng-src="{{childTypeImage(childForm.gender)}}" ng-hide="childForm.photo"/>
-        <img src="{{childForm.photo}}" ng-show="childForm.photo"/>
+      <div class="childlogo" style='background-image: url("{{childTypeImage(childForm.gender)}}");' ng-if="!childForm.photo">
+      </div>
+      <div class="childlogo" style='background-image: url("{{childForm.photo}}");' ng-if="childForm.photo">
       </div>
 
       <div class="inputfield">
