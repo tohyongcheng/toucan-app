@@ -43,7 +43,8 @@
         
         <label class="item item-input">
           <span class="input-label">
-            <i class="fa fa-birthday-cake"></i>
+            <!-- <i class="icon fa fa-birthday-cake"></i> -->
+            <i class="fa fa-camera-retro"></i>
           </span>
           <input class="input-font-white" type="date" ng-model="childForm.birthday" placeholder="Enter child's birthday"/>
         </label>
@@ -56,18 +57,18 @@
         </label>
 
         <label class="item">
-          <button class="button button-block button-positive" ng-click="nextStep()" ng-disabled="validate_first_step()">Next</button>
+          <button class="button button-block button-positive icon-birthday-cake" ng-click="nextStep()" ng-disabled="validate_first_step()">Next</button>
         </label>
       </div>
     </div>
 
     <div ng-show="!showChildParticulars">
 
-      <div style="height: 50vh; text-align: center; margin-top: 2em; color:white">
+      <div style="height: 50vh; text-align: center; margin-top: 2em; color:white; text-align:center;">
         <p>Take a photo of the QR Code on the Toucan Device, or enter it yourself.</p>
         <div style="margin: 3em; padding: 3em;">
           <div style="text-align: center">
-            <label>Device Unique ID</label>
+            <label style="color:white">Device Unique ID</label>
             <input type="text" name="machine_uuid" style="padding:1em;margin: 1em auto;" ng-model="childForm.machine_uuid" placeholder="e.g. 1234567890"></input>
             <button class="button button-positive icon ion-ios-camera-outline" ng-click='scan()'></button>
           </div>

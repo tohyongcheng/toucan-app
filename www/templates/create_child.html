@@ -62,11 +62,11 @@
 
     <div ng-show="!showChildParticulars">
 
-      <div style="height: 50vh; text-align: center; margin-top: 2em;">
+      <div style="height: 50vh; text-align: center; margin-top: 2em; color:white">
         <p>Take a photo of the QR Code on the Toucan Device, or enter it yourself.</p>
-        <div style="margin: 3em; padding: 3em; border: 1px solid white;">
+        <div style="margin: 3em; padding: 3em; border: 1px solid white; text-align:center;">
           <div style="text-align: center">
-            <label>Device Unique ID</label>
+            <label style="color:white">Device Unique ID</label>
             <input type="text" name="machine_uuid" style="padding:1em;margin: 1em auto;" ng-model="childForm.machine_uuid" placeholder="e.g. 1234567890"></input>
             <button class="button button-positive icon ion-ios-camera-outline" ng-click='scan()'></button>
           </div>

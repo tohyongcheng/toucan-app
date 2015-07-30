@@ -1,6 +1,6 @@
 /* Empty. Add your own CSS if you like */
 
-/*@font-face {
+@font-face {
     font-family: 'fontawesome';
     src:url('../fonts/fontawesome-webfont.eot');
     src:url('../fonts/fontawesome-webfont.eot') format('embedded-opentype'),
@@ -11,10 +11,10 @@
     font-style: normal;
 }
 
-.icon-google-wallet:before {
+.icon-birthday-cake:before{
     font-family: "fontawesome";
-    content: "\f1ee";
-}*/
+    content: "\f1fd";
+}
 
 
 
@@ -331,30 +331,10 @@
 	margin-top: 1.8em;
 }
 
-/*setup_account.html*/
-
-
-
-
-
-/*.setup-account-page .inputfield .input-label{
-	border:3px solid red;
-}*/
-
-
-
-
 .setup-account-page .inputfield .item-divider p{
 	color:white;
 	font-size: 1.2em;
 }
-
-
-
-
-
-
-
 
 /* ######## create_child.html ######## */
 
@@ -365,6 +345,7 @@
 	margin:auto;
 	width:9em;
 	height:9em;
+	
 }
 
 .create-child-page .childlogo img {
