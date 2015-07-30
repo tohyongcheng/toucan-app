@@ -13,8 +13,8 @@
       <ion-scroll direction="x" scrollbar-x ="false" class="horizontal-wide item family-children">
         <div ng-repeat="child in children" class="inline">
           <div class="child-image" ui-sref="app.editChild({ id: $index })">
-            <img ng-src="{{childTypeImage(child.gender)}}" ng-hide="child.photo_url">
-            <img src="{{child.photo_url}}" ng-show="child.photo_url"/>
+            <img style='background-image:url("{{childTypeImage(child.gender)}}");' ng-hide="child.photo_url">
+            <img style='background-image:url("{{child.photo_url}}");' ng-show="child.photo_url"/>
           </div>
           <small>{{child.name}}</small>
         </div>
@@ -33,8 +33,8 @@
       <ion-scroll direction="x" scrollbar-x ="false" class="horizontal-wide item family-members">
         <div ng-repeat="member in family_members" class="inline">
           <div class="family-member-image">
-            <img ng-src="{{parentTypeImage(member.relationship)}}" ng-hide="member.photo_url"></img>
-            <img src="{{member.photo_url}}" ng-show="member.photo_url"/>
+            <img style='background-image:url("{{parentTypeImage(member.relationship)}}");' ng-hide="member.photo_url">
+            <img style='background-image:url("{{member.photo_url}}");' ng-show="member.photo_url"/>
           </div>
           <small>{{member.name}}</small>
         </div>

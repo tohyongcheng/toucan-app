@@ -17,10 +17,11 @@
       </div>
 
       <!-- Image -->
-      <div class="childlogo">
-        <img ng-src="{{childTypeImage(childForm.gender)}}" ng-hide="(childForm.photo_url || childForm.photo)"/>
-        <img ng-src="{{childForm.photo_url}}" ng-show="(childForm.photo_url && !childForm.photo)"/>
-        <img src="{{childForm.photo}}" ng-show="childForm.photo"/>
+      <div class="childlogo" style='background-image: url("{{childTypeImage(childForm.gender)}}");' ng-if="!(childForm.photo_url || childForm.photo)">
+      </div>
+      <div class="childlogo" style='background-image: url("{{childForm.photo_url}}");' ng-if="(childForm.photo_url && !childForm.photo)">
+      </div>
+      <div class="childlogo" style='background-image: url("{{childForm.photo}}");' ng-if="childForm.photo">
       </div>
 
       <div class="inputfield list">

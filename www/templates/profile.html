@@ -11,12 +11,14 @@
         <button class="button button-clear icon ion-ios-photos-outline" ng-click="launch_photo_library()"></button>
       </div>
 
-      
-      <div class="parent_image">
-        <img ng-src="{{parentTypeImage(user.relationship)}}" ng-hide="(user.photo_url || user.photo)"></img>
-        <img src="{{user.photo_url}}" ng-show="(user.photo_url && !user.photo)"/>
-        <img src="{{user.photo}}" ng-show="user.photo"/>
+      <div class="parent_image" style='background-image: url("{{parentTypeImage(user.relationship)}}");' ng-if="!(user.photo_url || user.photo)">
       </div>
+      <div class="parent_image" style='background-image: url("{{user.photo_url}}");' ng-if="(user.photo_url && !user.photo)">
+      </div>
+      <div class="parent_image" style='background-image: url("{{user.photo}}");' ng-if="user.photo">
+      </div>
+
+
       <!-- <div class="inputfield list"> -->
       <div class="inputfield list profile-info">
         <label class="item item-input">

@@ -16,9 +16,9 @@
           <button class="button button-clear icon ion-ios-photos-outline" ng-click="launch_photo_library()"></button>
         </div>
 
-        <div class="parent_image">
-          <img ng-src="{{parentTypeImage(parentForm.relationship)}}" ng-hide="parentForm.photo"></img>
-          <img src="{{parentForm.photo}}" ng-show="parentForm.photo"/>
+        <div class="parent_image" style='background-image: url("{{parentTypeImage(parentForm.relationship)}}");' ng-if="!parentForm.photo">
+        </div>
+        <div class="parent_image" style='background-image: url("{{parentForm.photo}}");' ng-if="parentForm.photo">
         </div>
 
         <div class="inputfield">

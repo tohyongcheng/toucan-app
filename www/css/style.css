@@ -27,19 +27,19 @@
 .parent_image{
 	text-align: center;
 	margin-top: 2em;
+	margin:auto;
+	width:9em;
+	height:9em;
+	border-radius: 999px;
+	border:2px solid white;
+	background-size: cover;
+	background-position: center;
 }
 
-.takephoto{
+.takephoto {
 	text-align: center;
 	background-color: #B9DCD7;
 	margin-left: auto;
-}
-
-.parent_image img{
-	border-radius: 999px;
-	border:1px solid white;
-	width:9em;
-	height:9em;
 }
 
 .inputfield{
@@ -216,7 +216,9 @@
 	height:100%;
 	margin-top:2em;
 	border-radius: 999px;
-	border: 2px solid white;
+	border:1px solid white;
+	background-size: cover;
+	background-position: center;
 }
 
 .home-page .boxicon.plus img{
@@ -365,16 +367,11 @@
 	margin:auto;
 	width:9em;
 	height:9em;
-}
-
-.create-child-page .childlogo img {
-	margin-top: 2em;
 	border-radius: 999px;
 	border:2px solid white;
-	width:100%;
-	height:100%;
+	background-size: cover;
+	background-position: center;
 }
-
 
 .inputfield .radio {
   background-color: transparent;
@@ -451,6 +448,9 @@
 	width:100%;
 	height:100%;
 	border-radius:999px;
+	border:1px solid white;
+	background-size: cover;
+	background-position: center;
 }
 
 .voice-page .child-selected {
@@ -465,7 +465,9 @@
 	width:100%;
 	height:100%;
 	border-radius:999px;
-	border: 2px solid white;
+	border:1px solid white;
+	background-size: cover;
+	background-position: center;
 	box-shadow: 0 0 1em 0.5em white;
 }
 
@@ -530,6 +532,9 @@
 	width:100%;
 	height:100%;
 	border-radius:999px;
+	border:1px solid white;
+	background-size: cover;
+	background-position: center;
 }
 
 .record-page .child-selected {
@@ -546,6 +551,9 @@
 	width:100%;
 	height:100%;
 	border-radius:999px;
+	border:1px solid white;
+	background-size: cover;
+	background-position: center;
 }
 
 
@@ -761,13 +769,15 @@
 .ping-page .child-image {
 	width: 6em;
 	height: 6em;
-	border-radius:999px;
 }
 
 .ping-page .child-image img {
 	width: 100%;
 	height: 100%;
 	border-radius:999px;
+	border:1px solid white;
+	background-size: cover;
+	background-position: center;
 }
 
 .ping-page .child-not-selected {
@@ -871,6 +881,8 @@
 	height:100%;
 	border-radius: 999px;
 	border:1px solid white;
+	background-size: cover;
+	background-position: center;
 }
 
 .family-page .add-member-image{
@@ -982,6 +994,8 @@
 	width:100%;
 	height:100%;
 	border:1px solid white;
+	background-size: cover;
+	background-position: center;
 }
 
 .settings-page .child-selected {
@@ -993,9 +1007,12 @@
 }
 
 .settings-page .child-selected img{
-	border-radius:999px;
 	width:100%;
 	height:100%;
+	border-radius: 999px;
+	border:1px solid white;
+	background-size: cover;
+	background-position: center;
 }
 
 .settings-page .select-children span {
