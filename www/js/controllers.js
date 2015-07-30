@@ -415,6 +415,7 @@ angular.module('starter.controllers', [])
   $scope.getChildren = function() {
     $scope.children = [];
     $ionicSlideBoxDelegate.update();
+    $ionicSlideBoxDelegate.slide(0);
     $http.get($auth.apiUrl() + "/mobile_api/users/"+$localStorage.user_id).
     success(function(data) {
       console.log(data);
@@ -424,9 +425,8 @@ angular.module('starter.controllers', [])
         $scope.children[i].latest_notifications.reverse();
       }
       
-      if (data.children.length == 0) {
+      if (data.children.length > 0) {
         // alert("Please create a child!");
-      } else {
         $scope.selected_child = $scope.children[0];
         $scope.notifications = $scope.children[0].latest_notifications;
         $scope.checkForEmergency();
@@ -736,7 +736,7 @@ angular.module('starter.controllers', [])
   $scope.initMap = function() {
     if (($scope.children.length > 0) && (Object.keys($scope.locations).length > 0))  {
 
-      $scope.map = { center: { latitude: 1.3000, longitude: 103.8 }, zoom: 12 };
+      $scope.map = { center: { latitude: 1.3000, longitude: 103.8 }, zoom: 11 };
       $scope.markers = [];
 
       for (key in $scope.locations) {

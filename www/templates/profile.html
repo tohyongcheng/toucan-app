@@ -20,17 +20,29 @@
       <!-- <div class="inputfield list"> -->
       <div class="inputfield list profile-info">
         <label class="item item-input">
-          
            <span class="input-label">
-            <i class="icon ion-ios-email"></i>
+            <i class="icon ion-person"></i>
           </span>
-          <input class = "input-info input-font-white" type="text" ng-model="user.name" placeholder="Update your name">
+          <input class = "input-font-white" type="text" ng-model="user.name" placeholder="Update your name">
         </label>
+
+        <label class="item item-input item-select">
+          <span class="input-label">
+            <i class="icon ion-ios-heart"></i>
+          </span>
+          <select class="relationship-option input-font-white" type="select" ng-model="user.relationship">
+            <option value="mother">Mother</option>
+            <option value="father">Father</option>
+            <option value="grandmother">Grandmother</option>
+            <option value="grandfather">Grandfather</option>
+          </select>
+        </label>
+        
         <label class="item item-input">
           <span class="input-label">
             <i class="icon ion-ios-telephone"></i>
           </span>
-          <input class="input-info input-font-white" type="tel" ng-model="user.mobile_number" placeholder="Update your contact no">
+          <input class="input-font-white" type="tel" ng-model="user.mobile_number" placeholder="Update your contact no">
         </label> 
 
         <label class="item">
