@@ -31,7 +31,7 @@
 
 .takephoto{
 	text-align: center;
-	background-color: #9DD2C3;
+	background-color: #B9DCD7;
 	margin-left: auto;
 }
 
@@ -43,7 +43,8 @@
 }
 
 .inputfield{
-	width:90%;
+	width:100%;
+	/*fuck*/
 	margin:auto;
 	margin-top: 4em;
 }
@@ -58,7 +59,8 @@
 }
 
 .inputfield .item-input{
-	width:90%;
+	width:100%;
+	/*fuck*/
 	margin:auto;
 	border-bottom:1px solid rgba(255, 255, 255, .5);
 }
@@ -152,13 +154,13 @@
     border: 0px;
     border-bottom-color: transparent;
     background-image: none;
-    background-color: #6FBEB6;
+    background-color: #A2D5D4;
     border-bottom: none;
 }
 
 
 .pane {
-	background-color: #9DD2C3;
+	background-color: #B9DCD7;
 }
 
 .logo {
@@ -166,17 +168,17 @@
 }
 
 .nav-bar-block .bar{
-	background-color:#6FBEB6;
+	background-color:#A2D5D4;
 }
 
 .login_button{
-	background-color: #9DD2C3;
+	background-color: #B9DCD7;
 	color:white;
 	border: 1px solid white;
 }
 
 .signup_button{
-	background-color: #9DD2C3;
+	background-color: #B9DCD7;
 	color:white;
 	border: 1px solid white;
 }
@@ -303,12 +305,12 @@
 
 .menu-left .bar-header{
 	height:5em;
-	background-color: #6FBEB6;
+	background-color: #A2D5D4;
 	border-bottom: 1px solid white !important;
 }
 
 .menu-left .scroll-content{
-	background-color: #6FBEB6
+	background-color: #A2D5D4;
 }
 
 
@@ -577,7 +579,7 @@
 	margin-right:auto;
 	width: 15em;
 	height: 15em;
-	background-color: #9DD2C3;
+	background-color: #B9DCD7;
 	border: 1px solid #FFF;
 	border-radius:999px;
 }
@@ -599,7 +601,7 @@
 
 .bottombuttons button{
 	display:inline-block;
-	background-color: #9DD2C3;
+	background-color: #B9DCD7;
 	border:2px solid transparent;
 	text-align: center;
 }
@@ -655,7 +657,7 @@
 }*/
 
 /*.create-family-member-page .proceedfield .item{
-	background-color: #9DD2C3;
+	background-color: #B9DCD7;
 }*/
 
 
@@ -933,7 +935,8 @@
 .profile-page .profile-info .input-info{
 	text-align: center;
 	font-size: 1em;
-	width:90%;
+	width:100%; 
+	/*fuck*/
 }
 
 
@@ -941,7 +944,7 @@
 
 /*settings.html*/
 .settings-page{
-	background-color: #9DD2C3;
+	background-color: #B9DCD7;
 }
 
 .settings-page .item-divider{
