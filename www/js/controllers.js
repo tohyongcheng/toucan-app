@@ -49,7 +49,7 @@ angular.module('starter.controllers', [])
       // how to send new response to server 
     })
     .catch(function(resp) { 
-      alert("Error:", resp);
+      alert("Error registering user. Please try again.", resp);
       // handle error response
     });
   };
@@ -60,7 +60,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('SettingsCtrl', function($scope, $auth, $state, $rootScope, $http, LoadingService, GlobalFactory) {
+.controller('SettingsCtrl', function($scope, $auth, $state, $rootScope, $http, $ionicPopup, LoadingService, GlobalFactory) {
   $scope.settings = {};
 
   $scope.$on('$ionicView.beforeEnter', function() {
@@ -111,7 +111,10 @@ angular.module('starter.controllers', [])
   $scope.update_settings = function() {
     $http.put($auth.apiUrl() + "/mobile_api/toucan_devices/"+$scope.selected_children, $scope.settings).success(function(data) {
       console.log(data);
-      alert("Successfully Updated!");
+      $ionicPopup.alert({
+         title: 'Success',
+         template: 'Successfully Updated!'
+       });
     }).error(function(err){
       alert("Error!");
       console.log(err);
@@ -473,14 +476,14 @@ angular.module('starter.controllers', [])
         $http.post($auth.apiUrl() + "/mobile_api/user_devices", formData).success(function(data) {
           console.log("successfully posted device token", data);
         }).error(function(err) {
-
         });
       }
     }, function(error) {
-      $rootScope.validate_error(error);
+      
     });
 
     $rootScope.$on('$cordovaPush:notificationReceived', function(event, notification) {
+      $scope.getChildren();
       if (ionic.Platform.isIOS()) {
           handleIOS(notification);
       }
@@ -489,7 +492,7 @@ angular.module('starter.controllers', [])
 
 
   handleIOS = function(notification) {
-    console.log('notification: ', notification)
+    console.log('notification: ', notification);
     if (notification.alert) {
       navigator.notification.alert(notification.alert);
       console.log('alert: ', notification.alert);
@@ -507,7 +510,7 @@ angular.module('starter.controllers', [])
         // Success!
         console.log('badge: ', notification.badge);
       }, function(error) {
-        $rootScope.validate_error(error);
+        
       });
     }
   }
@@ -619,7 +622,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $cordovaCamera, LoadingService, $state) {
+.controller('CreateFamilyMemberCtrl', function($scope, $http, $auth, $localStorage, $ionicPlatform, $ionicPopup, $cordovaCamera, LoadingService, $state) {
   $scope.parentForm = { relationship: "mother" };
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.parentForm.photo = null;
@@ -679,7 +682,10 @@ angular.module('starter.controllers', [])
     LoadingService.showLoading();
     $http.post($auth.apiUrl() + "/mobile_api/users", $scope.parentForm)
     .success(function(data) {
-      alert("Family Member created!");
+      $ionicPopup.alert({
+         title: 'Success',
+         template: 'Family Member created!'
+       });
       $scope.parentForm = {};
       $scope.parentForm.photo = null;
       LoadingService.hideLoading();
@@ -729,19 +735,19 @@ angular.module('starter.controllers', [])
 
   $scope.initMap = function() {
     if (($scope.children.length > 0) && (Object.keys($scope.locations).length > 0))  {
+
       $scope.map = { center: { latitude: 1.3000, longitude: 103.8 }, zoom: 12 };
-      console.log($scope.map);
       $scope.markers = [];
+
       for (key in $scope.locations) {
-        console.log(key, $scope.locations[key]);
         var len = $scope.locations[key].length;
         $scope.max_timestep_length = Math.max(len, $scope.max_timestep_length);
         if (len > 0) {
           $scope.markers.push({
             id: key,
             coords: {
-              latitude: $scope.locations[key][len-1].lat,
-              longitude: $scope.locations[key][len-1].lng
+              latitude: $scope.locations[key][0].lat,
+              longitude: $scope.locations[key][0].lng
             }
           });          
         } else {
@@ -750,6 +756,7 @@ angular.module('starter.controllers', [])
           }); 
         }
       }
+
       LoadingService.hideLoading();
     } else {
       $scope.map = { center: { latitude: 1.3000, longitude: 103.8 }, zoom: 11 };
@@ -757,6 +764,7 @@ angular.module('starter.controllers', [])
   }
 
   $scope.changeTimeStep = function(timestep) {
+    $scope.markers = [];
     var i = 0;
     for (key in $scope.locations) {
       $scope.markers[i] = {
@@ -809,7 +817,10 @@ angular.module('starter.controllers', [])
 
       $http.post($auth.apiUrl() + "/mobile_api/ping_messages", data).then(function(success) {
         console.log(success);
-        alert("Ping sent successfully!");
+        $ionicPopup.alert({
+          title: 'Success',
+          template: 'Ping sent!'
+        });
       }, function(error){
         console.log(error);
       });
@@ -817,7 +828,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $cordovaFile, $cordovaMedia, $cordovaFileTransfer, $timeout, LoadingService, $http, GlobalFactory, $auth) {
+.controller('MediaCtrl',function($scope, $stateParams, $ionicPlatform, $ionicPopup, $cordovaFile, $cordovaMedia, $cordovaFileTransfer, $timeout, LoadingService, $http, GlobalFactory, $auth) {
 
   $scope.$on('$ionicView.beforeEnter', function() {
     $scope.audio_file = null;
@@ -944,13 +955,19 @@ angular.module('starter.controllers', [])
     LoadingService.showLoading();
 
     var win = function (result) {
-      alert("Voice Message sent successfully!");
+      $ionicPopup.alert({
+         title: 'Success',
+         template: 'Voice Message sent!'
+       });
       $scope.audio_file = null;
       LoadingService.hideLoading();
     }
 
     var fail = function(err) {
-      alert("There was an error sending the voice message.");
+      $ionicPopup.alert({
+        title: 'Oh no!',
+        template: 'Voice Message was not sent. Please try again!'
+      });
     }
 
     $scope.ft.upload(filePath, server, win, fail, options);
@@ -1045,7 +1062,7 @@ angular.module('starter.controllers', [])
     return "user-recording";
   }
 })
-.controller('ProfileCtrl',function($scope, $stateParams, $cordovaCamera, $timeout, LoadingService, $http, $auth) {
+.controller('ProfileCtrl',function($scope, $stateParams, $cordovaCamera, $ionicPopup, $timeout, LoadingService, $http, $auth) {
 
   $scope.$on('$ionicView.beforeEnter', function() {
   });
@@ -1103,7 +1120,10 @@ angular.module('starter.controllers', [])
   $scope.updateParentParticulars = function(){
     $http.put($auth.apiUrl() + "/mobile_api/users/update", $scope.user).
     success(function() {
-      alert("Your profile has been updated.");
+      $ionicPopup.alert({
+         title: 'Success',
+         template: 'Your profile has been updated.'
+       });
     }).
     error(function() {
 
