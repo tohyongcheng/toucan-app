@@ -1,6 +1,6 @@
 <ion-view>
-  <ion-nav-title class="header_title" >
-    SET EMERGENCY NUMBERS
+  <ion-nav-title class="header_title icon ion-alert-circled" >
+    EMERGENCY NUMBERS
   </ion-nav-title>
   <ion-content class="emergency-page">
     <div class="list">
@@ -33,7 +33,9 @@
         <span class="input-label">7</span>
         <input type="tel" ng-model="submitForm.mobile_numbers[6]">
       </label>
-      <button class="button button-positive button-block" ng-click="update_mobile_numbers()">Update</button>
+      <div style="padding: 2em;">
+        <button class="button button-positive button-block" ng-click="update_mobile_numbers()">Update</button>
+      </div>
     </div>
   </ion-content>
 </ion-view>

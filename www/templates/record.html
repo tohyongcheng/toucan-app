@@ -19,8 +19,6 @@
     </ion-nav-back-button>
   </ion-nav-bar> -->
 
-
-
   <ion-content class="record-page">
     <ion-scroll direction="x" scrollbar-x="false" class="horizontal-wide select-children" >
       <span class="children-options" ng-repeat="child in children" ng-click="toggle_child(child)" style="cursor: pointer;">
@@ -33,37 +31,38 @@
 
       </span>
     </ion-scroll>
+    <div class="record-controllers">
+      <div class ="topbuttons">
+        <button class="button startstoprecord" on-hold="start_record()" on-release="stop_record()">
+          <img src="img/MICROPHONE-01.png"/>
+        </button>
+        <p>Press, hold and record. </p>
+      </div>
 
-    <div class ="topbuttons">
-      <button class="button startstoprecord" on-hold="start_record()" on-release="stop_record()">
-        <img src="img/MICROPHONE-01.png"/>
-      </button>
-      <p>Press, hold and record. </p>
-    </div>
+      <div class="bottombuttons">
+  <!--       <button class="button previousbutton" ng-click="">
+          <div class="control-buttons">
+            <img src="../img/BACK.png"/>
+          </div>
+        </button> -->
+        <button class="button playpausebutton" ng-click="play()">
+          <div class="control-buttons">
+            <img src="img/PLAY.png"/>
+          </div>
+        </button>
+        
 
-    <div class="bottombuttons">
-<!--       <button class="button previousbutton" ng-click="">
-        <div class="control-buttons">
-          <img src="../img/BACK.png"/>
-        </div>
-      </button> -->
-      <button class="button playpausebutton" ng-click="play()">
-        <div class="control-buttons">
-          <img src="img/PLAY.png"/>
-        </div>
-      </button>
-      
-
-      <button class="button playpausebutton" ng-click="pause()">
-        <div class="control-buttons">
-          <img src="img/PAUSE.png"/>
-        </div>
-      </button>
-      <!-- <button class="button nextbutton" ng-click="stop()">
-        <div class="control-buttons">
-          <img src="../img/FORWARD_2.png"/>
-        </div>
-      </button> -->
+        <button class="button playpausebutton" ng-click="pause()">
+          <div class="control-buttons">
+            <img src="img/PAUSE.png"/>
+          </div>
+        </button>
+        <!-- <button class="button nextbutton" ng-click="stop()">
+          <div class="control-buttons">
+            <img src="../img/FORWARD_2.png"/>
+          </div>
+        </button> -->
+      </div>
     </div>
 
     <div style="text-align:center;">

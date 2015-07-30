@@ -22,13 +22,16 @@
         </div>
 
         <div class="inputfield">
-          <div class="item item-divider">Personal Information</div>
           <label class="item item-input">
-            <span class="input-label">Name</span>
-            <input class="input-font-white" type="text" ng-model="parentForm.name">
+            <span class="input-label">
+              <i class="icon ion-person"></i>
+            </span>
+            <input class="input-font-white" type="text" ng-model="parentForm.name" placeholder="Enter your name">
           </label>
-          <label class="item item-select">
-            <span class="input-label">Relationship</span>
+          <label class="item item-input item-select">
+            <span class="input-label">
+              <i class="icon ion-ios-heart"></i>
+            </span>
             <select class="relationship-option input-font-white" type="select" ng-model="parentForm.relationship">
               <option value="mother">Mother</option>
               <option value="father">Father</option>
@@ -37,18 +40,21 @@
             </select>
           </label>
           <label class="item item-input">
-            <span class="input-label">Email</span>
-            <input class="input-font-white" type="email" ng-model="parentForm.email">
+            <span class="input-label">
+              <i class="icon ion-ios-email"></i>
+            </span>
+            <input class="input-font-white" type="email" ng-model="parentForm.email" placeholder="Enter your email">
           </label>
           <label class="item item-input">
-            <span class="input-label">Contact No.</span>
-            <input class="input-font-white" type="tel" ng-model="parentForm.mobile_number">
+            <span class="input-label">
+              <i class="icon ion-ios-telephone"></i>
+            </span>
+            <input class="input-font-white" type="tel" ng-model="parentForm.mobile_number" placeholder="Enter your mobile no">
           </label>
         </div>
-        <label class="item" >
+        <label class="item">
           <button class="button button-block button-positive" ng-click="createFamilyMember()">Proceed</button>
         </label>
-        
       </div>
     </form>
   </ion-content>

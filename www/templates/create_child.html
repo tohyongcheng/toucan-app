@@ -1,12 +1,13 @@
 <ion-view>
   <ion-nav-bar>
-    <ion-nav-back-button class="button-clear">
-      <i class="ion-arrow-left-c"></i>
+    <ion-nav-title class="header_title icon-left ion-person-add" >
+    ADD A CHILD
+    </ion-nav-title>
+    <ion-nav-back-button class="button button-icon button-clear">
+      <i class="ion-ios-arrow-back"></i>
     </ion-nav-back-button>
   </ion-nav-bar>
-  <ion-nav-title class="header_title icon-left ion-person-add" >
-    ADD A CHILD
-  </ion-nav-title>
+  
   <ion-content class="create-child-page">
     <!-- Image -->
     <div ng-show="showChildParticulars">
@@ -23,35 +24,35 @@
         <img src="{{childForm.photo}}" ng-show="childForm.photo"/>
       </div>
       <div class="inputfield list">
-        <label class="item item-select item-select-gender">
+        <label class="item item-input item-select-gender">
           <span class="input-label input-label-gender">
             <i class="icon ion-female"></i>
             <i class="icon ion-male"></i>
           </span>
           <div class="gender-selector">
-            <ion-radio class = "input-gender" ng-model="childForm.gender" value="boy">Boy</ion-radio>
-            <ion-radio class = "input-gender" ng-model="childForm.gender" value="girl">Girl</ion-radio>
+            <ion-radio class = "input-gender input-font-white" ng-model="childForm.gender" value="boy">Boy</ion-radio>
+            <ion-radio class = "input-gender input-font-white" ng-model="childForm.gender" value="girl">Girl</ion-radio>
           </div>
         </label>
         <label class="item item-input">
           <span class="input-label">
-            <i class="icon ion-ios-email"></i>
+            <i class="icon ion-person"></i>
           </span>
-          <input type="text" ng-model="childForm.name">
+          <input class="input-font-white" type="text" ng-model="childForm.name" placeholder="Enter child's name">
         </label>
         
         <label class="item item-input">
           <span class="input-label">
-            <i class="icon ion-ios-email"></i> 
+            <i class="fa fa-birthday-cake"></i>
           </span>
-          <input type="date" ng-model="childForm.birthday"/>
+          <input class="input-font-white" type="date" ng-model="childForm.birthday" placeholder="Enter child's birthday"/>
         </label>
 
         <label class="item item-input">
           <span class="input-label">
             <i class="icon ion-ios-telephone"></i>
           </span>
-          <input type="tel" ng-model="childForm.mobile_number">
+          <input class="input-font-white" type="tel" ng-model="childForm.mobile_number" placeholder="Enter child's phone number">
         </label>
         <label class="item">
           <button class="button button-block button-positive" ng-click="nextStep()" ng-disabled="validate_first_step()">Next</button>

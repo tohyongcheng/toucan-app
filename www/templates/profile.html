@@ -1,36 +1,42 @@
 <ion-view>
-  <ion-nav-title class="header_title icon-left ion-android-home" >
+  <ion-nav-title class="header_title icon-left ion-document" >
     PROFILE
   </ion-nav-title>
   <ion-content class="profile-page">
       <form>
       <!-- Image -->
-      <div class="list">        
-        <div class="camera-buttons">
-          <button class="button button-clear icon ion-ios-camera-outline" ng-click="launch_camera()"></button>
-          <button class="button button-clear icon ion-ios-photos-outline" ng-click="launch_photo_library()"></button>
-        </div>
+              
+      <div class="camera-buttons">
+        <button class="button button-clear icon ion-ios-camera-outline" ng-click="launch_camera()"></button>
+        <button class="button button-clear icon ion-ios-photos-outline" ng-click="launch_photo_library()"></button>
+      </div>
 
-        <div class="profile-info profile-img-div">
-          <img ng-src="{{parentTypeImage(user.relationship)}}" ng-hide="(user.photo_url || user.photo)"></img>
-          <img src="{{user.photo_url}}" ng-show="(user.photo_url && !user.photo)"/>
-          <img src="{{user.photo}}" ng-show="user.photo"/>
-        </div>
+      
+      <div class="parent_image">
+        <img ng-src="{{parentTypeImage(user.relationship)}}" ng-hide="(user.photo_url || user.photo)"></img>
+        <img src="{{user.photo_url}}" ng-show="(user.photo_url && !user.photo)"/>
+        <img src="{{user.photo}}" ng-show="user.photo"/>
+      </div>
+      <!-- <div class="inputfield list"> -->
+      <div class="inputfield list profile-info">
+        <label class="item item-input">
+          
+           <span class="input-label">
+            <i class="icon ion-ios-email"></i>
+          </span>
+          <input class = "input-info input-font-white" type="text" ng-model="user.name" placeholder="Update your name">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">
+            <i class="icon ion-ios-telephone"></i>
+          </span>
+          <input class="input-info input-font-white" type="tel" ng-model="user.mobile_number" placeholder="Update your contact no">
+        </label> 
 
-        <div class="profile-info">
-          <label class="item item-input">
-            <span class="input-label">Name</span>
-            <input class = "input-info input-font-white" type="text" ng-model="user.name">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Contact No.</span>
-            <input class="input-info input-font-white" type="tel" ng-model="user.mobile_number">
-          </label> 
-
-          <label class="item">
-            <button class="button button-full button-balanced icon ion-checkmark-round" ng-click="updateParentParticulars()" ></button>
-          </label>
-        </div>
+        <label class="item">
+          <button class="button button-full button-positive icon ion-checkmark-round" ng-click="updateParentParticulars()" ></button>
+        </label>
+      </div>
 
         
       </div>
