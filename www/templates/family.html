@@ -30,7 +30,7 @@
       <div class="item item-divider word-center">
         My Family Members
       </div>
-      <ion-scroll direction="x" class="horizontal-wide item family-members">
+      <ion-scroll direction="x" scrollbar-x ="false" class="horizontal-wide item family-members">
         <div ng-repeat="member in family_members" class="inline">
           <div class="family-member-image">
             <img ng-src="{{parentTypeImage(member.relationship)}}" ng-hide="member.photo_url"></img>

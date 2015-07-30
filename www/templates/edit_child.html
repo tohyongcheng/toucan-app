@@ -24,27 +24,35 @@
       </div>
 
       <div class="inputfield list">
-        <div class="item item-divider">Personal Information</div> 
-        <label class="item item-select item-select-gender">
-          <span class="input-label input-label-gender">Gender</span>
+        <label class="item item-input item-select-gender">
+          <span class="input-label input-label-gender">
+            <i class="icon ion-female"></i>
+            <i class="icon ion-male"></i>
+          </span>
           <div class="gender-selector">
-            <ion-radio class = "input-gender" ng-model="childForm.gender" value="boy">Boy</ion-radio>
-            <ion-radio class = "input-gender" ng-model="childForm.gender" value="girl">Girl</ion-radio>
+            <ion-radio class = "input-gender input-font-white" ng-model="childForm.gender" value="boy">Boy</ion-radio>
+            <ion-radio class = "input-gender input-font-white" ng-model="childForm.gender" value="girl">Girl</ion-radio>
           </div>
         </label>
         <label class="item item-input">
-          <span class="input-label">Name</span>
-          <input type="text" ng-model="childForm.name">
+          <span class="input-label">
+            <i class="icon ion-person"></i>
+          </span>
+          <input class="input-font-white" type="text" ng-model="childForm.name" placeholder="Enter child's name">
         </label>
         
         <label class="item item-input">
-          <span class="input-label">Birthday</span>
-          <input type="date" ng-model="childForm.birthday"/>
+          <span class="input-label">
+            <i class="fa fa-birthday-cake"></i>
+          </span>
+          <input class="input-font-white" type="date" ng-model="childForm.birthday" placeholder="Enter child's birthday"/>
         </label>
 
         <label class="item item-input">
-          <span class="input-label">Mobile Number</span>
-          <input type="tel" ng-model="childForm.mobile_number">
+          <span class="input-label">
+            <i class="icon ion-ios-telephone"></i>
+          </span>
+          <input class="input-font-white" type="tel" ng-model="childForm.mobile_number" placeholder="Enter child's phone number">
         </label>
         <label class="item">
           <button class="button button-block button-positive" ng-click="update_child()">Update</button>
